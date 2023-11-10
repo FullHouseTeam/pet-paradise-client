@@ -6,6 +6,9 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "format": "prettier --write src/",
+    "format:check": "prettier src/ --ignore-path .gitignore --check",
+    "format:fix": "prettier src/ --ignore-path .gitignore --write",
     "prepare": "husky install"
   },
   "private": true,

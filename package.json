@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "format": "prettier --write src/",
     "format:check": "prettier src/ --ignore-path .gitignore --check",
     "format:fix": "prettier src/ --ignore-path .gitignore --write",

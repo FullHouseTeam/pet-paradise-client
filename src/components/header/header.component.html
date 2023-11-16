@@ -1,0 +1,27 @@
+<header class="app-header">
+  <nav class="nav-links">
+    <a><img class="logo" src="../../resources/logo.png" alt="image" /></a>
+    <button mat-button color="accent" (click)="redirectToHome()">Home</button>
+    <button
+      mat-button
+      color="accent"
+      (click)="redirectToCategoriesAndProducts()">
+      Categories & products
+    </button>
+    <button mat-button color="accent" (click)="redirectToAboutUs()">
+      About Us
+    </button>
+    <button
+      mat-icon-button
+      (click)="redirectToShopCart()"
+      aria-label="Example icon button with a shopping_cart icon">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="redirectToCustomer()"
+      aria-label="Example icon button with a person icon">
+      <mat-icon>person</mat-icon>
+    </button>
+  </nav>
+</header>

@@ -1,15 +1,11 @@
-body,
-html {
-  height: 100%;
+body {
+  height: 100vh;
   margin: 0;
-}
-
-.cent {
-  width: 100%;
-  height: 83.6%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.container {
   text-align: center;
-  background-color: #cce8f2;
 }

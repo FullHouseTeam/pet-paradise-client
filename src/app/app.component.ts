@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { HomeComponent } from '../components/home/home.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [HomeComponent, RouterModule, HeaderComponent, FooterComponent],
   selector: 'pet-paradise-client-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

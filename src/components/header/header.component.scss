@@ -1,0 +1,33 @@
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    button {
+      margin: 5px;
+      white-space: nowrap;
+      color: #000000;
+    }
+    a {
+      align-content: center;
+    }
+    .logo {
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .nav-links {
+      flex-direction: column;
+
+      button {
+        margin: 5px 0;
+      }
+    }
+  }
+}

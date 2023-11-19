@@ -1,0 +1,30 @@
+{
+    "listeners":{
+        "*:8080":{
+            "pass":"routes"
+        },
+        "*:80":{
+            "pass":"routes"
+        }
+    },
+
+    "routes": [
+        {
+            "match":{
+                "uri":[
+                    "~^/*"
+                ]
+            },
+            "action": {
+                "share": [
+			"/www/$uri",
+			"/www/browser/$uri",
+			"/www/server/$uri"
+		],
+		"types": [
+			"*/*"
+		]
+            }
+        }
+    ]
+}

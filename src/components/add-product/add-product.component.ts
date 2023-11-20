@@ -92,6 +92,7 @@ export class AddProductComponent implements OnInit{
       }
     );
   }
+
   
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),

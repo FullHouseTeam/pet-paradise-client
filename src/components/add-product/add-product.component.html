@@ -1,0 +1,68 @@
+<section>
+    <h1>Add Product</h1>
+    <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
+        <label>
+          Name
+          <input type="text" formControlName="name" />
+        </label>
+        <label>
+          Igame
+          <input type="text" formControlName="image" />
+        </label>
+        <br>
+        <label>
+            Price
+            <input type="number" formControlName="price" />
+        </label>
+        <label>
+            Quantity
+            <input type="number" formControlName="quantity" />
+        </label>
+        <br>
+        <label>Categories
+            <select formControlName="categories">
+                <option value="1">Dogs</option>
+                <option value="2">Cats</option>
+                <option value="3">Birds</option>
+            </select>
+        </label>
+        <label>Types
+            <select formControlName="types">
+                <option value="1">Food</option>
+                <option value="2">Accesories</option>
+                <option value="3">Houses</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            Discount
+            <input type="number" formControlName="discount" />
+        </label>
+        <br>
+        <label>Providers
+            <select formControlName="provider">
+                <option value="1">DogChow</option>
+                <option value="2">Peddigree</option>
+                <option value="3">Purina</option>
+            </select>
+        </label>
+        <label>Brands
+            <select formControlName="brand">
+                <option value="1">Food</option>
+                <option value="2">Accesories</option>
+                <option value="3">Houses</option>
+            </select>
+        </label>
+        <br>
+        <label> Is Avalible
+            <input type="checkbox" formControlName="avalible" />
+        </label>
+        <label> Has Tax
+            <input type="checkbox" formControlName="hasTax" />
+        </label>
+        <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    </form>
+    <h2>Profile Form</h2>
+    <p>Name: {{ profileForm.value.name }}</p>
+    <p>Email: {{ profileForm.value.image }}</p>
+</section>

@@ -1,0 +1,34 @@
+<div class="container-info">
+
+    <div class="image-container">
+        <img src="{{image}}" alt="image">
+    </div>
+
+    <div class="info-container">
+
+        <div class="big-letters">{{ title }}</div>
+        <div class="big-letters">{{ price }}</div>
+        <div class="description">{{ description }}</div>
+
+        <div class="double-container">
+            <div class="big-letters">{{ brand }}</div>
+            <div class="big-letters">{{ animalCategory }}</div>
+        </div>
+
+        <div class="double-container">
+            <div class="big-letters">{{ provider }}</div>
+            <div class="big-letters">{{ productType }}</div>
+        </div>
+
+        <button class="add-Button"> Add to Card </button>
+
+    </div>
+</div>
+
+<div class="container-products">
+    <app-product-card [productId]="'1'"></app-product-card>
+    <app-product-card [productId]="'3'"></app-product-card>
+    <app-product-card [productId]="'2'"></app-product-card>
+    <app-product-card [productId]="'1'"></app-product-card>
+    <app-product-card [productId]="'2'"></app-product-card>
+</div>

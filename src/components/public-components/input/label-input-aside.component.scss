@@ -1,0 +1,19 @@
+.input-container {
+  left: 0;
+  right: 0;
+  font-weight: 500;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 50vw));
+  grid-gap: 1vw;
+
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.2vw;
+  text-align: center;
+}
+@media only screen and (max-width: 360px) {
+  mat-form-field {
+    margin-bottom: 5vw;
+  }
+}
+

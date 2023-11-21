@@ -1,0 +1,23 @@
+.product-view {
+  background-color: lightgray;
+  font-size: 1vw;
+}
+
+.form-control{
+
+  height: 2vw;
+  width:4vw;
+}
+
+
+@media only screen and (max-width: 360px) {
+  .product-view {
+    background-color: lightgray;
+    font-size: 4vw;
+  }
+
+  .form-control{
+    height: 4vw;
+    width:8vw;
+  }
+}

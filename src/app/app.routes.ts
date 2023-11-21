@@ -9,6 +9,7 @@ import { TermsAndConditionsComponent } from '../components/terms-and-conditions/
 import { DescriptionComponent } from '../components/example-api/description.component';
 import { ProductInfoComponent } from "../components/product-info/product-info.component";
 
+
 export const appRoutes: Route[] = [
   { path: 'store', component: CategoriesAndProductsComponent },
   { path: 'shop-cart', component: ShopCartComponent },
@@ -20,4 +21,5 @@ export const appRoutes: Route[] = [
   { path: '**', component: DescriptionComponent },
   { path: 'example-api', component: DescriptionComponent },
   { path: 'product/:id', component: ProductInfoComponent }
+
 ];

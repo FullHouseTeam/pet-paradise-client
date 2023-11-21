@@ -25,6 +25,8 @@
 .right {
   border-top-right-radius: 3vw;
   border-bottom-right-radius: 3vw;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-container,
@@ -45,9 +47,11 @@ input {
   border: none;
   border-radius: 0.5vw;
   cursor: pointer;
-  font-family: 'quicksand';
+  font-family: 'Quicksand', serif;
+  font-weight: bold;
   font-size: 1.2vw;
-  width: 100%;
+  width: 50%;
+  margin-top: 2vw;
 }
 
 .welcomeTitle {
@@ -55,21 +59,27 @@ input {
   padding: 1vw;
   margin-bottom: 1vw;
   color: #7B8B91;
-  font-family: 'quicksand';
-  font-size: 1.5vw;
+  font-family: 'Quicksand', serif;
+  font-weight: bold;
+  font-size: 2vw;
+  margin-top: 0.5vw;
+
 }
 
 .errorLabels {
   display: block;
-  margin-bottom: 0.3vw;
+  margin-bottom: 0.5vw;
+  margin-top: 1vw;
   font-family: 'quicksand';
   color: red;
   font-size: 0.8vw;
+  font-weight: bold;
+
 }
 
 .textField-container {
   position: relative;
-  margin-bottom: 1vw;
+  margin-top: 1vw;
   justify-content: start;
   text-align: start;
   border: 1px solid #626262;
@@ -77,6 +87,7 @@ input {
   padding-top: 1vw;
   padding-left: 1vw;
   height: 2vw;
+  width: 17vw;
   display: flex;
   align-items: center;
 }
@@ -144,17 +155,10 @@ input {
     border-radius: 0;
   }
 
-  .left,
-  .right,
-  .sloganTitle,
-  .welcomeTitle,
-  .errorLabels,
-  .textField-line,
-  .textField-input,
-
   .log-in-Button {
     padding: 2%;
     font-size: 3vw;
+    margin-top: 7vw;
   }
 
   .password-textField-input {
@@ -163,8 +167,14 @@ input {
   }
 
   .textField-container {
-    height: 6vw;
-    margin-bottom: 5vw;
+    height: 8vw;
+    width: 60vw;
+    margin-top: 3vw;
+  }
+
+  .errorLabels {
+    font-size: 4vw;
+    margin-bottom: 3vw;
   }
 
   .textField-input {
@@ -175,5 +185,28 @@ input {
 
   .welcomeTitle {
     font-size: 7vw;
+    padding-bottom: 10vw;
+    padding-top: 5vw;
+  }
+}
+
+@media only screen and (min-width: 740px) and (max-width: 740px) {
+  .image-container,
+  .slogan img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  .welcomeTitle {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .errorLabels {
+    margin-bottom: 0;
+  }
+
+  .container {
+    height: 38vw;
   }
 }

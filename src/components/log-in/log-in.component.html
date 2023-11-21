@@ -1,9 +1,9 @@
 <div class="container">
     <div class="left">
 
-        <img class="image-container" src="../../resources/logov2.png" alt="image"/>
+        <img class="image-container" src="/assets/logov2.png" alt="image"/>
 
-        <label class="welcomeTitle">Welcome Back</label>
+        <label class="welcomeTitle">Welcome Back!</label>
 
         <div class="textField-container" [ngClass]="{'error': email.invalid && (email.dirty || email.touched)}">
             <input type="text" class="textField-input" [ngClass]="{'error-text': email.invalid && (email.dirty || email.touched)}" placeholder="Email" [formControl]="email" required>
@@ -26,7 +26,7 @@
 
     <div class="right">
         <div class="slogan">
-            <img src="../../resources/sloganPets.png" alt="Presentation Image">
+            <img src="/assets/sloganPets.png" alt="Presentation Image">
         </div>
     </div>
 </div>

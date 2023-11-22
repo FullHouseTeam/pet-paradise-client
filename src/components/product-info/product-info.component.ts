@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ActivatedRoute} from "@angular/router";
-import { ProductCardComponent } from "../../product-card/product-card/product-card.component";
+import { ProductCardComponent } from "../product-card/product-card.component";
 
 @Component({
   selector: 'app-product-info',
@@ -11,15 +11,15 @@ import { ProductCardComponent } from "../../product-card/product-card/product-ca
   styleUrl: './product-info.component.scss'
 })
 export class ProductInfoComponent implements OnInit {
-  productId = String;
-  title = String;
-  price = String;
-  description = String;
-  brand = String;
-  animalCategory = String;
-  provider = String;
-  productType = String;
-  image = String;
+  productId: string = '';
+  title: string = '';
+  price: string = '';
+  description: string = '';
+  brand: string = '';
+  animalCategory: string = '';
+  provider: string = '';
+  productType: string = '';
+  image: string = '';
 
   constructor(private route: ActivatedRoute) {}
 

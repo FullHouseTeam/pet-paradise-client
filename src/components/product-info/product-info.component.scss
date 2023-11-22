@@ -49,7 +49,6 @@
   padding: 10px;
 }
 
-
 .info-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -144,7 +143,6 @@
     margin-left: unset;
     max-width: 80vw;
     height: unset;
-
   }
 
   .big-letters {
@@ -179,7 +177,6 @@
   }
 
   .double-container {
-
     align-items: center;
   }
 
@@ -207,7 +204,5 @@
     height: 120px;
     width: 120px;
   }
-
-
 
 }

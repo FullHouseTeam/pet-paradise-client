@@ -1,0 +1,42 @@
+.dialog-container {
+  margin: 50px;
+  overflow: auto;
+  height: auto;
+  max-height: 80vh;
+}
+
+
+.center {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 750px) {
+  .center {
+    flex-direction: column;
+  }
+  .dialog-container{
+    margin: 20px;
+    overflow: auto;
+    height: auto;
+    max-height: 80vh;
+  }
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 20px;
+  width: 50%;
+}
+
+.internal-left,
+.internal-right {
+  height: 75px;
+}
+
+.dialog-container mat-form-field {
+  font-size: 12px;
+}

@@ -1,68 +1,93 @@
-<section>
-    <h1>Add Product</h1>
+
+<div class="dialog-container">
+    <h1 mat-dialog-title>Add Product</h1>
     <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
-        <label>
-          Name
-          <input type="text" formControlName="name" />
-        </label>
-        <label>
-          Igame
-          <input type="text" formControlName="image" />
-        </label>
-        <br>
-        <label>
-            Price
-            <input type="number" formControlName="price" />
-        </label>
-        <label>
-            Quantity
-            <input type="number" formControlName="quantity" />
-        </label>
-        <br>
-        <label>Categories
-            <select formControlName="categories">
-                <option value="1">Dogs</option>
-                <option value="2">Cats</option>
-                <option value="3">Birds</option>
-            </select>
-        </label>
-        <label>Types
-            <select formControlName="types">
-                <option value="1">Food</option>
-                <option value="2">Accesories</option>
-                <option value="3">Houses</option>
-            </select>
-        </label>
-        <br>
-        <label>
-            Discount
-            <input type="number" formControlName="discount" />
-        </label>
-        <br>
-        <label>Providers
-            <select formControlName="provider">
-                <option value="1">DogChow</option>
-                <option value="2">Peddigree</option>
-                <option value="3">Purina</option>
-            </select>
-        </label>
-        <label>Brands
-            <select formControlName="brand">
-                <option value="1">Food</option>
-                <option value="2">Accesories</option>
-                <option value="3">Houses</option>
-            </select>
-        </label>
-        <br>
-        <label> Is Avalible
-            <input type="checkbox" formControlName="avalible" />
-        </label>
-        <label> Has Tax
-            <input type="checkbox" formControlName="hasTax" />
-        </label>
-        <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    <div class="center">
+        <div class="left">
+            <div class="internal-left">
+                <mat-form-field class="example-form-field" hintLabel="Max 30 characters">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" maxlength="30" formControlName="name" class="input" />
+                </mat-form-field>
+            </div>
+            <div class="internal-left">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Image</mat-label>
+                <input matInput type="text" formControlName="image" />
+                </mat-form-field>
+            </div>
+            <div class="internal-left">
+                <mat-form-field>
+                    <mat-label>Providers</mat-label>
+                        <mat-select formControlName="provider">
+                            <mat-option *ngFor="let provider of providers" value="{{provider.name}}">{{provider.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="internal-left">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Types</mat-label>
+                        <mat-select  formControlName="types">
+                            <mat-option  *ngFor="let type of types" value="{{type.name}}">{{type.name}}</mat-option >
+                        </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="internal-left">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" formControlName="quantity" />
+                </mat-form-field>
+            </div>
+            <div class="internal-left">
+                <mat-checkbox [labelPosition]="'before'" formControlName="hasTax" color="primary">
+                    Has Tax
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="right">
+            <div class="internal-right">
+                <mat-form-field class="example-form-field" hintLabel="Max 30 characters">
+                    <mat-label>Description</mat-label>
+                    <input matInput type="text" maxlength="100" formControlName="description" />
+                </mat-form-field>
+            </div>
+            <div class="internal-right">
+                <mat-checkbox [labelPosition]="'before'" formControlName="avalible" color="primary">
+                    Is Avalible
+                </mat-checkbox>
+            </div>
+            <div class="internal-right">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Categories</mat-label>
+                        <mat-select formControlName="categories">
+                            <mat-option *ngFor="let categorie of categories" value="{{categorie.name}}">{{categorie.name}}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="internal-right">
+                <mat-form-field>
+                    <mat-label>Brands</mat-label>
+                    <mat-select formControlName="brand">
+                        <mat-option *ngFor="let brand of brands" value="{{brand.name}}">{{brand.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="internal-right">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Discount</mat-label>
+                        <input matInput type="number" formControlName="discount" />
+                </mat-form-field>
+            </div>
+            <div class="internal-right">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Price</mat-label>
+                    <input matInput type="number" formControlName="price" />
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Save</button>
+    </div>
     </form>
-    <h2>Profile Form</h2>
-    <p>Name: {{ profileForm.value.name }}</p>
-    <p>Email: {{ profileForm.value.image }}</p>
-</section>
+</div>

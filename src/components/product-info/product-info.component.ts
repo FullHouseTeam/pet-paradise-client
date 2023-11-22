@@ -6,7 +6,6 @@ import { ProductService} from "../../services/products/product.service";
 import { Product} from "../../models/product.model";
 import {BrandService} from "../../services/brands/brand.service";
 import {Brand} from "../../models/brand.model";
-import {NUMPAD_EIGHT} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-product-info',
@@ -51,7 +50,6 @@ export class ProductInfoComponent implements OnInit {
 
   private loadProductDetails() {
 
-
     //this.title = this.product[Number(this.productId)].productType;
 
     this.price = this.product.length > 0 ? this.product[Number(this.productId)].price.toString() : '0';
@@ -79,7 +77,6 @@ export class ProductInfoComponent implements OnInit {
         break;
     }
   }
-
   onClick() {
     this.isClicked = !this.isClicked;
   }
@@ -104,4 +101,5 @@ export class ProductInfoComponent implements OnInit {
     );
 
   }
+
 }

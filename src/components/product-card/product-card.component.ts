@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   private loadProductDetails() {
+
     switch (this.productId) {
       case '1':
         this.title = 'Product 1';

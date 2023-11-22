@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductCardComponent implements OnInit {
   @Input() productId: string = '';
+  @Input() buttonText: string = 'Add to Cart';
+  @Input() buttonColor: string = '';
+  @Input() buttonTextColor: string = '';
   title = '';
   price = '';
   image = '';
@@ -23,7 +26,7 @@ export class ProductCardComponent implements OnInit {
     switch (this.productId) {
       case '1':
         this.title = 'Product 1';
-        this.price = '15.00 $';
+        this.price = '500000.00 $';
         this.image = '/assets/feeder.jpg';
         break;
       case '2':

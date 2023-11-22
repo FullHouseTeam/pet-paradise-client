@@ -7,7 +7,7 @@ import { AboutUsComponent } from '../components/about-us/about-us.component';
 import { SupportPageComponent } from '../components/support-page/support-page.component';
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import { DescriptionComponent } from '../components/example-api/description.component';
-import { ProductInfoComponent } from "../components/product-info/product-info/product-info.component";
+import { ProductInfoComponent } from "../components/product-info/product-info.component";
 export const appRoutes: Route[] = [
   {
     path: 'categories-and-products',

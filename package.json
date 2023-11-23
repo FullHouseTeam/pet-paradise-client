@@ -9,6 +9,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
     "prepare": "husky install"
   },
   "private": true,

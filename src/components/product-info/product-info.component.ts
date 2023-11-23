@@ -7,6 +7,7 @@ import { Product} from "../../models/product.model";
 import {BrandService} from "../../services/brands/brand.service";
 import {Brand} from "../../models/brand.model";
 
+
 @Component({
   selector: 'app-product-info',
   standalone: true,
@@ -43,6 +44,7 @@ export class ProductInfoComponent implements OnInit {
     this.getBrand();
     this.route.params.subscribe(params => {
       this.productId = params['id'];
+      //this.productId = String(this.product[0].ProductID)
       this.loadProductDetails();
     });
   }
@@ -61,6 +63,7 @@ export class ProductInfoComponent implements OnInit {
 
     this.provider = 'Purina';
     //this.productType = this.product.length > 0 ? this.product[Number(this.productId)].productType : ''
+
     switch (this.productId) {
       case '1':
         this.image = 'https://www.agrovetmanantial.com/assets/images/productos-veterinaria/plato-perro.webp';

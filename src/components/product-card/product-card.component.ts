@@ -1,32 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnInit {
   @Input() productId: string = '';
-  @Input() buttonText: string = 'Add to Cart';
-  @Input() buttonColor: string = '';
-  @Input() buttonTextColor: string = '';
   title = '';
   price = '';
   image = '';
+  isClicked = false;
+
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
     this.loadProductDetails();
   }
 
   private loadProductDetails() {
-
     switch (this.productId) {
       case '1':
         this.title = 'Product 1';
-        this.price = '500000.00 $';
+        this.price = '15.00 $';
         this.image = '/assets/feeder.jpg';
         break;
       case '2':
@@ -44,6 +41,20 @@ export class ProductCardComponent implements OnInit {
         this.price = '0.00 $';
         this.image = '/assets/feeder.jpg';
         break;
+    }
+  }
+
+  onClick() {
+    this.isClicked = !this.isClicked;
+
+    const buttonElement = this.el.nativeElement.querySelector('.add-button');
+
+    if (this.isClicked) {
+      this.renderer.setStyle(buttonElement, 'background-color', 'red');
+      this.renderer.setProperty(buttonElement, 'innerText', 'Remove from Cart');
+    } else {
+      this.renderer.setStyle(buttonElement, 'background-color', '#3F51B5');
+      this.renderer.setProperty(buttonElement, 'innerText', 'Add to Cart');
     }
   }
 }

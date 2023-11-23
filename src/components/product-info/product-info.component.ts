@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2, ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { ProductCardComponent } from "../product-card/product-card.component";
 
 @Component({
@@ -20,8 +20,10 @@ export class ProductInfoComponent implements OnInit {
   provider: string = '';
   productType: string = '';
   image: string = '';
+  isClicked = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private renderer: Renderer2, private el: ElementRef, private route: ActivatedRoute, private router: Router) {}
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -54,5 +56,23 @@ export class ProductInfoComponent implements OnInit {
         this.image = '/assets/feeder.jpg';
         break;
     }
+  }
+
+  onClick() {
+    this.isClicked = !this.isClicked;
+
+    const buttonElement = this.el.nativeElement.querySelector('.add-Button');
+
+    if (this.isClicked) {
+      this.renderer.setStyle(buttonElement, 'background-color', 'red');
+      this.renderer.setProperty(buttonElement, 'innerText', 'Remove from Cart');
+    } else {
+      this.renderer.setStyle(buttonElement, 'background-color', '#3F51B5');
+      this.renderer.setProperty(buttonElement, 'innerText', 'Add to Cart');
+    }
+  }
+
+  redirectToCategoriesAndProducts() {
+    this.router.navigate(['/categories-and-products']);
   }
 }

@@ -31,7 +31,8 @@ p {
   font-weight: bold;
 }
 
-button {
+.add-button {
+  background: #3F51B5;
   color: white;
   width: 8vw;
   padding: 0.5vw;
@@ -55,7 +56,7 @@ button {
     font-size: 3vw;
   }
 
-  button {
+  .add-button {
     width: 20vw;
     height: 7vw;
     font-size: 2.5vw;

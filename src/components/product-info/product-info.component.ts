@@ -21,7 +21,7 @@ export class ProductInfoComponent implements OnInit {
   productType: string = '';
   image: string = '';
   isClicked = false;
-
+  productIds: string[] = ['1', '2', '1', '3', '1'];
   constructor(private renderer: Renderer2, private el: ElementRef, private route: ActivatedRoute, private router: Router) {}
 
 

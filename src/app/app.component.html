@@ -1,9 +1,9 @@
-<pet-paradise-client-header></pet-paradise-client-header>
+@if(showHeaderFooter()) {
+  <pet-paradise-client-header></pet-paradise-client-header>
+}
 <div class="cent">
   <router-outlet></router-outlet>
-  <router-outlet></router-outlet>
-  <router-outlet></router-outlet>
-  <router-outlet></router-outlet>
 </div>
-
-<pet-paradise-client-footer></pet-paradise-client-footer>
+@if(showHeaderFooter()) {
+  <pet-paradise-client-footer></pet-paradise-client-footer>
+}

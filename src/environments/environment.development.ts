@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5155'
+  rest_api_url: 'http://rest-api-pet-paradise.westus3.cloudapp.azure.com/swagger/index.html'
 };

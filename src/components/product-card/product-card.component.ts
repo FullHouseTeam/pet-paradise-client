@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-card',
@@ -13,7 +14,7 @@ export class ProductCardComponent implements OnInit {
   image = '';
   isClicked = false;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private el: ElementRef, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.loadProductDetails();
@@ -56,5 +57,9 @@ export class ProductCardComponent implements OnInit {
       this.renderer.setStyle(buttonElement, 'background-color', '#3F51B5');
       this.renderer.setProperty(buttonElement, 'innerText', 'Add to Cart');
     }
+  }
+
+  goToProduct() {
+    this.router.navigate(['/product', this.productId], { relativeTo: this.route });
   }
 }

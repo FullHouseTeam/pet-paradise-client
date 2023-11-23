@@ -37,9 +37,5 @@
 </div>
 
 <div class="container-products">
-    <app-product-card [productId]="'1'"></app-product-card>
-    <app-product-card [productId]="'3'"></app-product-card>
-    <app-product-card [productId]="'2'"></app-product-card>
-    <app-product-card [productId]="'1'"></app-product-card>
-    <app-product-card [productId]="'2'"></app-product-card>
+    <app-product-card *ngFor="let productId of productIds" [productId] = "productId"></app-product-card>
 </div>

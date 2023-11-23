@@ -1,0 +1,28 @@
+nav a{
+  color: #000;
+  text-decoration: none;
+}
+.btn-header-coll:not(.collapsed){
+  color: #1E60A2;
+}
+@media (max-width: 768px) {
+  nav{
+      visibility: hidden;
+      opacity: 0;
+      top: -100px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: #cae8f4;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 1000;
+      transition: .2s;
+  }
+  #menu:checked + nav{
+      visibility: visible;
+      opacity: 1;
+      top: 0;
+  }
+}

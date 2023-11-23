@@ -1,13 +1,9 @@
 @if(showHeaderFooter()) {
-<pet-paradise-client-header style="flex: 0 1 auto"></pet-paradise-client-header>
+  <pet-paradise-client-header></pet-paradise-client-header>
 }
 <div class="cent">
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-  @if(showHeaderFooter()){
-  <pet-paradise-client-footer
-    style="flex: 0 1 auto; width: 100%"
-  ></pet-paradise-client-footer>
-  }
+  <router-outlet></router-outlet>
 </div>
+@if(showHeaderFooter()) {
+  <pet-paradise-client-footer></pet-paradise-client-footer>
+}

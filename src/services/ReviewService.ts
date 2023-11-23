@@ -16,6 +16,10 @@ export class ReviewService {
         return this.http.get<Review[]>(`${this.apiUrl}list`);
     }
 
+    getById(idReview: number): Observable<Review> {
+        return this.http.get<Review>(`${this.apiUrl}get/${idReview}`);
+    }
+
     add(model: Review):Observable<Review> {
         return this.http.post<Review>(`${this.apiUrl}save`, model);
     }

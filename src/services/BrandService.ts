@@ -16,6 +16,10 @@ export class BrandService {
         return this.http.get<Brand[]>(`${this.apiUrl}list`);
     }
 
+    getById(idBrand: number): Observable<Brand> {
+        return this.http.get<Brand>(`${this.apiUrl}get/${idBrand}`);
+    }
+
     add(model: Brand):Observable<Brand> {
         return this.http.post<Brand>(`${this.apiUrl}save`, model);
     }

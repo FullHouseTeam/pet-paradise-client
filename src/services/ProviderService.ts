@@ -16,6 +16,10 @@ export class ProviderService {
         return this.http.get<Provider[]>(`${this.apiUrl}list`);
     }
 
+    getById(idProvider: number): Observable<Provider> {
+        return this.http.get<Provider>(`${this.apiUrl}get/${idProvider}`);
+    }
+
     add(model: Provider):Observable<Provider> {
         return this.http.post<Provider>(`${this.apiUrl}save`, model);
     }

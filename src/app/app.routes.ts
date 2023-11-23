@@ -18,5 +18,5 @@ export const appRoutes: Route[] = [
   { path: 'support', component: SupportPageComponent },
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
   { path: '', component: HomeComponent },
-  { path: 'description-product', component: DescriptionComponent, pathMatch: 'full', data: { name: 'description' } }
+  { path: 'example-api', component: DescriptionComponent }
 ];

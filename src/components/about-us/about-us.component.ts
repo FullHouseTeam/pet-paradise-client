@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Product } from '../../models/Product';
 import { ProductsService } from '../../services/products.service';
 
 @Component({

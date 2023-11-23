@@ -38,7 +38,6 @@ export class ProductInfoComponent implements OnInit {
       private brandService: BrandService
       ) {}
 
-
   ngOnInit() {
     this.getProductsList();
     this.getBrand();

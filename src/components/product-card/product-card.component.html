@@ -1,8 +1,12 @@
 <div class="container">
-    <div class="image-container">
-        <img src="{{image}}" alt="image">
-    </div>
+    <button class="image-button" (click)="goToProduct()">
+        <div class="image-container">
+            <img src="{{image}}" alt="image">
+        </div>
+    </button>
+
     <p>{{title}}</p>
     <p>{{price}}</p>
     <button class="add-button" (click)="onClick()">Add to Cart</button>
+
 </div>

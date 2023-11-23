@@ -45,7 +45,6 @@ export class ProductInfoComponent implements OnInit {
     this.getBrand();
     this.route.params.subscribe(params => {
       this.productId = params['id'];
-      //this.productId = String(this.product[0].ProductID)
       this.loadProductDetails();
     });
   }
@@ -53,9 +52,8 @@ export class ProductInfoComponent implements OnInit {
   private loadProductDetails() {
 
 
-    //this.title = this.product[Number(this.productId)].name;
-    //this.productId = String(this.product[0].ProductID)
-    //this.price = '35.99$';
+    this.title = this.product[Number(this.productId)].productType;
+
     this.price = this.product.length > 0 ? this.product[Number(this.productId)].price.toString() : '0';
 
     this.description = this.product.length > 0 ? this.product[Number(this.productId)].description : '';
@@ -63,7 +61,7 @@ export class ProductInfoComponent implements OnInit {
     this.brand = this.product.length > 0  ? this.brands[Number(this.product[Number(this.productId)].brandID)].name : 'No description';
 
     this.animalCategory = this.product.length > 0 ? this.product[Number(this.productId)].animalCategory : 'No Category';
-    //this.provider = this.product.length > 0 ? this.product[Number(this.productId)].providerID : 'No Provider';
+
     this.provider = 'Purina';
     //this.productType = this.product.length > 0 ? this.product[Number(this.productId)].productType : ''
     switch (this.productId) {

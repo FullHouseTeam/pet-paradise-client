@@ -1,5 +1,6 @@
 export interface Brand {
   brandId: number,
   name: string,
-  logo: string
+  logo: string,
+  isAvailable: string
 }

@@ -44,7 +44,6 @@ export class ProductInfoComponent implements OnInit {
     this.getBrand();
     this.route.params.subscribe(params => {
       this.productId = params['id'];
-      //this.productId = String(this.product[0].ProductID)
       this.loadProductDetails();
     });
   }

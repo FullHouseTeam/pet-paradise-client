@@ -89,7 +89,10 @@
           "options": {
             "buildTarget": "pet-paradise:build"
           }
-        }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
+         }
       }
     }
   },

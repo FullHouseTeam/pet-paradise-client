@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -24,7 +24,7 @@ import { Categories } from '../../models/categories.model';
      MatInputModule,FormsModule, 
      MatButtonModule, MatIconModule,
      MatSelectModule, MatCheckboxModule, 
-     MatRadioModule],
+     MatRadioModule, MatDialogModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss'
 })

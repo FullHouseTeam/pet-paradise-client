@@ -1,5 +1,7 @@
 .dialog-container {
-  margin: 50px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
   overflow: auto;
   height: auto;
   max-height: 80vh;
@@ -20,6 +22,26 @@
     height: auto;
     max-height: 80vh;
   }
+  .left{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 50%;
+  }
+  .right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
 }
 
 .left,
@@ -28,13 +50,22 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 20px;
+  margin-top: 0;
+  margin-bottom: 0px;
+  margin-left: 25px;
+  margin-right: 25px;
   width: 50%;
 }
 
 .internal-left,
 .internal-right {
-  height: 75px;
+  height: 80px;
+}
+
+.internal-left-top,
+.internal-right-top {
+  height: 90px;
+  margin: auto;
 }
 
 .dialog-container mat-form-field {

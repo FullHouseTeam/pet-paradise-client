@@ -9,3 +9,155 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.d-flex{
+  display: flex;
+}
+.p-3{
+  padding: 15px;
+}
+.gap-3{
+  gap: 15px;
+}
+.gap-4{
+  gap: 20px;
+}
+.mx-auto{
+  margin: 0 auto;
+}
+.align-items-center{
+  align-items: center;
+}
+.m-2{
+  margin: 10px;
+}
+.fs-5{
+  font-size: 22px;
+}
+.ctn-main{
+  padding: 28px;
+  height: calc(100vh - 100px);
+}
+.bg-1{
+  background-color: #cae8f4;
+}
+.bg-1-100{
+  background-color: #93c8ff;
+}
+h3{
+  font-size: 30px;
+}
+.text-center{
+  text-align: center;
+}
+.rounded-7{
+  border-radius: 7px;
+}
+.shadow{
+  box-shadow: 1.5px 1.5px 2px 2px #c6c5c5;
+}
+.bg-2{
+  background-color: #d5c1a8;
+}
+.bg-footer{
+  background-color: #DF7676;
+}
+.mb-1{
+  margin-bottom: 5px;
+}
+.justify-content-center{
+  justify-content: center;
+}
+.container{
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-select{
+  padding: 10px;
+}
+.form-control{
+  padding: 10px;
+}
+.rounded-40{
+  border-radius: 40px;
+}
+.col{
+  flex: 1;
+}
+.my-5{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.mb-2{
+  margin-bottom: 10px;
+}
+.bg-white{
+  background-color: #ffffff;
+}
+
+.btn{
+  outline: none !important;
+  padding: 10px 14px;
+  border-radius: 5px;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-1{
+  background-color: #9CCEFF;
+  &:focus{
+      box-shadow: 0 0 0 3px #B2BAC2;
+  }
+  &:hover{
+      background-color: #608EBA;
+  }
+}
+.btn-danger{
+  background-color: #fcced0;
+  &:focus{
+      box-shadow: 0 0 0 3px #fcced072;
+  }
+  &:hover{
+      background-color: #edbbbe;
+  }
+}
+.p-2{
+  padding: 10px;
+}
+.bg-danger{
+  background-color: #fcced0;
+}
+.rounded-50{
+  border-radius: 50%;
+}
+.position-absolute{
+  position: absolute;
+}
+.top-0{
+  top: 0;
+}
+.end-0{
+  right: 0;
+}
+.px-2{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.py-1{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.position-relative{
+  position: relative;
+}
+.m-1{
+  margin: 5px;
+}
+.justify-content-evenly{
+  justify-content: space-evenly;
+}
+.bg-dark{
+  background-color: #4a4950;
+}

@@ -6,6 +6,7 @@ import { CustomerPageComponent } from '../components/customer-page/customer-page
 import { AboutUsComponent } from '../components/about-us/about-us.component';
 import { SupportPageComponent } from '../components/support-page/support-page.component';
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
+import { DescriptionComponent } from '../components/example-api/description.component';
 export const appRoutes: Route[] = [
   {
     path: 'categories-and-products',
@@ -16,5 +17,6 @@ export const appRoutes: Route[] = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'support', component: SupportPageComponent },
   { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'example-api', component: DescriptionComponent }
 ];

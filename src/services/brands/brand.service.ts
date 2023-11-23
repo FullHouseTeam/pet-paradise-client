@@ -17,7 +17,7 @@ export class BrandService {
   }
 
   getById(idBrand: number): Observable<Brand> {
-    return this.http.get<Brand>(`${this.api_url}get/${idBrand}`);
+    return this.http.get<Brand>(`${this.api_url}list/id?id=${idBrand}`);
   }
 
   add(model: Brand):Observable<Brand> {

@@ -2,6 +2,11 @@ import {Component, OnInit, Renderer2, ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ProductCardComponent } from "../product-card/product-card.component";
+import { ProductService} from "../../services/products/product.service";
+import { Product} from "../../models/product.model";
+import {BrandService} from "../../services/brands/brand.service";
+import {Brand} from "../../models/brand.model";
+import {NUMPAD_EIGHT} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-product-info',
@@ -22,26 +27,45 @@ export class ProductInfoComponent implements OnInit {
   image: string = '';
   isClicked = false;
   productIds: string[] = ['1', '2', '1', '3', '1'];
-  constructor(private renderer: Renderer2, private el: ElementRef, private route: ActivatedRoute, private router: Router) {}
+  product: Product[] = [];
+  brands: Brand[] = [];
+
+  constructor(
+      private renderer: Renderer2,
+      private el: ElementRef,
+      private route: ActivatedRoute,
+      private router: Router,
+      private productService: ProductService,
+      private brandService: BrandService
+      ) {}
 
 
   ngOnInit() {
+    this.getProductsList();
+    this.getBrand();
     this.route.params.subscribe(params => {
       this.productId = params['id'];
+      //this.productId = String(this.product[0].ProductID)
       this.loadProductDetails();
     });
   }
 
   private loadProductDetails() {
-    this.title = 'Black dog feeder ';
-    this.price = '35.99$';
-    this.description = 'This pink dog feeder is the perfect way to add a touch of style to your cat\'s feeding area. ' +
-        'The feeder is made of durable plastic and is dishwasher safe for easy cleaning. It has a large capacity to ' +
-        'hold enough food for your cat for several days.';
-    this.brand = 'Dog Chow';
-    this.animalCategory = 'Dogs';
+
+
+    //this.title = this.product[Number(this.productId)].name;
+    //this.productId = String(this.product[0].ProductID)
+    //this.price = '35.99$';
+    this.price = this.product.length > 0 ? this.product[Number(this.productId)].price.toString() : '0';
+
+    this.description = this.product.length > 0 ? this.product[Number(this.productId)].description : '';
+
+    this.brand = this.product.length > 0  ? this.brands[Number(this.product[Number(this.productId)].brandID)].name : 'No description';
+
+    this.animalCategory = this.product.length > 0 ? this.product[Number(this.productId)].animalCategory : 'No Category';
+    //this.provider = this.product.length > 0 ? this.product[Number(this.productId)].providerID : 'No Provider';
     this.provider = 'Purina';
-    this.productType = 'Feeder';
+    //this.productType = this.product.length > 0 ? this.product[Number(this.productId)].productType : ''
     switch (this.productId) {
       case '1':
         this.image = '/assets/feeder.jpg';
@@ -74,5 +98,22 @@ export class ProductInfoComponent implements OnInit {
 
   redirectToCategoriesAndProducts() {
     this.router.navigate(['/categories-and-products']);
+  }
+
+  getProductsList() {
+    this.productService.getList().subscribe(
+        (data) => {
+          this.product = data;
+        }
+    );
+  }
+
+  getBrand() {
+  this.brandService.getById(1).subscribe(
+        (data) => {
+          this.brands = [data];
+        }
+    );
+
   }
 }

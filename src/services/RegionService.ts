@@ -16,6 +16,10 @@ export class RegionService {
         return this.http.get<Region[]>(`${this.apiUrl}list`);
     }
 
+    getById(idRegion: number): Observable<Region> {
+        return this.http.get<Region>(`${this.apiUrl}get/${idRegion}`);
+    }
+
     add(model: Region):Observable<Region> {
         return this.http.post<Region>(`${this.apiUrl}save`, model);
     }

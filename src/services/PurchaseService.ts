@@ -16,6 +16,10 @@ export class PurchaseService {
         return this.http.get<Purchase[]>(`${this.apiUrl}list`);
     }
 
+    getById(idPurchase: number): Observable<Purchase> {
+        return this.http.get<Purchase>(`${this.apiUrl}get/${idPurchase}`);
+    }
+
     add(model: Purchase):Observable<Purchase> {
         return this.http.post<Purchase>(`${this.apiUrl}save`, model);
     }

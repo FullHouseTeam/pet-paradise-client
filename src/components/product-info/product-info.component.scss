@@ -56,12 +56,46 @@
   font-family: 'Quicksand', serif;
   font-size: 1.3vw;
   font-weight: bold;
+  margin-top: 0.2vw;
+}
+
+.subtitle {
+  position: relative;
+  width: 10vw;
+  height: 2.5vw;
+  font-size: 1vw;
+  text-align: center;
+  font-family: 'Quicksand', serif;
+}
+
+.text-up {
+  position: absolute;
+  font-weight: bold;
+}
+
+.text-down {
+  position: absolute;
+  top: 1vw;
+
 }
 
 .double-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-bottom: 0.5vw
+}
+
+.category-button {
+  background-color: #79CD9F;
+  border: none;
+  border-radius: 0.3vw;
+  height: 1.7vw;
+  color: white;
+  width: 9vw;
+  cursor: pointer;
+  font-family: 'Quicksand', serif;
+  font-weight: bold;
+  font-size: 1vw;
 }
 
 .add-Button {
@@ -75,8 +109,10 @@
   cursor: pointer;
   font-family: 'Quicksand', serif;
   font-size: 1vw;
-  width: 11vw;
+  width: 12vw;
   height: 2vw;
+  font-weight: bold;
+  margin-left: 5vw;
 }
 
 @media only screen and (max-width: 360px) {
@@ -95,7 +131,26 @@
 
   .big-letters {
     font-size: 3vw;
-    margin-bottom: -6vw;
+  }
+
+  .subtitle {
+
+    width: 20vw;
+    height: 8vw;
+    margin-bottom: -2vw;
+  }
+  .text-up {
+    font-size: 2vw;
+  }
+
+  .text-down {
+    font-size: 2vw;
+    top: 3vw;
+  }
+
+  .category-button {
+    width: 15vw;
+    height: 3vw;
   }
 
   .description {
@@ -110,6 +165,7 @@
   .double-container {
     margin-bottom: -4vw;
     margin-top: -4vw;
+    align-items: center;
   }
 
   .add-Button {
@@ -150,12 +206,12 @@
   }
 
   .double-container {
-    margin-bottom: 1vw;
+    margin-bottom: -1vw;
     margin-top: -0.5vw;
   }
 
   .big-letters {
-    margin-bottom: -1vw;
+    margin-bottom: -0.5vw;
 
   }
 }

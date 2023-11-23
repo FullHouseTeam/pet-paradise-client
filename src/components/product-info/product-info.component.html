@@ -7,28 +7,39 @@
     <div class="info-container">
 
         <div class="big-letters">{{ title }}</div>
-        <div class="big-letters">{{ price }}</div>
+        <div class="double-container">
+            <div class="big-letters">{{ price }}</div>
+            <button class="category-button" (click)="redirectToCategoriesAndProducts()">{{animalCategory}}</button>
+        </div>
+
         <div class="description">{{ description }}</div>
 
         <div class="double-container">
-            <div class="big-letters">{{ brand }}</div>
-            <div class="big-letters">{{ animalCategory }}</div>
+            <div class="subtitle">
+                <div class="text-up">Provider:</div>
+                <div class="text-down">{{provider}}</div>
+            </div>
+
+            <div class="subtitle">
+                <div class="text-up">Brand:</div>
+                <div class="text-down">{{brand}}</div>
+            </div>
         </div>
 
-        <div class="double-container">
-            <div class="big-letters">{{ provider }}</div>
-            <div class="big-letters">{{ productType }}</div>
+        <div class="subtitle">
+            <div class="text-up">Product Type:</div>
+            <div class="text-down">{{productType}}</div>
         </div>
 
-        <button class="add-Button"> Add to Cart </button>
+        <button class="add-Button" (click)="onClick()"> Add to Cart </button>
 
     </div>
 </div>
 
 <div class="container-products">
-    <app-product-card productId="1" buttonText="Add to Cart" buttonColor="#3F51B5"></app-product-card>
-    <app-product-card productId="3" buttonText="Add to Cart" buttonColor="#3F51B5"></app-product-card>
-    <app-product-card productId="1" buttonText="Add to Cart" buttonColor="#3F51B5"></app-product-card>
-    <app-product-card productId="2" buttonText="Add to Cart" buttonColor="#3F51B5"></app-product-card>
-    <app-product-card productId="2" buttonText="Add to Cart" buttonColor="#3F51B5"></app-product-card>
+    <app-product-card [productId]="'1'"></app-product-card>
+    <app-product-card [productId]="'3'"></app-product-card>
+    <app-product-card [productId]="'2'"></app-product-card>
+    <app-product-card [productId]="'1'"></app-product-card>
+    <app-product-card [productId]="'2'"></app-product-card>
 </div>

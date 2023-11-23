@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { PurchaseService } from "../../services/purchases/purchase.service";
 import { Purchase } from "../../models/purchase.model";
-import { FormGroup, Validators } from '@angular/forms';
 import { PurchaseDTO } from '../../modelsDTO/purchaseDTO.model';
+import { PurchaseService } from "../../services/purchases/purchase.service";
 
 @Component({
   selector: 'pet-paradise-client-app-description',
@@ -105,5 +103,4 @@ export class DescriptionComponent implements OnInit {
       }
     );
   }
-  
 }

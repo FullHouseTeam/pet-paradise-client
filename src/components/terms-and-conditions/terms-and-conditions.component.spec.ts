@@ -7,7 +7,7 @@ describe('TermsAndConditionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TermsAndConditionsComponent]
+      declarations: [TermsAndConditionsComponent], // Declare the component in the testing module
     }).compileComponents();
 
     fixture = TestBed.createComponent(TermsAndConditionsComponent);

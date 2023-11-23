@@ -7,7 +7,7 @@ describe('CustomerPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomerPageComponent]
+      declarations: [CustomerPageComponent], // Declare the component in the testing module
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomerPageComponent);

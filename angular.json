@@ -92,11 +92,23 @@
         },
         "test": {
           "builder": "@angular-builders/jest:run"
-         }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        }
       }
     }
   },
   "cli": {
-    "analytics": "6017a9af-6749-48eb-a16b-735abb52c350"
+    "analytics": "6017a9af-6749-48eb-a16b-735abb52c350",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

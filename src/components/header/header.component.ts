@@ -27,7 +27,7 @@ export class HeaderComponent {
     this.router.navigate(['/about-us']);
   }
   redirectToCustomer() {
-    this.router.navigate(['/customer']);
+    this.router.navigate(['/log-in']);
   }
   redirectToShopCart() {
     this.router.navigate(['/shop-cart']);

@@ -1,22 +1,25 @@
 <div class="categories-products-page-container">
-    <div>
+    <div style="text-align: center">
         <p> Categories</p>
     </div>
     <div class="categories-container">
-        <button mat-flat-button class="custom-button">
-            <img src="/assets/feeder.jpg" alt="Image" class="centered-image">
+        <button mat-flat-button class="custom-button" (click)="redirectToDogsCategory()">
+            <img src="/assets/dog.png" alt="Image" class="centered-image">
         </button>
-        <button mat-flat-button class="custom-button">
-            <img src="/assets/feeder.jpg" alt="Image" class="centered-image">
+        <button mat-flat-button class="custom-button" (click)="redirectToCatsCategory()">
+            <img src="/assets/cat.png" alt="Image" class="centered-image">
         </button>
-        <button mat-flat-button class="custom-button">
-            <img src="/assets/feeder.jpg" alt="Image" class="centered-image">
+        <button mat-flat-button class="custom-button" (click)="redirectToFishCategory()">
+            <img src="/assets/fish.png" alt="Image" class="centered-image">
         </button>
-        <button mat-flat-button class="custom-button">
-            <img src="/assets/feeder.jpg" alt="Image" class="centered-image">
+        <button mat-flat-button class="custom-button" (click)="redirectToParrotCategory()">
+            <img src="/assets/parrot.png" alt="Image" class="centered-image">
         </button>
-        <button mat-flat-button class="custom-button">
-            <img src="/assets/feeder.jpg" alt="Image" class="centered-image">
+        <button mat-flat-button class="custom-button" (click)="redirectToRodentCategory()">
+            <img src="/assets/rodent.png" alt="Image" class="centered-image">
+        </button>
+        <button mat-flat-button class="custom-button" (click)="redirectToReptileCategories()">
+            <img src="/assets/reptile.png" alt="Image" class="centered-image">
         </button>
     </div>
     <div class="searcher-filter-container">

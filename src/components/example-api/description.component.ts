@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BrandService } from "../../services/BrandService";
-import { Brand } from "../../models/Brand";
+import { BrandService } from "../../services/brands/brand.service";
+import { Brand } from "../../models/brand.model";
 
 @Component({
   selector: 'pet-paradise-client-app-description',

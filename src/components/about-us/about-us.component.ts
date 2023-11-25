@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/Product';
-import { ProductService } from '../../services/ProductService';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/products/product.service';
 
 @Component({
   selector: 'pet-paradise-client-about-us',

@@ -17,11 +17,8 @@ export class AppComponent {
   title = "pet-paradise-client";
 
   showHeaderFooter() {
-    console.log(
-      ["/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about", "/sign-up", "/login"].includes(this.router.url),
-      this.router.url
-    );
-    return ["/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about", "/sign-up", "/login"].includes(this.router.url);
+
+    return ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about", "/sign-up", "/login"].includes(this.router.url);
 
   }
 }

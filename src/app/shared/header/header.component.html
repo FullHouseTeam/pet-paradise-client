@@ -1,13 +1,13 @@
 <header class="d-flex gap-3 align-items-center p-3 bg-1-100">
   <a href="">
-    <img src="assets/logo-black.svg" width="150" alt="logo">
+    <img src="assets/logo-black.svg" width="150" alt="logo" style="margin-left: 20px;">
   </a>
   <input type="checkbox" id="menu" hidden>
   <nav class="d-flex gap-md-5 gap-4 ms-auto align-items-center">
     <label class="material-icons d-md-none" role="button" for="menu" style="top: 20px; position: fixed;">cancel</label>
-    <a href="">Home</a>
-    <a href="/store">Store</a>
-    <a href="/about">About</a>
+    <a class="mx-md-5" href="">Home</a>
+    <a class="mx-md-5" href="/store">Store</a>
+    <a class="mx-md-5" href="/about">About</a>
     <div class="d-md-none">
       <mat-accordion>
         <mat-expansion-panel class="coll" (opened)="panelOpenState = true" (closed)="panelOpenState = false">

@@ -1,35 +1,36 @@
 <header class="d-flex gap-3 align-items-center p-3 bg-1-100">
-  <a href="/home">
+  <a href="">
     <img src="assets/logo-black.svg" width="150" alt="logo">
   </a>
   <input type="checkbox" id="menu" hidden>
   <nav class="d-flex gap-md-5 gap-4 ms-auto align-items-center">
-    <label class="material-icons d-md-none position-fixed" role="button" for="menu" style="top: 20px;">cancel</label>
-    <a href="/home">Home</a>
+    <label class="material-icons d-md-none" role="button" for="menu" style="top: 20px; position: fixed;">cancel</label>
+    <a href="">Home</a>
     <a href="/store">Store</a>
     <a href="/about">About</a>
     <div class="d-md-none">
-      <div class="d-flex align-items-center btn-header-coll collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#collheader">
-        Account <span class="material-icons ms-2">keyboard_arrow_down</span>
-      </div>
-      <div class="collapse" id="collheader">
-        <a class="text-warning d-block m-2 text-center" href="/sign-up">Sign up</a>
-        <a class="text-warning d-block m-2 text-center" href="/login">Login</a>
-      </div>
+      <mat-accordion>
+        <mat-expansion-panel class="coll" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header style="height: auto;">
+            Account
+          </mat-expansion-panel-header>
+          <a class="text-warning d-block m-2 text-center" href="/sign-up">Sign up</a>
+          <a class="text-warning d-block m-2 text-center" href="/login">Login</a>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </nav>
   <a class="mx-md-5 ms-md-5 ms-auto" href="/shop-cart">
-    <img class="mx-md-5 ms-md-5 ms-auto" src="assets/shopping-bag.svg" width="30" alt="shopping-bag">
+    <img src="assets/shopping-bag.svg" width="30" alt="shopping-bag">
   </a>
-  
   <label class="material-icons d-md-none" role="button" for="menu">menu</label>
-  <div class="dropdown d-md-block d-none">
-    <div class="dropdown-toggle" role="button" data-bs-toggle="dropdown">
-      Account
-    </div>
-    <div class="dropdown-menu dropdown-menu-end px-1 rounded-7 shadow-sm">
-      <a class="btn btn-1 btn-sm d-block m-2" href="/sign-up">Sign up</a>
-      <a class="btn btn-1 btn-sm d-block m-2" href="/login">Login</a>
-    </div>
+  <div class="d-md-block d-none">
+    <button class="flex-row-reverse" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon fontIcon="keyboard_arrow_down"></mat-icon> Account
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item href="/sign-up">Sign up</a>
+      <a mat-menu-item href="/login">Login</a>
+    </mat-menu>
   </div>
 </header>

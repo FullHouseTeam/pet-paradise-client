@@ -18,4 +18,5 @@ export const appRoutes: Route[] = [
   { path: 'example-api', component: DescriptionComponent },
   { path: 'product/:id', component: ProductInfoComponent },
   { path: '', component: HomeComponent },
+  { path: '**', component: DescriptionComponent },
   ];

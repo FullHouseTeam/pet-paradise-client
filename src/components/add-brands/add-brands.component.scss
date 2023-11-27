@@ -1,0 +1,99 @@
+.container {
+  background-color: white;
+  width: 45vw;
+  height: 30vw;
+  border-radius: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-bottom: 2.5vw;
+  text-align: center;
+  font-family: Quicksand, serif;
+  font-weight: bold;
+  font-size: 2vw;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input-container mat-form-field {
+  width: 18vw;
+}
+
+.file-input-button {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  margin-right: 1vw;
+}
+
+.file-input-button label {
+  display: inline-block;
+  background-color: #3F51B5;
+  color: white;
+  padding: 0.5vw 1vw;
+  border-radius: 0.5vw;
+  font-family: Quicksand, serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-input-button input {
+  position: absolute;
+  font-size: 100px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.accept-button {
+  padding: 0.6vw 2vw;
+  background-color: #001E47 ;
+  color: white;
+  border-radius: 0.5vw;
+  border: none;
+  font-family: Quicksand, serif;
+  font-weight: bold;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.preview-image {
+
+  max-width: 25vw;
+  max-height: 17vw;
+}
+
+@media only screen and (max-width: 360px) {
+  .container {
+    width: 80vw;
+    height: 100vw;
+  }
+
+  .title {
+    font-size: 6vw;
+
+    margin-bottom: 5vw;
+  }
+  .input-container mat-form-field {
+    width: 55vw;
+    font-size: 4vw;
+  }
+
+  .file-input-button {
+    font-size: 3vw;
+  }
+
+
+
+  .accept-button {
+    height: 6.5vw;
+  }
+}

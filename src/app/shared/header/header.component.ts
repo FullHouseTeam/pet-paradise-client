@@ -5,6 +5,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pet-paradise-client-header',
@@ -22,4 +23,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 })
 export class HeaderComponent {
   panelOpenState: boolean = false
+  constructor(private router: Router) {}
+
+  redirectTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 }

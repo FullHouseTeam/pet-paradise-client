@@ -1,0 +1,36 @@
+<header class="d-flex gap-3 align-items-center p-3 bg-1-100">
+  <a href="">
+    <img src="assets/logo-black.svg" width="150" alt="logo" style="margin-left: 20px;">
+  </a>
+  <input type="checkbox" id="menu" hidden>
+  <nav class="d-flex gap-md-5 gap-4 ms-auto align-items-center">
+    <label class="material-icons d-md-none" role="button" for="menu" style="top: 20px; position: fixed;">cancel</label>
+    <a class="mx-md-5" href="">Home</a>
+    <a class="mx-md-5" href="/store">Store</a>
+    <a class="mx-md-5" href="/about">About</a>
+    <div class="d-md-none">
+      <mat-accordion>
+        <mat-expansion-panel class="coll" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header style="height: auto;">
+            Account
+          </mat-expansion-panel-header>
+          <a class="text-warning d-block m-2 text-center" href="/sign-up">Sign up</a>
+          <a class="text-warning d-block m-2 text-center" href="/login">Login</a>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </nav>
+  <a class="mx-md-5 ms-md-5 ms-auto" href="/shop-cart">
+    <img src="assets/shopping-bag.svg" width="30" alt="shopping-bag">
+  </a>
+  <label class="material-icons d-md-none" role="button" for="menu">menu</label>
+  <div class="d-md-block d-none">
+    <button class="flex-row-reverse" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon fontIcon="keyboard_arrow_down"></mat-icon> Account
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item href="/sign-up">Sign up</a>
+      <a mat-menu-item href="/login">Login</a>
+    </mat-menu>
+  </div>
+</header>

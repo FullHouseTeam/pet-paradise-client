@@ -52,7 +52,7 @@ export class ProductInfoComponent implements OnInit {
   private loadProductDetails() {
 
 
-    this.title = this.product[Number(this.productId)].productType;
+    //this.title = this.product[Number(this.productId)].productType;
 
     this.price = this.product.length > 0 ? this.product[Number(this.productId)].price.toString() : '0';
 
@@ -66,7 +66,7 @@ export class ProductInfoComponent implements OnInit {
     //this.productType = this.product.length > 0 ? this.product[Number(this.productId)].productType : ''
     switch (this.productId) {
       case '1':
-        this.image = '/assets/feeder.jpg';
+        this.image = 'https://www.agrovetmanantial.com/assets/images/productos-veterinaria/plato-perro.webp';
         break;
       case '2':
         this.image = '/assets/feeder2.jpg';
@@ -82,16 +82,6 @@ export class ProductInfoComponent implements OnInit {
 
   onClick() {
     this.isClicked = !this.isClicked;
-
-    const buttonElement = this.el.nativeElement.querySelector('.add-Button');
-
-    if (this.isClicked) {
-      this.renderer.setStyle(buttonElement, 'background-color', 'red');
-      this.renderer.setProperty(buttonElement, 'innerText', 'Remove from Cart');
-    } else {
-      this.renderer.setStyle(buttonElement, 'background-color', '#3F51B5');
-      this.renderer.setProperty(buttonElement, 'innerText', 'Add to Cart');
-    }
   }
 
   redirectToCategoriesAndProducts() {

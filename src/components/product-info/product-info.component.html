@@ -36,7 +36,9 @@
             <div class="text-down">{{productType}}</div>
         </div>
 
-        <button class="add-Button" (click)="onClick()"> Add to Cart </button>
+        <button class="add-Button" [ngClass]="{'clicked': isClicked}" (click)="onClick()">
+            {{ isClicked ? 'Remove from Cart' : 'Add to Cart' }}
+        </button>
 
     </div>
 </div>

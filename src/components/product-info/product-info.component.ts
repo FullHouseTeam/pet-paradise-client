@@ -6,6 +6,8 @@ import { ProductService} from "../../services/products/product.service";
 import { Product} from "../../models/product.model";
 import {BrandService} from "../../services/brands/brand.service";
 import {Brand} from "../../models/brand.model";
+import { forkJoin } from 'rxjs';
+
 
 
 @Component({
@@ -20,63 +22,55 @@ export class ProductInfoComponent implements OnInit {
   title: string = '';
   price: string = '';
   description: string = '';
-  brand: string = '';
+  brandName: string = '';
   animalCategory: string = '';
   provider: string = '';
   productType: string = '';
   image: string = '';
+  discount: string = '';
   isClicked = false;
   productIds: string[] = ['1', '2', '1', '3', '1'];
-  product: Product[] = [];
-  brands: Brand[] = [];
+  products: Product[] = [];
+  brand: Brand = {} as Brand;
+  product: Product = {} as Product;
 
   constructor(
-      private renderer: Renderer2,
-      private el: ElementRef,
       private route: ActivatedRoute,
       private router: Router,
       private productService: ProductService,
       private brandService: BrandService
-      ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.getProductsList();
-    this.getBrand();
     this.route.params.subscribe(params => {
       this.productId = params['id'];
-      this.loadProductDetails();
+
+      forkJoin([
+        this.getProductsList(),
+        this.getProduct(Number(this.productId)),
+      ]).subscribe(([products, product]) => {
+        this.products = products;
+        this.product = product;
+
+        forkJoin([this.getBrand(Number(this.product.brandID))]).subscribe(([brand]) => {
+          this.brand = brand;
+          this.loadProductDetails();
+        });
+      });
     });
   }
 
   private loadProductDetails() {
-
-    //this.title = this.product[Number(this.productId)].productType;
-
-    this.price = this.product.length > 0 ? this.product[Number(this.productId)].price.toString() : '0';
-
-    this.description = this.product.length > 0 ? this.product[Number(this.productId)].description : '';
-
-    this.brand = this.product.length > 0  ? this.brands[Number(this.product[Number(this.productId)].brandID)].name : 'No description';
-
-    this.animalCategory = this.product.length > 0 ? this.product[Number(this.productId)].animalCategory : 'No Category';
-
+    this.title = this.product.name;
+    this.brandName = this.brand.name;
+    this.price = this.product.price.toString();
+    this.description = this.product.description;
+    this.animalCategory = this.product.animalCategory;
     this.provider = 'Purina';
-    //this.productType = this.product.length > 0 ? this.product[Number(this.productId)].productType : ''
-
-    switch (this.productId) {
-      case '1':
-        this.image = 'https://www.agrovetmanantial.com/assets/images/productos-veterinaria/plato-perro.webp';
-        break;
-      case '2':
-        this.image = '/assets/feeder2.jpg';
-        break;
-      case '3':
-        this.image = '/assets/feeder3.jpg';
-        break;
-      default:
-        this.image = '/assets/feeder.jpg';
-        break;
-    }
+    this.productType = this.product.productType;
+    this.discount = this.product.discount.toString();
+    this.image = this.product.image || 'https://res.cloudinary.com/dkappxhfr/image/upload/v1701198312/Pet/noImage.webp';
   }
   onClick() {
     this.isClicked = !this.isClicked;
@@ -87,20 +81,15 @@ export class ProductInfoComponent implements OnInit {
   }
 
   getProductsList() {
-    this.productService.getList().subscribe(
-        (data) => {
-          this.product = data;
-        }
-    );
+    return this.productService.getList();
   }
 
-  getBrand() {
-  this.brandService.getById(1).subscribe(
-        (data) => {
-          this.brands = [data];
-        }
-    );
-
+  getBrand(id: number) {
+    return this.brandService.getById(id);
   }
 
+  getProduct(id: number) {
+    return this.productService.getById(id);
+  }
 }
+

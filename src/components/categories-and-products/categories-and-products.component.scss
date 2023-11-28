@@ -13,15 +13,6 @@
   grid-gap: 1vw;
 }
 
-.categories-container {
-  padding-left: 20vw;
-  padding-right: 20vw;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 3vw;
-  place-items: center;
-}
-
 .custom-button {
   display: flex;
   align-items: center;
@@ -74,13 +65,6 @@
     background-color: white;
   }
 
-  .categories-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1vw;
-    place-items: center;
-
-  }
 
   .custom-button {
     display: flex;

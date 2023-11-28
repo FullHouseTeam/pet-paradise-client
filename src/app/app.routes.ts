@@ -20,11 +20,5 @@ export const appRoutes: Route[] = [
   { path: 'store/:category', component: CategoriesAndProductsComponent },
   { path: '**', component: DescriptionComponent },
   { path: 'example-api', component: DescriptionComponent },
-  { path: 'product/:id', component: ProductInfoComponent },
-  { path: 'categories-and-products/dog', component: CategoriesAndProductsComponent },
-  { path: 'categories-and-products/cat', component: CategoriesAndProductsComponent },
-  { path: 'categories-and-products/parrot', component: CategoriesAndProductsComponent },
-  { path: 'categories-and-products/fish', component: CategoriesAndProductsComponent },
-  { path: 'categories-and-products/rodent', component: CategoriesAndProductsComponent },
-  { path: 'categories-and-products/reptile', component: CategoriesAndProductsComponent }
+  { path: 'product/:id', component: ProductInfoComponent }
 ];

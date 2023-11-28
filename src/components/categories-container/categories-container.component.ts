@@ -12,12 +12,12 @@ import {Router} from "@angular/router";
 })
 export class CategoriesContainerComponent {
   categories = [
-    { name: 'Dogs', route: '/categories-and-products/dog', imageSrc: '/assets/dog.png' },
-    { name: 'Cats', route: '/categories-and-products/cat', imageSrc: '/assets/cat.png' },
-    { name: 'Fishes', route: '/categories-and-products/fish', imageSrc: '/assets/fish.png' },
-    { name: 'Parrots', route: '/categories-and-products/parrot', imageSrc: '/assets/parrot.png' },
-    { name: 'Rodents', route: '/categories-and-products/rodent', imageSrc: '/assets/rodent.png' },
-    { name: 'Others', route: '/categories-and-products/reptile', imageSrc: '/assets/others.png' }
+    { name: 'Dogs', route: '/store/dog', imageSrc: '/assets/dog.png' },
+    { name: 'Cats', route: '/store/cat', imageSrc: '/assets/cat.png' },
+    { name: 'Fishes', route: '/store/fish', imageSrc: '/assets/fish.png' },
+    { name: 'Birds', route: '/store/bird', imageSrc: '/assets/parrot.png' },
+    { name: 'Rodents', route: '/store/rodent', imageSrc: '/assets/rodent.png' },
+    { name: 'Others', route: '/store/other', imageSrc: '/assets/others.png' }
   ];
 
   constructor(private router: Router) {}

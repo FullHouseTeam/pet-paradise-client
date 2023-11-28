@@ -18,7 +18,8 @@ export class AppComponent {
 
   showHeaderFooter() {
 
-    return ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about", "/sign-up", "/login"].includes(this.router.url);
+    return ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about",
+      "/store/dog", "/store/cat", "/store/rodent", "/store/bird", "/store/other", "/store/fish", "/sign-up", "/login"].includes(this.router.url);
 
   }
 }

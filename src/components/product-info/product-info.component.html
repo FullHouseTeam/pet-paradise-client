@@ -8,7 +8,7 @@
 
         <div class="big-letters">{{ title }}</div>
         <div class="double-container">
-            <div class="big-letters">{{ price }}</div>
+            <div class="big-letters">{{ price }} $</div>
             <button class="category-button" (click)="redirectToCategoriesAndProducts()">{{animalCategory}}</button>
         </div>
 
@@ -27,13 +27,20 @@
 
             <div class="subtitle">
                 <div class="text-up">Brand:</div>
-                <div class="text-down">{{brand}}</div>
+                <div class="text-down">{{brandName}}</div>
             </div>
         </div>
 
-        <div class="subtitle">
-            <div class="text-up">Product Type:</div>
-            <div class="text-down">{{productType}}</div>
+        <div class="double-container">
+            <div class="subtitle">
+                <div class="text-up">Product Type:</div>
+                <div class="text-down">{{productType}}</div>
+            </div>
+
+            <div class="subtitle">
+                <div class="text-up">Discount:</div>
+                <div class="text-down">{{discount}} %</div>
+            </div>
         </div>
 
         <button class="add-Button" [ngClass]="{'clicked': isClicked}" (click)="onClick()">

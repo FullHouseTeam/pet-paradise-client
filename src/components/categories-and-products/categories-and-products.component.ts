@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ProductCardComponent} from "../product-card/product-card.component";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
-import {MatSelectModule} from "@angular/material/select";
-import {CdkFixedSizeVirtualScroll} from "@angular/cdk/scrolling";
-import {CategoriesContainerComponent} from "../categories-container/categories-container.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {forkJoin} from "rxjs";
-import {ProductService} from "../../services/products/product.service";
-import {Product} from "../../models/product.model";
+import { ProductCardComponent } from "../product-card/product-card.component";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { CdkFixedSizeVirtualScroll } from "@angular/cdk/scrolling";
+import { CategoriesContainerComponent } from "../categories-container/categories-container.component";
+import { ActivatedRoute, Router } from "@angular/router";
+import { forkJoin } from "rxjs";
+import { ProductService } from "../../services/products/product.service";
+import { Product } from "../../models/product.model";
 
 @Component({
   selector: 'pet-paradise-client-categories-and-products',

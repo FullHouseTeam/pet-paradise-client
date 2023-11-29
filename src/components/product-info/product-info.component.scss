@@ -53,6 +53,7 @@
   padding: 10px;
 }
 
+
 .info-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -147,12 +148,14 @@
 
 @media only screen and (max-width: 360px) {
 
+
   .container-info {
     margin-top: 10vw;
     grid-template-columns: 1fr;
     margin-left: unset;
     max-width: 80vw;
     height: unset;
+
   }
 
   .big-letters {
@@ -187,12 +190,14 @@
   }
 
   .double-container {
+
     align-items: center;
   }
 
   .add-Button {
     width: 25vw;
     height: 6vw;
+    justify-self: center;
     font-size: 2.5vw;
   }
 

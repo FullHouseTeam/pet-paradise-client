@@ -17,8 +17,6 @@
   align-items: center;
   justify-content: center;
   width: 6.3vw;
-  height: 6vw;
-  max-height: 6vw;
   border: none;
   cursor: pointer;
   background: transparent;
@@ -59,58 +57,63 @@ p {
 
 @media only screen and (max-width: 360px) {
   .container {
-    height: 22vh;
-    padding: 1vw;
-    width: 25vw;
-  }
-
-  .image-button {
-    width: 20vw;
-    height: 30vw;
-
-  }
-
-  .image-button {
-    width: 20vw;
-    height: 30vw;
-
-  }
-
-  p {
-    margin: 2% 0;
-    font-size: 3vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 22vw;
+    max-height: 50vw;
+    min-height: unset;
+    margin-left: unset;
+    place-items: center;
   }
 
   .add-button {
     width: 20vw;
     height: 7vw;
     font-size: 2.5vw;
+    margin-bottom: 2vw;
+
   }
 
-  .image-container {
-    width: 90%;
-    height: 40%;
+  p {
+    font-size: 3vw;
   }
 
+  .image-button {
+    width: 100%;
+    height: 100%;
 
+
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
 }
+
 
 @media only screen and (min-width: 740px) and (max-width: 740px) {
   .container {
-    height: 26vh;
-    padding: 1vw;
-    width: 11vw;
-    margin-left: 1vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 10vw;
+    height: 10vw;
+    max-height: 50vw;
+    min-height: unset;
+    margin-left: unset;
+    place-items: center;
   }
+
 
   p {
     margin: -4% 0;
     font-size: 1vw;
   }
 
-.image-button {
-  width: 10vw;
-}
+  .image-button {
+    width: 10vw;
+  }
 
   button {
     width: 10vw;
@@ -118,14 +121,14 @@ p {
     font-size: 1vw;
   }
   .image-container {
-    width: 90%;
-    height: 100%;
+    width: 60%;
+    height: auto;
 
   }
 
   .image-container img {
-    width: 90%;
-    height: 120%;
+    width: 60%;
+    height: 50%;
 
   }
 }

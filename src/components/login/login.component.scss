@@ -1,0 +1,179 @@
+.container {
+  display: flex;
+  height: 70vh;
+  max-width: 90vw;
+}
+
+.left,
+.right {
+  flex: 1;
+  background-color: #fff;
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.left {
+  border-top-left-radius: 3vw;
+  border-bottom-left-radius: 3vw;
+
+}
+
+.right {
+  border-top-right-radius: 3vw;
+  border-bottom-right-radius: 3vw;
+}
+
+.image-container,
+.slogan img {
+  max-width: 100%;
+  height: auto;
+}
+
+input {
+  margin-bottom: 1vw;
+  width: 100%;
+}
+
+.log-in-Button {
+  background-color: #3F51B5;
+  color: white;
+  padding: 2% 2vw;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  font-family: 'quicksand';
+  font-size: 1.2vw;
+  width: 50%;
+}
+
+.welcomeTitle {
+  display: block;
+  padding: 1vw;
+  margin-bottom: 1vw;
+  color: #7B8B91;
+  font-family: 'quicksand';
+  font-size: 2vw;
+}
+
+.errorLabels {
+  display: block;
+  margin-bottom: 0.3vw;
+  font-family: 'quicksand';
+  color: red;
+  font-size: 0.8vw;
+}
+
+.textField-container {
+  position: relative;
+  margin-bottom: 1vw;
+  justify-content: start;
+  text-align: start;
+  border: 1px solid #626262;
+  border-radius: 5px;
+  padding-top: 1vw;
+  padding-left: 1vw;
+  height: 2vw;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper {
+  flex: 1;
+}
+
+.toggleButton {
+  margin-left: 0.5vw;
+  margin-bottom: 1vw;
+}
+
+.textField-input.error-text {
+  color: red;
+}
+
+.textField-container.error {
+  border-color: red;
+}
+
+.textField-input {
+  border: none;
+  outline: none;
+  font-size: 1vw;
+  padding: 0.8vw 0;
+  font-family: 'quicksand';
+  background-color: transparent;
+}
+
+.password-textField-input {
+  border: none;
+  width: 9vw;
+  outline: none;
+  font-size: 1vw;
+  padding: 0.8vw 0;
+  font-family: 'quicksand';
+  background-color: transparent;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.slogan {
+  padding: 20px;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 360px) {
+  .container {
+    max-width: 100%;
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    border-radius: 0;
+  }
+
+  .left,
+  .right,
+  .sloganTitle,
+  .welcomeTitle,
+  .errorLabels,
+  .textField-line,
+  .textField-input,
+
+  .log-in-Button {
+    padding: 2%;
+    font-size: 3vw;
+  }
+
+  .password-textField-input {
+    font-size: 5vw;
+    width: 32vw;
+  }
+
+  .textField-container {
+    height: 6vw;
+    margin-bottom: 5vw;
+  }
+
+  .textField-input {
+    font-size: 5vw;
+    width: 45vw;
+    height: 60%;
+  }
+
+  .welcomeTitle {
+    font-size: 7vw;
+  }
+}

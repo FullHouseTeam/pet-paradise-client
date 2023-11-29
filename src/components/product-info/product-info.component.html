@@ -7,10 +7,23 @@
     <div class="info-container">
 
         <div class="big-letters">{{ title }}</div>
-        <div class="double-container">
-            <div class="big-letters">{{ price }} $</div>
-            <button class="category-button" (click)="redirectToCategoriesAndProducts()">{{animalCategory}}</button>
+        <div class="triple-container">
+            <div class="big-letters" *ngIf="product.discount > 0; else noDiscount">
+                {{ (product.price - (product.price * (product.discount / 100))).toFixed(2) }} $
+            </div>
+            <ng-template #noDiscount>
+                <div class="big-letters" >
+                    {{ product.price }} $
+                </div>
+            </ng-template>
+            <div class="big-letters" *ngIf="product.discount > 0" style="text-decoration: line-through; color: red">
+                {{ product.price }} $
+            </div>
+            <button class="category-button" (click)="redirectToCategoriesAndProducts()">{{ animalCategory }}</button>
         </div>
+
+
+
 
         <div class="description">
             <p>

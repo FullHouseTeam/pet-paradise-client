@@ -75,7 +75,7 @@
   font-family: 'Quicksand', serif;
   font-size: 1.3vw;
   font-weight: bold;
-  margin-bottom: 0.5vw;
+  margin-bottom: 0.8vw;
 
 }
 
@@ -105,6 +105,12 @@
   margin-bottom: 0.5vw
 }
 
+
+.triple-container {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.8fr;
+  margin-bottom: 0.5vw
+}
 .category-button {
   background-color: #79CD9F;
   border: none;

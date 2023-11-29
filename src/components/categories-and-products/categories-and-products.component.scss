@@ -5,6 +5,7 @@
   background-color: #FAF7F1;
   padding: 2vw;
 }
+
 .searcher-filter-container {
   padding-right: 20vw;
   padding-left: 20vw;
@@ -45,6 +46,7 @@
 .no-products-found-message {
   font-size: 2vw;
 }
+
 @media only screen and (max-width: 740px) {
   .container-products {
     grid-template-columns: repeat(4, 1fr);
@@ -62,6 +64,7 @@
     grid-gap: 1vw;
     max-height: 60vw;
   }
+
   .categories-products-page-container {
     display: grid;
     grid-template-columns: 0fr;

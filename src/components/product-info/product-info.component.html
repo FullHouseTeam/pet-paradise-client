@@ -5,8 +5,8 @@
     </div>
 
     <div class="info-container">
-
         <div class="big-letters">{{ title }}</div>
+
         <div class="triple-container">
             <div class="big-letters" *ngIf="product.discount > 0; else noDiscount">
                 {{ (product.price - (product.price * (product.discount / 100))).toFixed(2) }} $
@@ -22,14 +22,10 @@
             <button class="category-button" (click)="redirectToCategoriesAndProducts()">{{ animalCategory }}</button>
         </div>
 
-
-
-
         <div class="description">
             <p>
                 {{ description }}
             </p>
-
         </div>
 
         <div class="double-container">
@@ -59,7 +55,6 @@
         <button class="add-Button" [ngClass]="{'clicked': isClicked}" (click)="onClick()">
             {{ isClicked ? 'Remove from Cart' : 'Add to Cart' }}
         </button>
-
     </div>
 </div>
 

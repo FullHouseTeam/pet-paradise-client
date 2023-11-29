@@ -75,7 +75,6 @@ p {
     height: 7vw;
     font-size: 2.5vw;
     margin-bottom: 2vw;
-
   }
 
   p {
@@ -85,8 +84,6 @@ p {
   .image-button {
     width: 100%;
     height: 100%;
-
-
   }
 
   .image-container img {
@@ -95,7 +92,6 @@ p {
     max-height: 100%;
   }
 }
-
 
 @media only screen and (min-width: 740px) and (max-width: 740px) {
   .container {
@@ -108,7 +104,6 @@ p {
     margin-left: unset;
     place-items: center;
   }
-
 
   p {
     margin: -4% 0;
@@ -127,12 +122,10 @@ p {
   .image-container {
     width: 60%;
     height: auto;
-
   }
 
   .image-container img {
     width: 60%;
     height: 50%;
-
   }
 }

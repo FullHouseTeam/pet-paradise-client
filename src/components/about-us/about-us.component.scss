@@ -42,7 +42,7 @@
 
     .content {
       font-family: 'Quicksand-Medium', sans-serif;
-      font-size: 16px;
+      font-size: 17px;
       padding: 0 20px;
       text-align: left;
 
@@ -59,6 +59,10 @@
   }
 
   @media (max-width: 768px) {
+    h2 {
+      font-size: 28px;
+    }
+    
     .white-box {
       width: auto;
     }
@@ -66,11 +70,25 @@
     .about-section {
       flex-direction: column;
 
-      .content,
-      .cats-image,
-      .parrots-image,
+      .content {
+        font-size: 19px;
+        order: 1;
+
+        .title-content {
+          font-size: 20px;
+        }
+      }
+
+      .cats-image {
+        order: 2;
+      }
+
+      .parrots-image {
+        order: 3;
+      }
+
       .puppies-image {
-        width: 100%;
+        order: 4;
       }
     }
   }

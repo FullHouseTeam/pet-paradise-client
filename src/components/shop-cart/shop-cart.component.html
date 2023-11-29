@@ -9,13 +9,8 @@
     </div>
 
     <div style="display: grid; grid-gap: 20px">
-        <div class="shop-list">
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
-            <pet-paradise-client-product-view-edition></pet-paradise-client-product-view-edition>
+        <div class="shop-list"  *ngFor="let product of products">
+            <pet-paradise-client-product-view-edition [productName]="product.name" [productImage]="product.image" [productPrice]="product.price.toString()"></pet-paradise-client-product-view-edition>
         </div>
         <div>
             Max Price

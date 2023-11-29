@@ -14,7 +14,7 @@ export const appRoutes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'store', component: CategoriesAndProductsComponent },
   { path: 'product/:id', component: ProductInfoComponent},
-  { path: 'shop-cart', component: ShopCartComponent },
+  { path: 'shop-cart/:id', component: ShopCartComponent },
   { path: 'customer', component: CustomerPageComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'support', component: SupportPageComponent },

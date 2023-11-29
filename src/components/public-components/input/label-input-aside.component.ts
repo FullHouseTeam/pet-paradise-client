@@ -6,40 +6,17 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from '@angular/material/core';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import _moment from 'moment';
-import {default as _rollupMoment, Moment} from 'moment';
+import {MatSelectModule} from "@angular/material/select";
 
-const moment = _rollupMoment || _moment;
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MM/YYYY',
-  },
-  display: {
-    dateInput: 'MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
 
 @Component({
   selector: 'pet-paradise-client-label-input-aside',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, NgStyle, MatDatepickerModule, NgForOf, MatButtonModule, MatNativeDateModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, NgStyle, MatDatepickerModule, NgForOf, MatButtonModule, MatNativeDateModule, MatSelectModule],
   templateUrl: './label-input-aside.component.html',
   styleUrls: ['./label-input-aside.component.scss'],
-  providers: [
 
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
-    },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ]
 })
 export class LabelInputAsideComponent {
   emailEntry = new FormControl();
@@ -47,7 +24,22 @@ export class LabelInputAsideComponent {
   cvvEntry = new FormControl();
   nitEntry = new FormControl();
   cardNumberEntry = new FormControl();
-  date = new FormControl(moment(), Validators.required);
+  years: number[] = [2023, 2024, 2025, 2026, 2027, 2028, 2029];
+  months: any[] = [
+    { value: '01', viewValue: 'January' },
+    { value: '02', viewValue: 'February' },
+    { value: '03', viewValue: 'March' },
+    { value: '04', viewValue: 'April' },
+    { value: '05', viewValue: 'May' },
+    { value: '06', viewValue: 'June' },
+    { value: '07', viewValue: 'July' },
+    { value: '08', viewValue: 'August' },
+    { value: '09', viewValue: 'September' },
+    { value: '10', viewValue: 'October' },
+    { value: '11', viewValue: 'November' },
+    { value: '12', viewValue: 'December' }
+  ];
+
 
 
   getCardNumberErrorMessage() {
@@ -118,18 +110,5 @@ export class LabelInputAsideComponent {
   }
 
 
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.date.value!;
-    ctrlValue.month(normalizedMonthAndYear.month());
-    ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue(ctrlValue);
-    datepicker.close();
-  }
 
-  validateDate(control: FormControl) {
-    const selectedDate = moment(control.value);
-    const currentDate = moment();
-    console.log(selectedDate.isSameOrAfter(currentDate))
-    return selectedDate.isSameOrAfter(currentDate) ? 'it is' : 'it is not';
-  }
 }

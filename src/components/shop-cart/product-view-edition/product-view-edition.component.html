@@ -1,12 +1,12 @@
 <mat-grid-list cols="4" class="product-view">
     <mat-grid-tile colspan="2" rowspan="2">
-        <img class="logo" src="/assets/logov2.png" alt="image" width="115vw" height="115vw"/>
+        <img class="logo" src="{{productImage}}" alt="image" width="115vw" height="115vw"/>
     </mat-grid-tile>
     <mat-grid-tile>
-        TEXTO 1
+        {{productName}}
     </mat-grid-tile>
     <mat-grid-tile>
-        TEXTO 2
+        {{productPrice}}
     </mat-grid-tile>
     <mat-grid-tile>
             <input type="number"

@@ -36,17 +36,20 @@
             {{ getCardNumberErrorMessage() }}
         </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Month and Year</mat-label>
-        <input matInput [matDatepicker]="dp" [formControl]="date">
-        <mat-error *ngIf="date.invalid">
-            {{validateDate(date)}}
-        </mat-error>
-        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp
-                        startView="multi-year"
-                        (monthSelected)="setMonthAndYear($event, dp)"
-                        panelClass="example-month-picker">
-        </mat-datepicker>
-    </mat-form-field>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 20px">
+        <mat-form-field appearance="outline">
+            <mat-label>Month</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let month of months" [value]="month.value">{{ month.viewValue }}</mat-option>
+            </mat-select>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+            </mat-select>
+            <input matInput>
+        </mat-form-field>
+    </div>
 </div>

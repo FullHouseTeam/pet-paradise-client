@@ -1,2 +1,34 @@
-html, body { min-height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@font-face {
+  font-family: 'Quicksand-Bold';
+  src: url('./assets/fonts/quicksand/Quicksand-Bold.ttf') format('woff2'),
+}
+
+@font-face {
+  font-family: 'Quicksand-SemiBold';
+  src: url('./assets/fonts/quicksand/Quicksand-SemiBold.ttf') format('woff2'),
+}
+
+@font-face {
+  font-family: 'Quicksand-Medium';
+  src: url('./assets/fonts/quicksand/Quicksand-Medium.ttf') format('woff2'),
+}
+
+@font-face {
+  font-family: 'Quicksand-Regular';
+  src: url('./assets/fonts/quicksand/Quicksand-Regular.ttf') format('woff2'),
+}
+
+@font-face {
+  font-family: 'Quicksand-Light';
+  src: url('./assets/fonts/quicksand/Quicksand-Light.ttf') format('woff2');
+}
+
+html, 
+body { 
+  min-height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  // font-family: Roboto, "Helvetica Neue", sans-serif; 
+}

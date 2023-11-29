@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { forkJoin } from "rxjs";
+import { ProductService } from "../../services/products/product.service";
+import { Product } from "../../models/product.model";
 
 @Component({
   selector: 'app-product-card',
@@ -13,37 +16,30 @@ export class ProductCardComponent implements OnInit {
   price = '';
   image = '';
   isClicked = false;
+  product: Product = {} as Product;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+      private renderer: Renderer2,
+      private el: ElementRef,
+      private router: Router,
+      private route: ActivatedRoute,
+      private productService: ProductService
+  ) {}
 
 
   ngOnInit() {
-    this.loadProductDetails();
+    forkJoin([this.getProduct(Number(this.productId))]).subscribe(
+        ([product]) => {
+          this.product = product;
+          this.loadProductDetails();
+        }
+    );
   }
 
   private loadProductDetails() {
-    switch (this.productId) {
-      case '1':
-        this.title = 'Product 1';
-        this.price = '15.00 $';
-        this.image = '/assets/feeder.jpg';
-        break;
-      case '2':
-        this.title = 'Product 2';
-        this.price = '544.90 $';
-        this.image = '/assets/feeder2.jpg';
-        break;
-      case '3':
-        this.title = 'Product 3';
-        this.price = '4571.15 $';
-        this.image = '/assets/feeder3.jpg';
-        break;
-      default:
-        this.title = 'default';
-        this.price = '0.00 $';
-        this.image = '/assets/feeder.jpg';
-        break;
-    }
+    this.title = this.truncateText(this.product.name, 10);
+    this.price = this.product.price.toString();
+    this.image = this.product.image;
   }
 
   onClick() {
@@ -60,7 +56,16 @@ export class ProductCardComponent implements OnInit {
     }
   }
   goToProduct() {
-    this.router.navigate(['/product', this.productId], { relativeTo: this.route });
+    window.location.replace('/product/' + this.productId);
+
+  }
+
+  getProduct(id: number) {
+    return this.productService.getById(id);
+  }
+
+  private truncateText(text: string, maxLength: number): string {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   }
 
 }

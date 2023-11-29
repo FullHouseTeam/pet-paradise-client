@@ -23,9 +23,7 @@ import {forkJoin} from "rxjs";
 })
 export class ShopCartComponent {
   customerId: string = '';
-  productNames: string[] = [];
-  productPrices: string[] = [];
-  productImages: string[] = [];
+  totalPrice: string = '';
   isClicked = false;
   products: Product[] = [];
   customerProducts: Product[] = [];
@@ -36,7 +34,6 @@ export class ShopCartComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private purchaseService: PurchaseService,
-    private router: Router
   ) {
   }
 
@@ -60,6 +57,7 @@ export class ShopCartComponent {
                       this.customerProducts.push(foundProduct);
                     }
                   }
+                  this.getTotalPrice()
                 }
               );
             }
@@ -78,8 +76,9 @@ export class ShopCartComponent {
   }
 
 
-  getProduct(id: number) {
-    return this.productService.getById(id);
+  getTotalPrice() {
+    this.totalPrice = this.customerProducts.reduce((total, product) => total + product.price - (product.price * product.discount / 100), 0).toString();
+
   }
 
   getPurchasesList() {

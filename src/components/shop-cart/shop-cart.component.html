@@ -9,11 +9,14 @@
     </div>
 
     <div style="display: grid; grid-gap: 20px">
-        <div class="shop-list"  *ngFor="let product of products">
-            <pet-paradise-client-product-view-edition [productName]="product.name" [productImage]="product.image" [productPrice]="product.price.toString()"></pet-paradise-client-product-view-edition>
+        <div class="shop-list" >
+            <div *ngFor="let product of customerProducts">
+                <pet-paradise-client-product-view-edition  [productName]="product.name" [productImage]="product.image" [productPrice]="(product.price - (product.price * product.discount / 100)).toString()"></pet-paradise-client-product-view-edition>
+            </div>
+
         </div>
         <div>
-            Max Price
+            {{totalPrice}}$
         </div>
     </div>
 

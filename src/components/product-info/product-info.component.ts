@@ -46,28 +46,28 @@ export class ProductInfoComponent implements OnInit {
       this.productId = params['id'];
       forkJoin([this.getProductsList()]).subscribe(
           ([products]) => {
-        this.products = products;
-          if (Number(this.productId) > this.products.length) {
-            this.router.navigate(['/error']);
-          } else {
-            const maxIds = Math.min(this.products.length, 5);
-            for (let i = 0; i < maxIds; i++) {
-              const randomProductId = Math.floor(Math.random() * this.products.length) + 1;
-              this.productIds.push(randomProductId.toString());
+            this.products = products;
+            if (Number(this.productId) > this.products.length) {
+              this.router.navigate(['/error']);
+            } else {
+              const maxIds = Math.min(this.products.length, 5);
+              for (let i = 0; i < maxIds; i++) {
+                const randomProductId = Math.floor(Math.random() * this.products.length) + 1;
+                this.productIds.push(randomProductId.toString());
+              }
+              forkJoin([this.getProduct(Number(this.productId))]).subscribe(
+                  ([product]) => {
+                    this.product = product;
+                    forkJoin([this.getBrand(Number(this.product.brandID))]).subscribe(
+                        ([brand]) => {
+                          this.brand = brand;
+                          this.loadProductDetails();
+                        }
+                    );
+                  }
+              )
             }
-            forkJoin([this.getProduct(Number(this.productId))]).subscribe(
-                ([product]) => {
-                  this.product = product;
-                  forkJoin([this.getBrand(Number(this.product.brandID))]).subscribe(
-                      ([brand]) => {
-                        this.brand = brand;
-                        this.loadProductDetails();
-                      }
-                  );
-                }
-            )
           }
-        }
       )
     });
   }
@@ -83,6 +83,7 @@ export class ProductInfoComponent implements OnInit {
     this.discount = this.product.discount.toString();
     this.image = this.product.image || 'https://res.cloudinary.com/dkappxhfr/image/upload/v1701218817/Pet/noImage.webp';
   }
+
   onClick() {
     this.isClicked = !this.isClicked;
   }
@@ -103,4 +104,3 @@ export class ProductInfoComponent implements OnInit {
     return this.productService.getById(id);
   }
 }
-

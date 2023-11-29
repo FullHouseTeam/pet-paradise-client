@@ -14,14 +14,14 @@ import { FooterComponent } from '../components/footer/footer.component';
 export class AppComponent {
   constructor(private router: Router) {}
 
-  title = 'pet-paradise-client';
+  title = "pet-paradise-client";
 
   showHeaderFooter() {
-    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/store", "/about", "/sign-up", "/login"];
+    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/about", "/sign-up", "/login"];
 
     const isProductPage = this.router.url.includes("/product/");
+    const isStorePage = this.router.url.includes("/store/");
 
-    return allowedRoutes.includes(this.router.url) || isProductPage;
+    return allowedRoutes.includes(this.router.url) || isProductPage || isStorePage;
   }
-
 }

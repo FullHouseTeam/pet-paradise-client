@@ -81,7 +81,7 @@ export class ProductInfoComponent implements OnInit {
     this.provider = 'Purina';
     this.productType = this.product.productType;
     this.discount = this.product.discount.toString();
-    this.image = this.product.image || 'https://res.cloudinary.com/dkappxhfr/image/upload/v1701198312/Pet/noImage.webp';
+    this.image = this.product.image || 'https://res.cloudinary.com/dkappxhfr/image/upload/v1701218817/Pet/noImage.webp';
   }
   onClick() {
     this.isClicked = !this.isClicked;

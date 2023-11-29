@@ -9,11 +9,10 @@ import {NgClass} from "@angular/common";
   selector: 'app-product-card',
   standalone: true,
   templateUrl: './product-card.component.html',
-  imports: [
-    NgClass
-  ],
+  imports: [NgClass],
   styleUrls: ['./product-card.component.scss']
 })
+
 export class ProductCardComponent implements OnInit {
   @Input() productId: string = '';
   title = '';
@@ -29,7 +28,6 @@ export class ProductCardComponent implements OnInit {
       private route: ActivatedRoute,
       private productService: ProductService
   ) {}
-
 
   ngOnInit() {
     forkJoin([this.getProduct(Number(this.productId))]).subscribe(
@@ -51,7 +49,6 @@ export class ProductCardComponent implements OnInit {
   }
   goToProduct() {
     window.location.replace('/product/' + this.productId);
-
   }
 
   getProduct(id: number) {
@@ -61,5 +58,4 @@ export class ProductCardComponent implements OnInit {
   private truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   }
-
 }

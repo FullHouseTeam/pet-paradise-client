@@ -9,7 +9,6 @@
   grid-gap: 1vw;
   place-items: center;
   margin-left: 3vw;
-
 }
 
 .container-products {
@@ -38,21 +37,17 @@
 .image-container img {
   width: 100%;
   height: auto;
-
 }
 
 .reto {
   width: 100%;
   height: 100%;
   overflow: hidden;
-
   font-size: calc(1em + 1vw);
-
   color: #333;
   text-align: justify;
   padding: 10px;
 }
-
 
 .info-container {
   display: grid;
@@ -77,7 +72,6 @@
   font-size: 1.3vw;
   font-weight: bold;
   margin-bottom: 0.8vw;
-
 }
 
 .subtitle {
@@ -97,7 +91,6 @@
 .text-down {
   position: absolute;
   top: 1vw;
-
 }
 
 .double-container {
@@ -106,12 +99,12 @@
   margin-bottom: 0.5vw
 }
 
-
 .triple-container {
   display: grid;
   grid-template-columns: 0.5fr 0.5fr 0.8fr;
   margin-bottom: 0.5vw
 }
+
 .category-button {
   background-color: #79CD9F;
   border: none;
@@ -147,15 +140,12 @@
 }
 
 @media only screen and (max-width: 360px) {
-
-
   .container-info {
     margin-top: 10vw;
     grid-template-columns: 1fr;
     margin-left: unset;
     max-width: 80vw;
     height: unset;
-
   }
 
   .big-letters {
@@ -190,7 +180,6 @@
   }
 
   .double-container {
-
     align-items: center;
   }
 
@@ -207,7 +196,6 @@
     padding: 1vw;
     grid-template-columns: repeat(3, 1fr);
   }
-
 }
 
 @media only screen and (min-width: 740px) and (max-width: 740px) {
@@ -219,5 +207,4 @@
     height: 120px;
     width: 120px;
   }
-
 }

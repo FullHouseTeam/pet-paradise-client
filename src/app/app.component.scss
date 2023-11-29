@@ -5,14 +5,16 @@ html {
 }
 
 .content {
+  display: flex;
   flex: 1 1 auto;
   width: 100%;
+  place-items: center;
+  justify-content: center;
 }
 
 .cent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   background-color: #FAF7F1;

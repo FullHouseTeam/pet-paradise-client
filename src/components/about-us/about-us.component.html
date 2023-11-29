@@ -3,7 +3,7 @@
 
   <div class="content-container">
     <div class="pet-container">
-      <img class="pet-icon" src="../../../assets/icons/dog-footprint.svg" alt="dog-footprint">
+      <img class="pet-icon" [src]="getIconPath('dog-footprint.svg')" alt="dog-footprint">
     </div>
 
     <div class="white-box">
@@ -17,13 +17,13 @@
           </p>
         </div>
         <div class="cats-image">
-          <img src="../../../assets/images/cats.jpg" alt="cats">
+          <img [src]="getImagePath('cats.jpg')" alt="cats">
         </div>
       </div>
 
       <div class="about-section">
         <div class="parrots-image">
-          <img src="../../../assets/images/parrots.jpg" alt="parrots">
+          <img [src]="getImagePath('parrots.jpg')" alt="parrots">
         </div>
         <div class="content">
           <p>
@@ -44,7 +44,7 @@
           </p>
         </div>
         <div class="puppies-image">
-          <img src="../../../assets/images/puppies.jpg" alt="puppies">
+          <img [src]="getImagePath('puppies.jpg')" alt="puppies">
         </div>
       </div>
     </div>

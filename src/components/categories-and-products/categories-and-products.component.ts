@@ -41,7 +41,12 @@ export class CategoriesAndProductsComponent implements OnInit{
 
   private loadProductDetails(prods: Product[]) {
     this.products = prods
-    this.filteredProducts = this.products.filter(product => product.animalCategory === this.productCategory);
+    if (this.productCategory === 'all') {
+      this.filteredProducts = this.products;
+    } else {
+      this.filteredProducts = this.products.filter(product => product.animalCategory === this.productCategory);
+    }
+    console.log(this.filteredProducts)
   }
   getProductsList() {
     return this.productService.getList();

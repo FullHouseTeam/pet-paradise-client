@@ -41,6 +41,10 @@
   overflow-y: scroll;
 
 }
+
+.no-products-found-message {
+  font-size: 2vw;
+}
 @media only screen and (max-width: 740px) {
   .container-products {
     grid-template-columns: repeat(4, 1fr);
@@ -88,5 +92,9 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1vw;
+  }
+
+  .no-products-found-message {
+    font-size: 6vw;
   }
 }

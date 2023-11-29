@@ -10,34 +10,19 @@
             <mat-select disabled placeholder="Filter By">
                 <mat-option value="option">Option</mat-option>
             </mat-select>
-            <mat-hint>By type</mat-hint>
+            <mat-hint>type</mat-hint>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <input disabled matInput placeholder="Search...">
-            <mat-hint>By name</mat-hint>
+            <mat-hint>name</mat-hint>
         </mat-form-field>
     </div>
-    <div class="container-products">
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
+    <div class="container-products" *ngIf="filteredProducts.length > 0">
+        <div *ngFor="let product of filteredProducts">
+            <app-product-card [productId]="product.productID.toString()"></app-product-card>
+        </div>
     </div>
-
+    <div class="no-products-found-message" *ngIf="filteredProducts.length <= 0">
+        There are no Products of category "{{productCategory}}" available
+    </div>
 </div>

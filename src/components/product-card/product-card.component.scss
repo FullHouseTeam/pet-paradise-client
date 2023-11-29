@@ -55,6 +55,10 @@ p {
   font-weight: bold;
 }
 
+.clicked {
+  background-color: #FF0000;
+}
+
 @media only screen and (max-width: 360px) {
   .container {
     display: grid;

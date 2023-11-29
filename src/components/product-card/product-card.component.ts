@@ -3,11 +3,15 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { forkJoin } from "rxjs";
 import { ProductService } from "../../services/products/product.service";
 import { Product } from "../../models/product.model";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
   templateUrl: './product-card.component.html',
+  imports: [
+    NgClass
+  ],
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnInit {
@@ -44,16 +48,6 @@ export class ProductCardComponent implements OnInit {
 
   onClick() {
     this.isClicked = !this.isClicked;
-
-    const buttonElement = this.el.nativeElement.querySelector('.add-button');
-
-    if (this.isClicked) {
-      this.renderer.setStyle(buttonElement, 'background-color', 'red');
-      this.renderer.setProperty(buttonElement, 'innerText', 'Remove from Cart');
-    } else {
-      this.renderer.setStyle(buttonElement, 'background-color', '#3F51B5');
-      this.renderer.setProperty(buttonElement, 'innerText', 'Add to Cart');
-    }
   }
   goToProduct() {
     window.location.replace('/product/' + this.productId);

@@ -8,6 +8,7 @@ import { SupportPageComponent } from '../components/support-page/support-page.co
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import { DescriptionComponent } from '../components/example-api/description.component';
 import { ProductInfoComponent } from "../components/product-info/product-info.component";
+
 export const appRoutes: Route[] = [
   { path: 'product/:id', component: ProductInfoComponent},
   { path: 'store', component: CategoriesAndProductsComponent },
@@ -20,4 +21,5 @@ export const appRoutes: Route[] = [
   { path: 'store/:category', component: CategoriesAndProductsComponent },
   { path: '**', component: DescriptionComponent },
   { path: 'example-api', component: DescriptionComponent }
+
 ];

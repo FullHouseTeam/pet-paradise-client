@@ -10,6 +10,7 @@
         <p>{{price}} $</p>
     </div>
 
-    <button class="add-button" (click)="onClick()">Add to Cart</button>
-
+    <button class="add-button" [ngClass]="{'clicked': isClicked}" (click)="onClick()">
+        {{ isClicked ? 'Remove from Cart' : 'Add to Cart' }}
+    </button>
 </div>

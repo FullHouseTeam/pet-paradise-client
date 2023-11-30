@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
-import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from '@angular/material/core';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatSelectModule} from "@angular/material/select";
 
 
@@ -24,7 +23,9 @@ export class LabelInputAsideComponent {
   cvvEntry = new FormControl();
   nitEntry = new FormControl();
   cardNumberEntry = new FormControl();
-  years: number[] = [2023, 2024, 2025, 2026, 2027, 2028, 2029];
+  yearsEntry = new FormControl();
+  monthsEntry = new FormControl();
+  years: string[] = ['2023', '2024', '2025', '2026', '2027', '2028', '2029'];
   months: any[] = [
     { value: '01', viewValue: 'January' },
     { value: '02', viewValue: 'February' },
@@ -40,10 +41,62 @@ export class LabelInputAsideComponent {
     { value: '12', viewValue: 'December' }
   ];
 
+  @Output() zipCodeValue = new EventEmitter<string>();
+  @Output() emailValue = new EventEmitter<string>();
+  @Output() cvvValue = new EventEmitter<string>();
+  @Output() nitValue = new EventEmitter<string>();
+  @Output() cardNumberValue = new EventEmitter<string>();
+  @Output() monthValue = new EventEmitter<string>();
+  @Output() yearValue = new EventEmitter<string>();
+
+
+  sendEmailValue() {
+    if (this.emailEntry.valid) {
+      this.emailValue.emit(this.emailEntry.value)
+    }
+  }
+  sendZipCodeValue() {
+    if (this.zipCodeEntry.valid) {
+      this.zipCodeValue.emit(this.zipCodeEntry.value)
+    }
+  }
+  sendCvvValue() {
+    if (this.cvvEntry.valid) {
+      this.cvvValue.emit(this.cvvEntry.value)
+    }
+  }
+  sendNitValue() {
+    if (this.nitEntry.valid) {
+      this.nitValue.emit(this.nitEntry.value)
+    }
+  }
+  sendCardNumberValue() {
+    if (this.cardNumberEntry.valid) {
+      this.cardNumberValue.emit(this.cardNumberEntry.value)
+    }
+  }
+
+  sendMonthValue() {
+    if (this.monthsEntry.valid) {
+      if( this.monthsEntry.value > 9) {
+        this.monthValue.emit(this.monthsEntry.value.toString())
+      } else {
+        this.monthValue.emit('0' + this.monthsEntry.value.toString())
+      }
+    }
+  }
+  sendYearValue() {
+
+    if (this.yearsEntry.valid) {
+      this.yearValue.emit(this.yearsEntry.value.toString())
+    }
+
+  }
+
 
 
   getCardNumberErrorMessage() {
-    this.cardNumberEntry.setValidators([Validators.required, Validators.pattern('^[0-9]{16}$')])
+    this.cardNumberEntry.setValidators([Validators.required, Validators.pattern('^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$')])
 
     if (this.cardNumberEntry.hasError('required')) {
       return 'fill this field';
@@ -109,6 +162,33 @@ export class LabelInputAsideComponent {
     return '';
   }
 
+  getMonthValidation() {
+    this.monthsEntry.setValidators([Validators.required, Validators.min(1), Validators.max(12)])
+    if (this.monthsEntry.hasError('required')) {
+      return 'fill this field'
+    }
 
+    if (this.monthsEntry.hasError('min')  || this.monthsEntry.hasError('max')) {
+      return 'value 1-12'
+    }
 
+    return '';
+  }
+
+  getYearValidation() {
+    this.yearsEntry.setValidators([Validators.required, Validators.min(2024), Validators.max(2035)])
+    if (this.yearsEntry.hasError('required')) {
+      return 'fill this field'
+    }
+
+    if (this.yearsEntry.hasError('min')) {
+      return 'value >2023'
+    }
+
+    if (this.yearsEntry.hasError('max')) {
+      return 'value <2036'
+    }
+
+    return '';
+  }
 }

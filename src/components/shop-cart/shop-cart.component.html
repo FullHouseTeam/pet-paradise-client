@@ -1,19 +1,26 @@
 <div class="shop-cart" style="background-color: white">
     <div style="display: grid; grid-gap: 1vw">
         <div>
-            <pet-paradise-client-label-input-aside></pet-paradise-client-label-input-aside>
+            <pet-paradise-client-label-input-aside
+                    (zipCodeValue)="receiveZipCode($event)"
+                    (emailValue)="receiveEmail($event)"
+                    (cardNumberValue)="receiveCardNumber($event)"
+                    (monthValue)="receiveMonth($event)"
+                    (yearValue)="receiveYear($event)"
+                    (cvvValue)="receiveCvv($event)"
+                    (nitValue)="receiveNit($event)"
+            ></pet-paradise-client-label-input-aside>
         </div>
-        <mat-button-toggle>
+        <mat-button-toggle (click)="showData()">
             BUY
         </mat-button-toggle>
     </div>
 
     <div style="display: grid; grid-gap: 20px">
         <div class="shop-list" >
-            <div *ngFor="let product of products; let i = index">
-                <pet-paradise-client-product-view-edition  [product]="product" [purchase]="purchases[i]" ></pet-paradise-client-product-view-edition>
+            <div *ngFor="let purchase of customerPurchases">
+                <pet-paradise-client-product-view-edition  [purchase]="purchase" ></pet-paradise-client-product-view-edition>
             </div>
-
         </div>
         <div>
             {{totalPrice}}$

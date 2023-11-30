@@ -9,6 +9,27 @@
   width:4vw;
 }
 
+.image {
+  height: 110px;
+  width: 110px;
+}
+
+@media only screen and (max-width: 740px) {
+  .product-view {
+    background-color: lightgray;
+    font-size: 2vw;
+  }
+
+  .form-control{
+    height: 4vw;
+    width:8vw;
+  }
+
+  .image {
+    height: 80px;
+    width: 80px;
+  }
+}
 
 @media only screen and (max-width: 360px) {
   .product-view {
@@ -19,5 +40,10 @@
   .form-control{
     height: 4vw;
     width:8vw;
+  }
+
+  .image {
+    height: 80px;
+    width: 80px;
   }
 }

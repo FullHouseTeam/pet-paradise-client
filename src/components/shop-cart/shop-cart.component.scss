@@ -4,7 +4,7 @@
   padding: 2vw;
   font-weight: 500;
   display: grid;
-  grid-template-columns: 30vw 20vw;
+  grid-template-columns: 30vw 25vw;
   grid-gap: 2vw;
   align-items: flex-start;
   font-size: 1.2vw;
@@ -19,7 +19,9 @@
 }
 
 @media only screen and (min-width: 740px) and (max-width: 740px) {
-
+  .shop-cart {
+  grid-template-columns: 35vw 35vw;
+}
 }
 
 @media only screen and (max-width: 360px) {

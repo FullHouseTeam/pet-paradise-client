@@ -1,22 +1,25 @@
-<mat-grid-list cols="4" class="product-view">
-    <mat-grid-tile colspan="2" rowspan="2">
-        <img class="logo" src="{{productImage}}" alt="image" width="115vw" height="115vw"/>
+<mat-grid-list cols="6" class="product-view" >
+    <mat-grid-tile colspan="2" rowspan="3">
+        <img class="image" src="{{productImage}}" alt="image"/>
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
         {{productName}}
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
         {{productPrice}}$
     </mat-grid-tile>
-    <mat-grid-tile>
-            <input type="number"
-                   class="form-control"
-                   matInput
-                   [(ngModel)]="productQuantity"
-                   (change)="updatePurchaseQuantity()"
-                   placeholder="0" min="1" max="10">
+    <mat-grid-tile colspan="2" rowspan="2" >
+        <mat-form-field appearance="outline">
+            <input matInput
+                   [formControl]="productQuantity"
+                   (input)="updatePurchaseQuantity()" required>
+            <mat-error *ngIf="productQuantity.invalid">
+                {{quantityValidation()}}
+            </mat-error>
+        </mat-form-field>
+
     </mat-grid-tile>
-    <mat-grid-tile style="justify-content: center">
+    <mat-grid-tile style="justify-content: center" colspan="2" rowspan="2">
         <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="print()">
             <mat-icon>restore_from_trash</mat-icon>
         </button>

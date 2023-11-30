@@ -2,9 +2,11 @@ export interface Purchase {
   purchaseID: number,
   totalPrice: number,
   reportDate: string,
-  obtainedTaxes: string,
-  applicationTax: string,
-  deliveryTime: string,
+  obtainedTaxes: number,
+  applicationTax: number,
+  deliveryTime: number,
+  localQuantity: number,
   productID: number,
-  userID: number
+  userID: number,
+  isAvailable: string
 }

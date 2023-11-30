@@ -10,7 +10,6 @@ import { DescriptionComponent } from '../components/example-api/description.comp
 import { ProductInfoComponent } from "../components/product-info/product-info.component";
 import { AddBrandsComponent} from "../components/add-brands/add-brands.component";
 
-
 export const appRoutes: Route[] = [
   { path: 'product/:id', component: ProductInfoComponent},
   { path: 'store', component: CategoriesAndProductsComponent },

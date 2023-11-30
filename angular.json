@@ -27,7 +27,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/images/",
+              "src/assets/icons/",
+              "src/assets/fonts/"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",

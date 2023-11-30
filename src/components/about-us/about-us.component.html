@@ -1,1 +1,52 @@
-<p>about us page</p>
+<div class="about-us-container">
+  <h2>About Us</h2>
+
+  <div class="content-container">
+    <div class="pet-container">
+      <img class="pet-icon" [src]="getIconPath('dog-footprint.svg')" alt="dog-footprint">
+    </div>
+
+    <div class="white-box">
+      <div class="about-section">
+        <div class="content">
+          <p class="title-content">Providing the Best for Our Friends, Pets</p>
+          <p>
+            Pet Paradise's mission is to provide our customers with convenient access to a wide range of pet products,
+            while always adhering to the necessary quality standards. We strive to offer affordable options and maintain
+            a constant commitment to customer satisfaction. Always safeguarding the well-being and happiness of pets.
+          </p>
+        </div>
+        <div class="cats-image">
+          <img [src]="getImagePath('cats.jpg')" alt="cats">
+        </div>
+      </div>
+
+      <div class="about-section">
+        <div class="parrots-image">
+          <img [src]="getImagePath('parrots.jpg')" alt="parrots">
+        </div>
+        <div class="content">
+          <p>
+            At Pet Paradise, we believe that pets are members of the family. That is why we are committed to offer our
+            customers the best products and services for the care of their pets. Our team is made up of experienced
+            professionals who are passionate about pets. We are committed to providing our customers with exceptional
+            customer service.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <div class="content">
+          <p class="title-content">Our Commitment to Pet Care</p>
+          <p>
+            Be recognized as a leader in the pet buying and selling industry, standing out for our dedication to price
+            transparency, product diversity and creating a seamless shopping experience.
+          </p>
+        </div>
+        <div class="puppies-image">
+          <img [src]="getImagePath('puppies.jpg')" alt="puppies">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+.about-us-container {
+  margin: 40px auto;
+  width: auto;
+
+  h2 {
+    font-family: 'Quicksand-Bold', sans-serif;
+    font-size: 30px;
+    color: #000000;
+    text-align: center;
+  }
+
+  .content-container {
+    text-align: center;
+  }
+
+  .pet-container {
+    margin-bottom: -27px;
+  }
+
+  img.pet-icon {
+    width: 40px; 
+    height: auto;
+  }
+
+  .white-box {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+  }
+
+  .about-section {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+
+    .content,
+    .cats-image,
+    .parrots-image,
+    .puppies-image {
+      flex: 1;
+    }
+
+    .content {
+      font-family: 'Quicksand-Medium', sans-serif;
+      font-size: 17px;
+      padding: 0 20px;
+      text-align: left;
+
+      .title-content {
+        font-family: 'Quicksand-Bold', sans-serif;
+        font-size: 19px;
+      }
+    }
+
+    img {
+      max-width: 50%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 28px;
+    }
+    
+    .white-box {
+      width: auto;
+    }
+
+    .about-section {
+      flex-direction: column;
+
+      .content {
+        font-size: 19px;
+        order: 1;
+
+        .title-content {
+          font-size: 20px;
+        }
+      }
+
+      .cats-image {
+        order: 2;
+      }
+
+      .parrots-image {
+        order: 3;
+      }
+
+      .puppies-image {
+        order: 4;
+      }
+    }
+  }
+}

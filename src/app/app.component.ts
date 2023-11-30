@@ -25,7 +25,8 @@ export class AppComponent {
 
     const isProductPage = this.router.url.includes("/product/");
     const isStorePage = this.router.url.includes("/store/");
+    const isShopCartPage = this.router.url.includes("/shop-cart/")
 
-    return allowedRoutes.includes(this.router.url) || isProductPage || isStorePage;
+    return allowedRoutes.includes(this.router.url) || isProductPage || isStorePage || isShopCartPage;
   }
 }

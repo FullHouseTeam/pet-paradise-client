@@ -1,19 +1,15 @@
-import {Component, Input, Output} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import { NgOptimizedImage} from "@angular/common";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Product} from "../../../models/product.model";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../../../services/products/product.service";
-import {forkJoin} from "rxjs";
 import {PurchaseService} from "../../../services/purchases/purchase.service";
 import {Purchase} from "../../../models/purchase.model";
-import EventEmitter from "events";
+
 
 @Component({
   selector: 'pet-paradise-client-product-view-edition',
@@ -22,9 +18,32 @@ import EventEmitter from "events";
   templateUrl: './product-view-edition.component.html',
   styleUrls: ['./product-view-edition.component.scss']
 })
-export class ProductViewEditionComponent {
-  @Input() productName: string = '';
-  @Input() productPrice: string = '';
-  @Input() productImage: string = '';
+export class ProductViewEditionComponent implements OnInit{
+  @Input() product: Product = {} as Product;
+  @Input() purchase: Purchase = {} as Purchase;
+  productQuantity: number = 0;
+  productImage: string = '';
+  productName: string = '';
+  productPrice: number = 0;
+
+
+
+  constructor(
+    private purchaseService: PurchaseService
+  ) {
+  }
+  ngOnInit(): void {
+    this.productImage = this.product.image
+    this.productName = this.product.name
+    this.productPrice = this.product.price
+  }
+
+  updatePurchaseQuantity() {
+    this.purchase.totalPrice = this.productQuantity
+    this.purchaseService.update(this.purchase.purchaseID, this.purchase)
+  }
+  print() {
+    console.log(this.purchase)
+  }
 }
 

@@ -57,7 +57,7 @@ export class ShopCartComponent {
                       this.customerProducts.push(foundProduct);
                     }
                   }
-                  this.getTotalPrice()
+                  this.onClick()
                 }
               );
             }
@@ -68,7 +68,7 @@ export class ShopCartComponent {
   }
 
   onClick() {
-    this.isClicked = !this.isClicked;
+    this.totalPrice = this.purchases[0].totalPrice.toString()
   }
 
   getProductsList() {

@@ -12,10 +12,12 @@
             <input type="number"
                    class="form-control"
                    matInput
-                   placeholder="1" min="1" max="10">
+                   [(ngModel)]="productQuantity"
+                   (change)="updatePurchaseQuantity()"
+                   placeholder="0" min="1" max="10">
     </mat-grid-tile>
     <mat-grid-tile style="justify-content: center">
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="print()">
             <mat-icon>restore_from_trash</mat-icon>
         </button>
     </mat-grid-tile>

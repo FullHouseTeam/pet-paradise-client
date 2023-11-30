@@ -1,0 +1,58 @@
+<footer class="bg-footer">
+  <section>
+    <div class="col-xl-3">
+      <a (click)="redirectTo('/')">
+        <img [src]="getIconPath('logo-white.svg')" width="100%" alt="logo" />
+      </a>
+    </div>
+    <div class="col-xl-3 d-flex gap-2">
+      <h5>Services</h5>
+      <a class="block" (click)="redirectTo('/')">Home</a>
+      <a class="block" (click)="redirectTo('/store/all')">Store</a>
+      <a class="block" (click)="redirectTo('/about')">About</a>
+    </div>
+    <div class="col-xl-3 d-flex gap-2">
+      <h5>Get Help</h5>
+      <a class="block" (click)="redirectTo('/support')">Support</a>
+      <a class="block" (click)="redirectTo('/terms-and-conditions')"
+        >Terms & Conditions</a
+      >
+      <a
+        class="block"
+        (click)="
+          redirectToSocialMedia('https://es.wikipedia.org/wiki/Wikipedia')
+        "
+        >Wikipedia</a
+      >
+    </div>
+    <div class="col-xl-3 d-flex gap-2">
+      <h5>Follow us</h5>
+      <div class="d-flex gap-3">
+        <a (click)="redirectToSocialMedia('https://www.facebook.com')">
+          <img [src]="getIconPath('facebook.svg')" width="30" alt="logo" />
+        </a>
+        <a
+          (click)="
+            redirectToSocialMedia(
+              'https://www.tiktok.com/foryou?is_copy_url=1&is_from_webapp=v1'
+            )
+          "
+        >
+          <img [src]="getIconPath('tiktok.svg')" width="30" alt="logo" />
+        </a>
+        <a (click)="redirectToSocialMedia('https://twitter.com/home')">
+          <img [src]="getIconPath('x.svg')" width="30" alt="logo" />
+        </a>
+        <a (click)="redirectToSocialMedia('https://www.instagram.com/')">
+          <img [src]="getIconPath('instagram.svg')" width="30" alt="logo" />
+        </a>
+      </div>
+    </div>
+  </section>
+  <hr style="opacity: 1" />
+  <div class="d-flex align-items-center gap-2">
+    Copyright
+    <img [src]="getIconPath('copyright.svg')" width="10" alt="logo" /> 2023 |
+    Pet Paradise Store. All Rights Reserved.
+  </div>
+</footer>

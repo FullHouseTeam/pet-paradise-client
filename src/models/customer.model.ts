@@ -4,5 +4,6 @@ export interface Customer {
   name: string,
   password: string,
   regionID: number,
-  nit: number
+  nit: number,
+  isAvailable: string
 }

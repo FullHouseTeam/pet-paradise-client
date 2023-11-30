@@ -12,11 +12,17 @@
   grid-template-columns: 1fr;
   place-items: center;
   grid-gap: 1vw;
-  max-height: 5vw;
+  max-height: 7vw;
   overflow-y: scroll;
 }
 
 .shipping-information-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  grid-gap: 1vw;
+}
+.payment-information-container {
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;

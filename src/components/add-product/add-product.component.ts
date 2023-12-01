@@ -18,6 +18,7 @@ import { ProductService } from '../../services/products/product.service';
 import { SaleService } from '../../services/suppliers/provider.service';
 import { BrandService } from '../../services/brands/brand.service';
 import { ProductDTO } from '../../modelsDTO/productDTO.model';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'pet-paradise-client-add-product',
@@ -34,6 +35,8 @@ import { ProductDTO } from '../../modelsDTO/productDTO.model';
 export class AddProductComponent implements OnInit{
   providerService: Provider[] = [];
   brandService: Brand[] = [];
+  products: Product[] = [];
+  currentMaxProductId: number = 0;
 
   selectedBrands: FormControl = new FormControl();
   selectedProviders: FormControl = new FormControl();
@@ -47,8 +50,23 @@ export class AddProductComponent implements OnInit{
   ngOnInit(): void {
     this.getProvidersList();
     this.getBrandService();
+    this.getProductsList();
   }
+  getProductsList() {
+    // Assuming your ProductService has a method to get the list of products
+    this.ProductService.getList().subscribe(
+      (data) => {
+        console.log('Product List:', data);
+        this.products = data;
 
+        // Find the current maximum product ID
+        this.currentMaxProductId = Math.max(...this.products.map((product) => product.productID), 0);
+      },
+      (error) => {
+        console.error('Error fetching product list:', error);
+      }
+    );
+  }
   getProvidersList(){
     this.SaleService.getList().subscribe(
       (data) => {
@@ -92,6 +110,7 @@ export class AddProductComponent implements OnInit{
 
   handleSubmit() {
     if (this.profileForm.valid) {
+      const newProductId = this.currentMaxProductId + 1;
       const newProduct: ProductDTO = {
         name: this.profileForm.value.name as string,
         image: this.profileForm.value.image as string,
@@ -104,7 +123,7 @@ export class AddProductComponent implements OnInit{
         isAvailable: this.profileForm.value.isAvailable as boolean,
         hasTax: this.profileForm.value.hasTax as boolean,
         description: this.profileForm.value.description as string,
-        productID: 13,
+        productID: newProductId,
         productType: this.profileForm.value.types as string
       };
   

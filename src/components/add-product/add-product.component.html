@@ -54,14 +54,14 @@
                 </mat-form-field>
             </div>
             <div class="internal-right">
-                <mat-checkbox [labelPosition]="'before'" formControlName="avalible" color="primary" appearance="outline" class="check">
+                <mat-checkbox [labelPosition]="'before'" formControlName="isAvailable" color="primary" appearance="outline" class="check">
                     Is Avalible
                 </mat-checkbox>
             </div>
             <div class="internal-right">
                 <mat-form-field class="example-form-field" appearance="outline">
                     <mat-label>Categories</mat-label>
-                        <mat-select formControlName="animalCategory">
+                        <mat-select formControlName="categories">
                             <mat-option *ngFor="let categorie of categories" value="{{categorie.name}}">{{categorie.name}}</mat-option>
                         </mat-select>
                 </mat-form-field>

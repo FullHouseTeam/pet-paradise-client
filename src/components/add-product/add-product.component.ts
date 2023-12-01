@@ -66,7 +66,21 @@ export class AddProductComponent implements OnInit{
       }
     );
   }
+  getProductsList() {
+    // Assuming your ProductService has a method to get the list of products
+    this.ProductService.getList().subscribe(
+      (data) => {
+        console.log('Product List:', data);
+        this.products = data;
 
+        // Find the current maximum product ID
+        this.currentMaxProductId = Math.max(...this.products.map((product) => product.productID), 0);
+      },
+      (error) => {
+        console.error('Error fetching product list:', error);
+      }
+    );
+  }
   getProvidersList(){
     this.SaleService.getList().subscribe(
       (data) => {

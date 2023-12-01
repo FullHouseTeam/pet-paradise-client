@@ -8,9 +8,10 @@ import { SupportPageComponent } from '../components/support-page/support-page.co
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import { DescriptionComponent } from '../components/example-api/description.component';
 import { ProductInfoComponent } from "../components/product-info/product-info.component";
+import { LoginComponent } from "../components/login/login.component";
 
 export const appRoutes: Route[] = [
-  { path: 'product/:id', component: ProductInfoComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'store', component: CategoriesAndProductsComponent },
   { path: 'shop-cart', component: ShopCartComponent },
   { path: 'customer', component: CustomerPageComponent },

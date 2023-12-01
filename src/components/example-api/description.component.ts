@@ -23,9 +23,9 @@ export class DescriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPurchaseList();
+    //this.getPurchaseList();
     //this.getPurchaseById(1);
-    //this.editTotalPrice();
+    this.editTotalPrice();
     //this.addPurchase();
   }
   
@@ -55,22 +55,22 @@ export class DescriptionComponent implements OnInit {
   
   editTotalPrice() {
     const idPurchase = 2; 
-    const newTotalPrice = 30.56;
+    const localQuantity = 20;
   
     this.purchaseService.getById(idPurchase).subscribe(
-      (purchase) => this.handleEditSuccess(purchase, idPurchase, newTotalPrice),
+      (purchase) => this.handleEditSuccess(purchase, idPurchase, localQuantity),
       (error) => this.handleEditError(error)
     );
 
   }
   
-  private handleEditSuccess(purchase: Purchase, idPurchase: number, newTotalPrice: number) {
+  private handleEditSuccess(purchase: Purchase, idPurchase: number, newLocalQuantity: number) {
     if (purchase) {
       const updatedPurchaseDTO: PurchaseDTO = {
-        totalPrice: newTotalPrice,
+        totalPrice: purchase.totalPrice,
         obtainedTaxes: purchase.obtainedTaxes,
         deliveryTime: purchase.deliveryTime,
-        localQuantity: purchase.localQuantity,
+        localQuantity: newLocalQuantity,
         productID: purchase.productID,
         userID: purchase.userID,
         isAvailable: true,

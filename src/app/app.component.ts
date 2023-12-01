@@ -3,10 +3,13 @@ import { Router, RouterModule } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { SharedService } from '../services/globalAttributes/shared.service';
+
 
 @Component({
   standalone: true,
   imports: [HomeComponent, RouterModule, HeaderComponent, FooterComponent],
+  providers: [SharedService], 
   selector: 'pet-paradise-client-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

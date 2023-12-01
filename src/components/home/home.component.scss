@@ -1,11 +1,46 @@
-body {
-  min-height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.home-page-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2vw;
+  padding-bottom: 2vw;
+  text-align: center;
+}
+.carousel {
+  width: 100%;
+  margin: auto;
 }
 
-.container {
-  text-align: center;
+.banner-image {
+  width: 99vw;
+  height: 20vw;
+}
+.carousel-item {
+  padding: 0 10px; /* Agrega un pequeño espacio entre los elementos */
+  box-sizing: border-box;
+  width: 30vw; /* Ajusta el ancho deseado */
+  flex: 0 0 auto; /* Evita que los elementos se expandan para ajustarse al contenedor */
+}
+
+@media only screen and (max-width: 740px) {
+  .banner-image {
+    width: 100vw;
+    height: 20vw;
+  }
+}
+.text-subtitles{
+  font-size: 3vw;
+}
+
+@media only screen and (max-width: 360px) {
+  .banner-image {
+    width: 100vw;
+    height: 30vw;
+  }
+  .text-subtitles{
+    font-size: 4vw;
+  }
+  .home-page-container {
+    grid-gap: 4vw;
+    padding-bottom: 4vw;
+  }
 }

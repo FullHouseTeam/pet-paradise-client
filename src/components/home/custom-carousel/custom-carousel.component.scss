@@ -1,0 +1,39 @@
+.carousel-container {
+  display: grid;
+  grid-gap: 1vw;
+  grid-template-columns: 1fr 4fr 1fr;
+}
+
+.product-cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1vw;
+  overflow-y: hidden;
+
+}
+
+.arrow-button {
+  background: transparent;
+  border: none;
+}
+
+@media only screen and (max-width: 740px) {
+  .carousel-container {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
+
+  .product-cards-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .carousel-container {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 0vw;
+  }
+
+  .product-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

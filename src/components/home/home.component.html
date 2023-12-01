@@ -1,1 +1,23 @@
-<p>HOME PAGE</p>
+<div class="home-page-container">
+    <div>
+        <img src="./assets/images/home-banner.png" class="banner-image">
+    </div>
+    <div class="text-subtitles">
+        Products on sale
+    </div>
+    <div>
+        <app-custom-carousel [products]="products"></app-custom-carousel>
+    </div>
+    <div class="text-subtitles">
+        Recommendations
+    </div>
+    <div>
+        <app-custom-carousel [products]="products"></app-custom-carousel>
+    </div>
+    <div class="text-subtitles">
+        See more of
+    </div>
+    <div>
+        <app-categories-container></app-categories-container>
+    </div>
+</div>

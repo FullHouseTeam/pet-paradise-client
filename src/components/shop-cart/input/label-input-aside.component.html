@@ -1,0 +1,60 @@
+<div class="input-container" >
+    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 20px">
+        <mat-form-field appearance="outline">
+            <mat-label>ZIP code</mat-label>
+            <input matInput placeholder="zipcode" [formControl]="zipCodeEntry" (input)="sendZipCodeValue()" required>
+            <mat-error *ngIf="zipCodeEntry.invalid">
+                {{ getZipCodeErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>CVV</mat-label>
+            <input matInput placeholder="cvv" [formControl]="cvvEntry" (input)="sendCvvValue()" required>
+            <mat-error *ngIf="cvvEntry.invalid">
+                {{ getCVVErrorMessage() }}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="name@dom.dot" [formControl]="emailEntry" (input)="sendEmailValue()" required>
+        <mat-error *ngIf="emailEntry.invalid">
+            {{ getEmailErrorMessage() }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>NIT</mat-label>
+        <input matInput placeholder="nit" [formControl]="nitEntry" (input)="sendNitValue()" required>
+        <mat-error *ngIf="nitEntry.invalid">
+            {{ getNITErrorMessage() }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Card Number</mat-label>
+        <input matInput placeholder="4n-4n-4n-4n" [formControl]="cardNumberEntry" (input)="sendCardNumberValue()" required>
+        <mat-error *ngIf="cardNumberEntry.invalid">
+            {{ getCardNumberErrorMessage() }}
+        </mat-error>
+    </mat-form-field>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 20px">
+        <mat-form-field appearance="outline">
+            <mat-label>Month</mat-label>
+            <input matInput placeholder="month" [formControl]="monthsEntry" (input)="sendMonthValue()" type="number" min="1" max="12" required>
+            <mat-error *ngIf="monthsEntry.invalid">
+                {{ getMonthValidation() }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <input matInput placeholder="year" [formControl]="yearsEntry" (input)="sendYearValue()" type="number" min="2024" max="2035" required>
+            <mat-error *ngIf="yearsEntry.invalid">
+                {{ getYearValidation() }}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-button (click)="buyProcess()">
+            BUY
+        </button>
+    </div>
+</div>

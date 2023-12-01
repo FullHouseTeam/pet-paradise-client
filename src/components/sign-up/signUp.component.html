@@ -3,14 +3,19 @@
 
         <img class="image-container" src="https://res.cloudinary.com/dkappxhfr/image/upload/v1701452082/Pet/Logo.png" alt="image"/>
 
-        <label class="welcomeTitle">Welcome Back</label>
+        <label class="welcomeTitle">Sign Up</label>
+
+        <div class="textField-container" [ngClass]="{'error': name.invalid && (name.dirty || name.touched)}">
+            <input type="text" class="textField-input" [ngClass]="{'error-text': name.invalid && (name.dirty || name.touched)}" placeholder="Name" [formControl]="name" required>
+        </div>
+        <label class="errorLabels" *ngIf="name.invalid && (name.dirty || name.touched)">{{ getErrorMessageName() }}</label>
 
         <div class="textField-container" [ngClass]="{'error': email.invalid && (email.dirty || email.touched)}">
             <input type="text" class="textField-input" [ngClass]="{'error-text': email.invalid && (email.dirty || email.touched)}" placeholder="Email" [formControl]="email" required>
         </div>
         <label class="errorLabels" *ngIf="email.invalid && (email.dirty || email.touched)">{{ getErrorMessageEmail() }}</label>
-        <div class="textField-container" [ngClass]="{'error': password.invalid && (password.dirty || password.touched)}">
 
+        <div class="textField-container" [ngClass]="{'error': password.invalid && (password.dirty || password.touched)}">
             <div class="input-wrapper">
                 <input type="{{ hide ? 'password' : 'text' }}" class="password-textField-input" placeholder="Password" [formControl]="password" required>
             </div>
@@ -20,8 +25,20 @@
                 </button>
             </div>
         </div>
+        <label class="errorLabels" *ngIf="password.invalid && (password.dirty || password.touched)">{{ getErrorMessagePassword() }}</label>
 
-        <button class="log-in-Button" (click)="checkEmailValidity()"> Log In </button>
+        <div class="textField-container">
+            <input type="text" class="textField-input" placeholder="RegionID" [formControl]="regionID" required>
+        </div>
+        <label class="errorLabels" *ngIf="regionID.invalid && (regionID.dirty || regionID.touched)">{{ getErrorMessageRegionID() }}</label>
+
+
+        <div class="textField-container">
+            <input type="text" class="textField-input" placeholder="Nit" [formControl]="regionID" required>
+        </div>
+        <label class="errorLabels" *ngIf="regionID.invalid && (regionID.dirty || regionID.touched)">{{ getErrorMessageRegionNit() }}</label>
+
+        <button class="log-in-Button" (click)="print()">Sign Up</button>
     </div>
 
     <div class="right">
@@ -32,9 +49,5 @@
     
     <div *ngIf="successMessage" class="success-message">
         {{ successMessage }}
-      </div>
-      
-    <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
+    </div>
 </div>

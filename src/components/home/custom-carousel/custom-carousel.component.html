@@ -1,0 +1,15 @@
+<div class="carousel-container">
+    <button (click)="showLess()" class="arrow-button">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+
+    <div class="product-cards-container">
+        <div *ngFor="let product of productsToShow">
+            <app-product-card [productId]="product.productID.toString()"></app-product-card>
+        </div>
+
+    </div>
+    <button (click)="showMore()" class="arrow-button">
+        <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+</div>

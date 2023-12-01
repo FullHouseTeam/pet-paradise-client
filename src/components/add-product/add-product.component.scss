@@ -1,0 +1,73 @@
+.dialog-container {
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  overflow: auto;
+  height: auto;
+  max-height: 80vh;
+}
+
+
+.center {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 750px) {
+  .center {
+    flex-direction: column;
+  }
+  .dialog-container{
+    margin: 20px;
+    overflow: auto;
+    height: auto;
+    max-height: 80vh;
+  }
+  .left{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 50%;
+  }
+  .right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: 0px;
+  margin-left: 25px;
+  margin-right: 25px;
+  width: 50%;
+}
+
+.internal-left,
+.internal-right {
+  height: 80px;
+}
+
+.internal-left-top,
+.internal-right-top {
+  height: 90px;
+  margin: auto;
+}
+
+.dialog-container mat-form-field {
+  font-size: 12px;
+}

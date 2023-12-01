@@ -12,21 +12,34 @@ import { forkJoin } from "rxjs";
 import { ProductService } from "../../services/products/product.service";
 import { Product } from "../../models/product.model";
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddProductComponent } from '../add-product/add-product.component';
+
 @Component({
   selector: 'pet-paradise-client-categories-and-products',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent, MatButtonToggleModule, MatButtonModule, MatInputModule, MatSelectModule, CdkFixedSizeVirtualScroll, CategoriesContainerComponent],
+  imports: [CommonModule, ProductCardComponent,ReactiveFormsModule, MatButtonToggleModule, MatButtonModule, MatInputModule, MatSelectModule, CdkFixedSizeVirtualScroll, CategoriesContainerComponent],
   templateUrl: './categories-and-products.component.html',
   styleUrls: ['./categories-and-products.component.scss']
 })
 export class CategoriesAndProductsComponent implements OnInit{
+  constructor(
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private productService: ProductService) {
+  }
+
+  openDialog() {
+    const dialogRef: MatDialogRef<AddProductComponent, any> = this.dialog.open(AddProductComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+  }
   productCategory: string = '';
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService) {
-  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.productCategory = params['category'];
@@ -51,5 +64,4 @@ export class CategoriesAndProductsComponent implements OnInit{
   getProductsList() {
     return this.productService.getList();
   }
-
 }

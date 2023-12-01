@@ -10,6 +10,7 @@ import { NgIf } from "@angular/common";
 import { FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomerService } from '../../services/customers/customer.service';
 import { Customer } from '../../models/customer.model';
+import { SharedService } from '../../services/globalAttributes/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,14 @@ import { Customer } from '../../models/customer.model';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  error: string | undefined;
   errorMessage = '';
-  isValid: boolean = false; 
-  customerId: number | undefined;
+  CustomerId: number | undefined;
   successMessage: string | undefined;
+  globalVariable: string;
 
-  constructor(private customerService: CustomerService, private router: Router) {
+
+  constructor(private customerService: CustomerService, private router: Router, private sharedService: SharedService) {
+    this.globalVariable = sharedService.getGlobalVariable();
   }
 
   ngOnInit(): void {
@@ -45,27 +47,26 @@ export class LoginComponent {
     return '';
   }
 
-  logIn() {
-    console.log('Email:', this.email.value);
-    console.log('Password:', this.password.value);
-  }
-
   checkEmailValidity() {
     this.customerService.getList().subscribe(
+      
       (customers: Customer[]) => {
         const sameEmailValidator = customers.find(customer => customer.email === this.email.value);
         const samePasswordValidator = customers.find(customer => customer.password === this.password.value);
-
+        
         if (sameEmailValidator && samePasswordValidator) {
-          console.log('Customer ID:', sameEmailValidator.customerID);
-          this.successMessage = 'Login successful!! Welcome back!';
+          this.CustomerId = sameEmailValidator.customerID;
+          this.sharedService.setGlobalVariable(this.CustomerId.toString());
 
+          this.successMessage = 'Login successful!! Welcome back!';
+          
           setTimeout(() => {
             this.successMessage = '';
           }, 1500);
           
           this.router.navigate(['']);
         } else {
+          
           this.errorMessage = 'Incorrect data!! No registered user was found with the data provided.';
 
           setTimeout(() => {

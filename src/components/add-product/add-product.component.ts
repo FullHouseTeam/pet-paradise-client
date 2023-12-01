@@ -15,7 +15,7 @@ import { Brand } from '../../models/brand.model';
 import { Types } from '../../models/types.model';
 import { Categories } from '../../models/categories.model';
 import { ProductService } from '../../services/products/product.service';
-import { SaleService } from '../../services/suppliers/provider.service';
+import { ProviderService } from '../../services/suppliers/provider.service'
 import { BrandService } from '../../services/brands/brand.service';
 import { ProductDTO } from '../../modelsDTO/productDTO.model';
 import { Product } from '../../models/product.model';
@@ -33,7 +33,7 @@ import { Product } from '../../models/product.model';
   styleUrl: './add-product.component.scss'
 })
 export class AddProductComponent implements OnInit{
-  providerService: Provider[] = [];
+  providerServices: Provider[] = [];
   brandService: Brand[] = [];
   products: Product[] = [];
   currentMaxProductId: number = 0;
@@ -43,7 +43,7 @@ export class AddProductComponent implements OnInit{
 
   constructor(
     private dialog: MatDialog,
-    private SaleService: SaleService, 
+    private ProviderService: ProviderService, 
     private BrandService: BrandService,
     private ProductService: ProductService
     ){}
@@ -66,24 +66,12 @@ export class AddProductComponent implements OnInit{
       }
     );
   }
-  getProductsList() {
-    this.ProductService.getList().subscribe(
-      (data) => {
-        this.products = data;
-
-        this.currentMaxProductId = Math.max(...this.products.map((product) => product.productID), 0);
-      },
-      (error) => {
-        console.error('Error fetching product list:', error);
-      }
-    );
-  }
 
   getProvidersList(){
-    this.SaleService.getList().subscribe(
+    this.ProviderService.getList().subscribe(
       (data) => {
-        this.providerService = data;
-        this.selectedProviders.setValue(this.providerService.map(provider => provider.providerID));
+        this.providerServices = data;
+        this.selectedProviders.setValue(this.providerServices.map(provider => provider.providerID));
       },
       (error) => {
         console.error('Error fetching brand list:', error);

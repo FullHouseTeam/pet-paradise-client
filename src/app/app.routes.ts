@@ -11,6 +11,7 @@ import { SupportPageComponent } from '../components/support-page/support-page.co
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import {InvoiceComponent} from "../components/invoice/invoice.component";
 import { SignUpComponent } from '../components/sign-up/signUp.component';
+import { ProductsListComponent } from '../components/products-list/products-list.component';
 
 export const appRoutes: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -26,5 +27,6 @@ export const appRoutes: Route[] = [
   { path: '', component: HomeComponent },
   { path: 'example-api', component: DescriptionComponent },
   { path: 'store/:category', component: CategoriesAndProductsComponent },
+  { path: 'about/products', component: ProductsListComponent },
   { path: '**', component: DescriptionComponent }
 ];

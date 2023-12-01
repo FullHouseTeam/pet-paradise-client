@@ -1,0 +1,26 @@
+<div class="product-container my-5">
+  <h1 class="product-container-title">Products</h1>
+
+  <table class="product-table" *ngIf="products">
+    <th>
+      <tr>
+        <th class="column-title">Name</th>
+        <th class="column-title">Quantity</th>
+        <th class="column-title">Price</th>
+        <th class="column-title">Edit</th>
+        <th class="column-title">Info</th>
+      </tr>
+    </th>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="row-content">{{ product.name }}</td>
+        <td class="row-content">{{ product.quantity }}</td>
+        <td class="row-content" >{{ product.price }}</td>
+        <td> <img class="edit-icon" [src]="getIconPath('editing.svg')" alt="edit-icon"> </td>
+        <td> <img class="info-icon" [src]="getIconPath('info.svg')" alt="info-icon"> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!products">No Product Found</p>
+</div>

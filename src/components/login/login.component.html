@@ -1,7 +1,7 @@
 <div class="container">
     <div class="left">
 
-        <img class="image-container" src="/assets/logo.png" alt="image"/>
+        <img class="image-container" src="https://res.cloudinary.com/dkappxhfr/image/upload/v1701452082/Pet/Logo.png" alt="image"/>
 
         <label class="welcomeTitle">Welcome Back</label>
 
@@ -21,12 +21,20 @@
             </div>
         </div>
 
-        <button class="log-in-Button"> Log In </button>
+        <button class="log-in-Button" (click)="checkEmailValidity()"> Log In </button>
     </div>
 
     <div class="right">
         <div class="slogan">
-            <img src="/assets/sloganPets.png" alt="Presentation Image">
+            <img src="https://res.cloudinary.com/dkappxhfr/image/upload/v1701452041/Pet/Slogan.png" alt="Presentation Image">
         </div>
     </div>
+    
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
 </div>

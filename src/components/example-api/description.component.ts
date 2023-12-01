@@ -23,7 +23,7 @@ export class DescriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPurchaseList();
+    //this.getPurchaseList();
     //this.getPurchaseById(1);
     //this.editTotalPrice();
     //this.addPurchase();
@@ -55,7 +55,7 @@ export class DescriptionComponent implements OnInit {
   
   editTotalPrice() {
     const idPurchase = 2; 
-    const newTotalPrice = 30.56;
+    const newTotalPrice = 123.56;
   
     this.purchaseService.getById(idPurchase).subscribe(
       (purchase) => this.handleEditSuccess(purchase, idPurchase, newTotalPrice),

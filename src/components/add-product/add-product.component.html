@@ -19,7 +19,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Providers</mat-label>
                         <mat-select formControlName="provider">
-                            <mat-option *ngFor="let provider of providerService" [value]="provider.providerID">
+                            <mat-option *ngFor="let provider of providerServices" [value]="provider.providerID">
                                 {{ provider.name }}
                             </mat-option>
                     </mat-select>

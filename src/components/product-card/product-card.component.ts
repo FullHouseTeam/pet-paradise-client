@@ -4,6 +4,10 @@ import { forkJoin } from "rxjs";
 import { ProductService } from "../../services/products/product.service";
 import { Product } from "../../models/product.model";
 import {NgClass} from "@angular/common";
+import {Purchase} from "../../models/purchase.model";
+import { SharedService } from "../../services/globalAttributes/shared.service";
+import { PurchaseService} from "../../services/purchases/purchase.service";
+import {PurchaseDTO} from "../../modelsDTO/purchaseDTO.model";
 
 @Component({
   selector: 'app-product-card',
@@ -20,17 +24,22 @@ export class ProductCardComponent implements OnInit {
   image = '';
   isClicked = false;
   product: Product = {} as Product;
+  purchases: Purchase[] = [];
+  purchaseDto: PurchaseDTO = {} as PurchaseDTO;
+  purchase: Purchase | undefined = {} as Purchase;
 
   constructor(
       private renderer: Renderer2,
       private el: ElementRef,
       private router: Router,
       private route: ActivatedRoute,
-      private productService: ProductService
+      private sharedService: SharedService,
+      private productService: ProductService,
+      private purchaseService: PurchaseService,
   ) {}
 
   ngOnInit() {
-    forkJoin([this.getProduct(Number(this.productId))]).subscribe(
+    forkJoin([this.getProduct(Number(this.productId)), this.getPurchaseList()]).subscribe(
         ([product]) => {
           this.product = product;
           this.loadProductDetails();
@@ -39,16 +48,48 @@ export class ProductCardComponent implements OnInit {
   }
 
   private loadProductDetails() {
+    this.isClicked = this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
     this.title = this.truncateText(this.product.name, 10);
     this.price = this.product.price.toString();
     this.image = this.product.image;
   }
 
   onClick() {
-    this.isClicked = !this.isClicked;
+    if(!this.isClicked) {
+      if(!this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))){
+        this.purchaseDto = {
+          totalPrice: 0,
+          obtainedTaxes: 0,
+          deliveryTime: 0,
+          localQuantity: 1,
+          productID: this.product.productID,
+          userID: Number(this.sharedService.getGlobalVariable()),
+          isAvailable: true
+        }
+        this.purchaseService.add(this.purchaseDto);
+        this.isClicked = !this.isClicked;
+      }
+    } else {
+      this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
+      this.purchaseDto = {
+        totalPrice: 0,
+        obtainedTaxes: 0,
+        deliveryTime: 0,
+        localQuantity: 1,
+        productID: this.product.productID,
+        userID: Number(this.sharedService.getGlobalVariable()),
+        isAvailable: false
+      }
+      this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto)
+      this.isClicked = !this.isClicked;
+    }
+
+
+
+
   }
   goToProduct() {
-    window.location.replace('/product/' + this.productId);
+    this.router.navigate(['/product/' + this.productId])
   }
 
   getProduct(id: number) {
@@ -58,4 +99,14 @@ export class ProductCardComponent implements OnInit {
   private truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   }
+  isDuplicated(purchases: Purchase[], productID: number, userID: number): boolean {
+    return purchases.some((purchase) => purchase.productID === productID && purchase.userID === userID);
+  }
+  getPurchaseList() {
+    return this.purchaseService.getList();
+  }
+  duplicatedObject(purchases: Purchase[], productID: number, userID: number): Purchase | undefined {
+    return purchases.find((purchase) => purchase.productID === productID && purchase.userID === userID);
+  }
+
 }

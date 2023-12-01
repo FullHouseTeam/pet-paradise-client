@@ -8,7 +8,7 @@ import { ProviderDTO } from '../../modelsDTO/providerDTO.model';
 @Injectable({
   providedIn: 'root'
 })
-export class SaleService {
+export class ProviderService {
   api_url: string = environment.rest_api_url + '/api/provider';
   
   constructor(private http: HttpClient) {}

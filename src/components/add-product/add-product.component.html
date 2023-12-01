@@ -61,7 +61,7 @@
             <div class="internal-right">
                 <mat-form-field class="example-form-field" appearance="outline">
                     <mat-label>Categories</mat-label>
-                        <mat-select formControlName="categories">
+                        <mat-select formControlName="animalCategory">
                             <mat-option *ngFor="let categorie of categories" value="{{categorie.name}}">{{categorie.name}}</mat-option>
                         </mat-select>
                 </mat-form-field>
@@ -92,7 +92,7 @@
     </div>
     <div class="down">
         <mat-dialog-actions class="exit" align="end" >
-            <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Save</button>
+            <button mat-raised-button color="primary" type="submit" >Save</button>
             <button mat-button mat-dialog-close>
                 Cancel
             </button>

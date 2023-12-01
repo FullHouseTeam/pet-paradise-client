@@ -17,6 +17,7 @@ import { Categories } from '../../models/categories.model';
 import { ProductService } from '../../services/products/product.service';
 import { SaleService } from '../../services/suppliers/provider.service';
 import { BrandService } from '../../services/brands/brand.service';
+import { ProductDTO } from '../../modelsDTO/productDTO.model';
 
 @Component({
   selector: 'pet-paradise-client-add-product',
@@ -40,12 +41,12 @@ export class AddProductComponent implements OnInit{
   constructor(
     private dialog: MatDialog,
     private SaleService: SaleService, 
-    private BrandService: BrandService
+    private BrandService: BrandService,
+    private ProductService: ProductService
     ){}
   ngOnInit(): void {
     this.getProvidersList();
     this.getBrandService();
-
   }
 
   getProvidersList(){
@@ -77,21 +78,48 @@ export class AddProductComponent implements OnInit{
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required),
+    price: new FormControl(0, Validators.required),
     quantity: new FormControl(1, Validators.required),
     categories: new FormControl('',Validators.required),
     types: new FormControl('',Validators.required),
     discount: new FormControl(0,Validators.required),
-    provider: new FormControl('',Validators.required),
-    brand: new FormControl('',Validators.required),
-    avalible: new FormControl(false),
+    provider: new FormControl(0,Validators.required),
+    brand: new FormControl(0,Validators.required),
+    isAvailable: new FormControl(false),
     hasTax: new FormControl(false),
     description: new FormControl('', Validators.required),
   });
 
   handleSubmit() {
-    console.log(this.profileForm.value);
+    if (this.profileForm.valid) {
+      const newProduct: ProductDTO = {
+        name: this.profileForm.value.name as string,
+        image: this.profileForm.value.image as string,
+        price: this.profileForm.value.price as number,
+        quantity: this.profileForm.value.quantity as number,
+        animalCategory: this.profileForm.value.categories as string,
+        discount: this.profileForm.value.discount as number,
+        providerID: this.profileForm.value.provider as number,
+        brandID: this.profileForm.value.brand as number,
+        isAvailable: this.profileForm.value.isAvailable as boolean,
+        hasTax: this.profileForm.value.hasTax as boolean,
+        description: this.profileForm.value.description as string,
+        productID: 13,
+        productType: this.profileForm.value.types as string
+      };
+  
+      this.ProductService.add(newProduct).subscribe(
+        (addedProduct) => {
+          console.log('Product added successfully:', addedProduct);
+        },
+        (error) => {
+          console.error('Error adding product:', error);
+        });
+    } else {
+      console.log('Form is invalid');
+    }
   }
+  
 
 
   types: Types[]=[

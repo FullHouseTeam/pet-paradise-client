@@ -1,0 +1,21 @@
+<div class="invoice-container">
+    <div style="text-align: center">
+        FECHA
+    </div>
+    <div class="product-summary-container" *ngFor="let product of customerProducts">
+        <app-product-summary [product]="product"></app-product-summary>
+    </div>
+    <div style="text-align: center">
+        SHIPPING INFORMATION
+    </div>
+    <div class="shipping-information-container">
+       <app-shipping-data-component [sale]="customerSale" [customer]="customer"></app-shipping-data-component>
+    </div>
+    <div style="text-align: center">
+        PAYMENT INFORMATION
+    </div>
+    <div class="payment-information-container">
+        <app-payment-data-component [customer]="customer" [sale]="customerSale"></app-payment-data-component>
+    </div>
+
+</div>

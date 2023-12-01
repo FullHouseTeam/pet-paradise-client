@@ -1,0 +1,42 @@
+.invoice-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2vw;
+  place-items: center;
+  background-color: white;
+  padding: 1vw 3vw;
+}
+
+.product-summary-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  grid-gap: 1vw;
+  max-height: 7vw;
+  overflow-y: scroll;
+}
+
+.shipping-information-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  grid-gap: 1vw;
+}
+.payment-information-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  grid-gap: 1vw;
+}
+
+@media only screen and (max-width: 360px) {
+  .product-summary-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    grid-gap: 1vw;
+    max-height: 25vw;
+    overflow-y: scroll;
+  }
+}
+

@@ -1,0 +1,19 @@
+<div class="shipping-info-container">
+    <div style="display: grid; grid-template-columns: 1fr; grid-gap: 1vw">
+        <p>
+            nit: {{customer.nit}}
+        </p>
+        <p>
+            cvv: {{sale.cvv}}
+        </p>
+    </div>
+    <br>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 1vw; place-items: center">
+        <p> Items </p>
+        <p>{{sale.finalPrice}}$</p>
+        <p> Shipping </p>
+        <p> --$ </p>
+        <p> Taxes </p>
+        <p> --$ </p>
+    </div>
+</div>

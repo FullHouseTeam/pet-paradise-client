@@ -11,17 +11,21 @@ import { DomSanitizer } from "@angular/platform-browser";
   templateUrl: './add-brands.component.html',
   styleUrls: ['./add-brands.component.scss']
 })
+
 export class AddBrandsComponent implements OnInit {
   files: any = [];
   imagePreview: string = '';
+  myWidget;
+
+
   constructor(
       private sanitizer: DomSanitizer,
-
       ) {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   catchFile(event: any) {
     const caughtFile = event.target.files[0];
@@ -36,8 +40,7 @@ export class AddBrandsComponent implements OnInit {
 
   extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const image = this.sanitizer.bypassSecurityTrustUrl($event);
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -56,10 +59,13 @@ export class AddBrandsComponent implements OnInit {
     }
   });
 
+
   isValidImageFile(file: File): boolean {
     const allowedExtensions = ['.jpg', '.jpeg'];
     const fileName = file.name.toLowerCase();
     return allowedExtensions.some(ext => fileName.endsWith(ext));
   }
 
+  uploadImage() {
+  }
 }

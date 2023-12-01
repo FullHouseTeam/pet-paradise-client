@@ -47,19 +47,18 @@ export class AddProductComponent implements OnInit{
     private BrandService: BrandService,
     private ProductService: ProductService
     ){}
+    
   ngOnInit(): void {
     this.getProvidersList();
     this.getBrandService();
     this.getProductsList();
   }
+
   getProductsList() {
-    // Assuming your ProductService has a method to get the list of products
     this.ProductService.getList().subscribe(
       (data) => {
-        console.log('Product List:', data);
         this.products = data;
 
-        // Find the current maximum product ID
         this.currentMaxProductId = Math.max(...this.products.map((product) => product.productID), 0);
       },
       (error) => {
@@ -67,10 +66,10 @@ export class AddProductComponent implements OnInit{
       }
     );
   }
+
   getProvidersList(){
     this.SaleService.getList().subscribe(
       (data) => {
-        console.log('Purchase List:', data);
         this.providerService = data;
         this.selectedProviders.setValue(this.providerService.map(provider => provider.providerID));
       },
@@ -83,7 +82,6 @@ export class AddProductComponent implements OnInit{
   getBrandService(){
     this.BrandService.getList().subscribe(
       (data) => {
-        console.log('Purchase List:', data);
         this.brandService = data;
         this.selectedProviders.setValue(this.brandService.map(brand => brand.brandID));
       },
@@ -93,7 +91,6 @@ export class AddProductComponent implements OnInit{
     );
   }
 
-  
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),

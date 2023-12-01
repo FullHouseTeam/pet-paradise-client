@@ -5,6 +5,7 @@ export interface Sale {
     cardNumber: string,
     date: string,
     finalPrice: number,
-    userID: number
+    userID: number,
+    isAvailable: string
   }
   

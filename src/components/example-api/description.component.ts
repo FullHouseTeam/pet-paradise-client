@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BrandService } from "../../services/brands/brand.service";
-import { Brand } from "../../models/brand.model";
+import { PurchaseService } from "../../services/purchases/purchase.service";
+import { Purchase } from "../../models/purchase.model";
+import { FormGroup, Validators } from '@angular/forms';
+import { PurchaseDTO } from '../../modelsDTO/purchaseDTO.model';
 
 @Component({
   selector: 'pet-paradise-client-app-description',
@@ -12,24 +14,104 @@ import { Brand } from "../../models/brand.model";
 })
 
 export class DescriptionComponent implements OnInit {
-  brands: Brand[] = [];
+  purchases: Purchase[] = [];
+  purchaseForm: any;
 
-  constructor(private brandService: BrandService) { 
+  
+
+  constructor(private purchaseService: PurchaseService) {
   }
 
   ngOnInit(): void {
-    this.getBrandList();
+    this.getPurchaseList();
+    //this.getPurchaseById(1);
+    //this.editTotalPrice();
+    //this.addPurchase();
   }
-
-  getBrandList() {
-    this.brandService.getList().subscribe(
+  
+  getPurchaseList() {
+    this.purchaseService.getList().subscribe(
       (data) => {
-        console.log('Brand List:', data);
-        this.brands = data;
+        console.log('Purchase List:', data);
+        this.purchases = data;
       },
       (error) => {
         console.error('Error fetching brand list:', error);
       }
     );
   }
+
+  getPurchaseById(idPurchase: number) {
+    this.purchaseService.getById(idPurchase).subscribe(
+      (purchase) => {
+        console.log('Purchase by ID:', purchase);
+      },
+      (error) => {
+        console.error('Error fetching purchase by ID:', error);
+      }
+    );
+  }
+
+  
+  editTotalPrice() {
+    const idPurchase = 2; 
+    const newTotalPrice = 30.56;
+  
+    this.purchaseService.getById(idPurchase).subscribe(
+      (purchase) => this.handleEditSuccess(purchase, idPurchase, newTotalPrice),
+      (error) => this.handleEditError(error)
+    );
+
+  }
+  
+  private handleEditSuccess(purchase: Purchase, idPurchase: number, newTotalPrice: number) {
+    if (purchase) {
+      const updatedPurchaseDTO: PurchaseDTO = {
+        totalPrice: newTotalPrice,
+        obtainedTaxes: purchase.obtainedTaxes,
+        deliveryTime: purchase.deliveryTime,
+        localQuantity: purchase.localQuantity,
+        productID: purchase.productID,
+        userID: purchase.userID,
+        isAvailable: true,
+      };
+  
+      this.purchaseService.update(idPurchase, updatedPurchaseDTO).subscribe(
+        (response) => {
+          console.log('Purchase after edition:', response);
+          this.getPurchaseList();
+        },
+        (error) => this.handleEditError(error)
+      );
+    } else {
+      console.error(`Purchase with ID ${idPurchase} not found.`);
+    }
+  }
+  
+  private handleEditError(error: any) {
+    console.error('Error editing purchase:', error);
+  }
+
+  addPurchase() {
+    const newPurchaseDTO: PurchaseDTO = {
+      totalPrice: 0,
+      obtainedTaxes: 0,
+      deliveryTime: 0,
+      localQuantity: 0,
+      productID: 0,
+      userID: 0,
+      isAvailable: false
+    };
+
+    this.purchaseService.add(newPurchaseDTO).subscribe(
+      (response) => {
+        console.log('Purchase successfully added:', response);
+        this.getPurchaseList();
+      },
+      (error) => {
+        console.error('Error when adding the purchase:', error);
+      }
+    );
+  }
+  
 }

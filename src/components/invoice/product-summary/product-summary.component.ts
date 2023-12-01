@@ -6,6 +6,7 @@ import {Product} from "../../../models/product.model";
 import {forkJoin} from "rxjs";
 import {Brand} from "../../../models/brand.model";
 import {Provider} from "../../../models/provider.model";
+import {ExportedProviderStatusResolver} from "@angular/compiler-cli/src/ngtsc/metadata";
 import {ProviderService} from "../../../services/suppliers/provider.service";
 
 @Component({

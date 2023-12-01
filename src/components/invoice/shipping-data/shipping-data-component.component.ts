@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Sale} from "../../../models/sales.model";
 import {Customer} from "../../../models/customer.model";
 import {RegionService} from "../../../services/regions/region.service";
 import {forkJoin} from "rxjs";
 import {Region} from "../../../models/region.model";
+import {Sale} from "../../../models/sale.model";
 
 @Component({
   selector: 'app-shipping-data-component',

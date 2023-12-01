@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Sale} from "../../../models/sales.model";
 import {Customer} from "../../../models/customer.model";
+import {Sale} from "../../../models/sale.model";
 
 @Component({
   selector: 'app-payment-data-component',

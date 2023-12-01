@@ -21,7 +21,7 @@ export class AppComponent {
 
 
   showHeaderFooter() {
-    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/about", "/sign-up", "/login"];
+    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/about", "/sign-up", "/login", "/invoice"];
 
     const isProductPage = this.router.url.includes("/product/");
     const isStorePage = this.router.url.includes("/store/");

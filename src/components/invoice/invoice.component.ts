@@ -4,7 +4,6 @@ import {ProductSummaryComponent} from "./product-summary/product-summary.compone
 import {ShippingDataComponentComponent} from "./shipping-data/shipping-data-component.component";
 import {Customer} from "../../models/customer.model";
 import {Purchase} from "../../models/purchase.model";
-import {Sale} from "../../models/sales.model";
 import {CustomerService} from "../../services/customers/customer.service";
 import {PurchaseService} from "../../services/purchases/purchase.service";
 import {SaleService} from "../../services/sales/sale.service";
@@ -12,6 +11,8 @@ import {forkJoin} from "rxjs";
 import {Product} from "../../models/product.model";
 import {ProductService} from "../../services/products/product.service";
 import {PaymentDataComponentComponent} from "./payment-data-component/payment-data-component.component";
+import {Sale} from "../../models/sale.model";
+import {SharedService} from "../../services/globalAttributes/shared.service";
 
 @Component({
   selector: 'app-invoice',
@@ -21,7 +22,7 @@ import {PaymentDataComponentComponent} from "./payment-data-component/payment-da
   styleUrl: './invoice.component.scss'
 })
 export class InvoiceComponent implements OnInit{
-  customerId: number = 1;
+  customerId: number = 0;
   customer:Customer = {} as Customer;
   purchases: Purchase[] = [];
   sales:Sale[] = []
@@ -34,10 +35,12 @@ export class InvoiceComponent implements OnInit{
     private customerService: CustomerService,
     private purchaseService: PurchaseService,
     private saleService: SaleService,
-    private productService: ProductService
+    private productService: ProductService,
+    private sharedService: SharedService
   ) {
   }
   ngOnInit(): void {
+    this.customerId = Number(this.getCustomerId())
     forkJoin([this.getCustomerById(this.customerId)]).subscribe(
       ([customer]) => {
         this.customer = customer;
@@ -91,4 +94,7 @@ export class InvoiceComponent implements OnInit{
     return this.productService.getById(productId);
   }
 
+  getCustomerId() {
+    return this.sharedService.getGlobalVariable()
+  }
 }

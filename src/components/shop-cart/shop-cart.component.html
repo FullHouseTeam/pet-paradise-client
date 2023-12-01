@@ -9,18 +9,15 @@
                     (yearValue)="receiveYear($event)"
                     (cvvValue)="receiveCvv($event)"
                     (nitValue)="receiveNit($event)"
+                    [customerId]="customerId"
             ></pet-paradise-client-label-input-aside>
         </div>
-        <mat-button-toggle (click)="showData()">
-            BUY
-        </mat-button-toggle>
+
     </div>
 
     <div style="display: grid; grid-gap: 20px">
-        <div class="shop-list" >
-            <div *ngFor="let purchase of customerPurchases">
-                <pet-paradise-client-product-view-edition  [purchase]="purchase" ></pet-paradise-client-product-view-edition>
-            </div>
+        <div class="shop-list" *ngFor="let purchaseData of customerPurchases">
+            <pet-paradise-client-product-view-edition  [purchase]="purchaseData" ></pet-paradise-client-product-view-edition>
         </div>
         <div>
             {{totalPrice}}$

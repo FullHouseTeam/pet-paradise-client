@@ -14,7 +14,10 @@ import {ProductService} from "../../services/products/product.service";
 import {PurchaseService} from "../../services/purchases/purchase.service";
 import {forkJoin} from "rxjs";
 import {SaleService} from "../../services/sales/sale.service";
-import {Sale} from "../../models/sales.model";
+import {Sale} from "../../models/sale.model";
+import {ProductDTO} from "../../modelsDTO/productDTO.model";
+import {PurchaseDTO} from "../../modelsDTO/purchaseDTO.model";
+
 
 @Component({
   selector: 'pet-paradise-client-shop-cart',
@@ -28,7 +31,6 @@ export class ShopCartComponent {
   totalPrice: string = '';
   isClicked = false;
   products: Product[] = [];
-  productForUpdate: Product = {} as Product;
   productForTotalPrice: Product = {} as Product;
   customerProducts: Product[] = [];
   purchases: Purchase[] = [];
@@ -46,7 +48,8 @@ export class ShopCartComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private purchaseService: PurchaseService,
-    private saleService: SaleService
+    private saleService: SaleService,
+    private router: Router
   ) {
   }
 
@@ -62,33 +65,26 @@ export class ShopCartComponent {
       this.email)
   }
   ngOnInit() {
-
     this.route.params.subscribe(params => {
       this.customerId = params['id'];
 
-      forkJoin([this.getPurchasesList(), this.getSalesList()]).subscribe(
-        ([purchases, sales]) => {
-          this.purchases = purchases;
-          this.sales = sales;
-          forkJoin([this.filterPurchasesByCustomerId(Number(this.customerId), this.purchases)]).subscribe(
-            (filteredPurchases) => {
-              this.customerPurchases = filteredPurchases;
-              forkJoin([this.getProductsList()]).subscribe(
-                ([products]) => {
-                  this.products = products;
-                  for (const purchase of purchases) {
-                    let foundProduct = products.find((product) => product.productID === purchase.productID);
-                    if (foundProduct) {
-                      this.customerProducts.push(foundProduct);
-                    }
-                    foundProduct = undefined;
-                  }
-                }
-              );
-            }
-          );
+      forkJoin([
+        this.getPurchasesList(),
+        this.getSalesList(),
+        this.getProductsList()
+      ]).subscribe(([purchases, sales, products]) => {
+        this.purchases = purchases;
+        this.sales = sales;
+        this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), purchases);
+        this.products = products;
+
+        for (const purchase of this.customerPurchases) {
+          const foundProduct = products.find((product) => product.productID === purchase.productID);
+          if (foundProduct) {
+            this.customerProducts.push(foundProduct);
+          }
         }
-      )
+      });
     });
   }
 
@@ -121,54 +117,27 @@ export class ShopCartComponent {
     return this.productService.getById(productId)
   }
 
-  updateProduct(productId: number, product: Product) {
+  updateProduct(productId: number, product: ProductDTO) {
     this.productService.update(productId, product)
   }
 
-  disablePurchase(purchase: Purchase) {
-    purchase.isAvailable = "false";
-    //this.purchaseService.update(purchase.purchaseID, purchase)
-  }
-
-  disableAllPurchasesBought() {
-    for (let purchase of this.customerPurchases) {
-      this.disablePurchase(purchase)
-    }
-  }
-  updateProductStock() {
-    for (let purchase of this.customerPurchases) {
-      forkJoin([this.getProductById(Number(purchase.productID))]).subscribe(
-        ([product]) => {
-          this.productForUpdate = product;
-        }
-      );
-      this.productForUpdate.quantity = this.productForUpdate.quantity - purchase.localQuantity;
-      this.updateProduct(purchase.productID, this.productForUpdate)
-    }
-  }
 
 
 
-  postSale() {
-    let completeDate = this.month + "/" + this.year;
-    const sale = {
-      saleID: this.sales.length,
-      zipCode: this.zipCode,
-      cvv: Number(this.cvv),
-      cardNumber: this.cardNumber,
-      date: completeDate,
-      finalPrice: Number(this.totalPrice),
-      userID: Number(this.customerId)
-    }
-    this.saleService.add(sale).subscribe(
-      (response) => {
-        console.log(response)
+
+
+
+
+
+
+  filterPurchasesByCustomerId(customerId: number, purchases: Purchase[]) {
+    let filteredPurchases: Purchase[] = [];
+    for (let purchase of purchases) {
+      if (purchase.userID === customerId && purchase.isAvailable === "true") {
+        filteredPurchases.push(purchase)
       }
-    )
-  }
-
-  filterPurchasesByCustomerId(customerId: number, purchases: Purchase[]): Purchase[] {
-    return purchases.filter(purchase => purchase.userID === customerId && (purchase.isAvailable.toLowerCase() == "true") );
+    }
+    return filteredPurchases;
   }
 
 

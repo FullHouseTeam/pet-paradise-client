@@ -17,7 +17,7 @@ export class AppComponent {
   title = "pet-paradise-client";
 
   showHeaderFooter() {
-    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/about", "/sign-up", "/login"];
+    const allowedRoutes = ["/", "/categories-and-products", "/shop-cart", "/home", "/terms-and-conditions", "/support", "/about", "/sign-up", "/login", "/admin/add-brand"];
 
     const isProductPage = this.router.url.includes("/product/");
     const isStorePage = this.router.url.includes("/store/");

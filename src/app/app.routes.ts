@@ -12,6 +12,7 @@ import { AddBrandsComponent} from "../components/add-brands/add-brands.component
 
 export const appRoutes: Route[] = [
   { path: 'product/:id', component: ProductInfoComponent},
+  { path: 'admin/add-brand', component: AddBrandsComponent},
   { path: 'store', component: CategoriesAndProductsComponent },
   { path: 'shop-cart', component: ShopCartComponent },
   { path: 'customer', component: CustomerPageComponent },
@@ -22,5 +23,5 @@ export const appRoutes: Route[] = [
   { path: 'store/:category', component: CategoriesAndProductsComponent },
   { path: '**', component: DescriptionComponent },
   { path: 'example-api', component: DescriptionComponent },
-  { path: 'admin/add-brand', component: AddBrandsComponent}
+
 ];

@@ -25,7 +25,7 @@ export class DescriptionComponent implements OnInit {
   ngOnInit(): void {
     //this.getPurchaseList();
     //this.getPurchaseById(1);
-    this.editTotalPrice();
+    //this.editTotalPrice();
     //this.addPurchase();
   }
   

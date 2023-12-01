@@ -10,9 +10,11 @@ import { ShopCartComponent } from '../components/shop-cart/shop-cart.component';
 import { SupportPageComponent } from '../components/support-page/support-page.component';
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import {InvoiceComponent} from "../components/invoice/invoice.component";
+import { SignUpComponent } from '../components/sign-up/signUp.component';
 
 export const appRoutes: Route[] = [
   { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'store', component: CategoriesAndProductsComponent },
   { path: 'invoice', component: InvoiceComponent},
   { path: 'product/:id', component: ProductInfoComponent},

@@ -16,7 +16,7 @@ import {forkJoin} from "rxjs";
 import {SaleService} from "../../services/sales/sale.service";
 import {Sale} from "../../models/sale.model";
 import {ProductDTO} from "../../modelsDTO/productDTO.model";
-import {PurchaseDTO} from "../../modelsDTO/purchaseDTO.model";
+import {SharedService} from "../../services/globalAttributes/shared.service";
 
 
 @Component({
@@ -49,7 +49,8 @@ export class ShopCartComponent {
     private productService: ProductService,
     private purchaseService: PurchaseService,
     private saleService: SaleService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {
   }
 
@@ -65,9 +66,7 @@ export class ShopCartComponent {
       this.email)
   }
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.customerId = params['id'];
-
+      this.customerId = this.getCustomerId();
       forkJoin([
         this.getPurchasesList(),
         this.getSalesList(),
@@ -84,7 +83,6 @@ export class ShopCartComponent {
             this.customerProducts.push(foundProduct);
           }
         }
-      });
     });
   }
 
@@ -161,5 +159,9 @@ export class ShopCartComponent {
   }
   receiveCvv(cvvReceived: string) {
     this.cvv = cvvReceived;
+  }
+
+  getCustomerId() {
+    return this.sharedService.getGlobalVariable()
   }
 }

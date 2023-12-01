@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="title">
+        Add a New Brand
+    </div>
+    <div class="input-container">
+        <mat-form-field hintLabel="Max 40 characters" appearance="outline">
+            <mat-label>Brand Name</mat-label>
+            <input matInput type="text" maxlength="40" required/>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <img class="preview-image" [src]="imagePreview">
+    </div>
+
+    <div>
+        <div class="file-input-button">
+            <label>Select your image logo</label>
+            <input (change)="catchFile($event)" type="file" accept=".jpg, .jpeg">
+        </div>
+
+        <button class="accept-button" (click)="uploadImage()" >Accept</button>
+    </div>
+</div>

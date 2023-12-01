@@ -8,10 +8,12 @@ import { SupportPageComponent } from '../components/support-page/support-page.co
 import { TermsAndConditionsComponent } from '../components/terms-and-conditions/terms-and-conditions.component';
 import { DescriptionComponent } from '../components/example-api/description.component';
 import { ProductInfoComponent } from "../components/product-info/product-info.component";
+import { AddBrandsComponent } from "../components/add-brands/add-brands.component";
 
 export const appRoutes: Route[] = [
   { path: 'product/:id', component: ProductInfoComponent},
   { path: 'store', component: CategoriesAndProductsComponent },
+  { path: 'admin/add-brands', component: AddBrandsComponent },
   { path: 'shop-cart', component: ShopCartComponent },
   { path: 'customer', component: CustomerPageComponent },
   { path: 'about', component: AboutUsComponent },

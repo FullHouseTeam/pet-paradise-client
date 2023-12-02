@@ -276,7 +276,7 @@ export class LabelInputAsideComponent implements OnInit{
     console.log(sale)
     this.saleService.add(sale);
   }
-  buyProcess(){
+  buyProcess() {
     if (this.monthsEntry.valid && this.yearsEntry.valid && this.cvvEntry.valid && this.cardNumberEntry.valid && this.nitEntry.valid && this.zipCodeEntry.valid) {
       forkJoin([
         this.getPurchases()
@@ -285,6 +285,8 @@ export class LabelInputAsideComponent implements OnInit{
           this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), this.purchases)
         }
       );
+    }
+    if (this.customerPurchases.length > 0) {
       this.getTotalPrice()
       this.updateProductStock()
       this.postSale()

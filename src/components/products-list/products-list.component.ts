@@ -23,7 +23,6 @@ export class ProductsListComponent implements OnInit {
         this.products = products;
       },
       error: (response) => {
-        console.log(response);
       }
       }
     )

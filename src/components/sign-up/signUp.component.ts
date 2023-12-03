@@ -38,11 +38,6 @@ export class SignUpComponent {
   nit = new FormControl('', [Validators.pattern(/^[6-9]\d{6,7}$/),]);
 
   public print() {
-    console.log('Email:', this.email.value);
-    console.log('Name:', this.name.value);
-    console.log('Password:', this.password.value);
-    console.log('Region ID:', this.regionID.value);
-    console.log('NIT:', this.nit.value);
   }
 
   getErrorMessageEmail() {

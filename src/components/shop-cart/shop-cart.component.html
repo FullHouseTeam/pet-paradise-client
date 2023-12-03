@@ -2,26 +2,17 @@
     <div style="display: grid; grid-gap: 1vw">
         <div>
             <pet-paradise-client-label-input-aside
-                    (zipCodeValue)="receiveZipCode($event)"
-                    (emailValue)="receiveEmail($event)"
-                    (cardNumberValue)="receiveCardNumber($event)"
-                    (monthValue)="receiveMonth($event)"
-                    (yearValue)="receiveYear($event)"
-                    (cvvValue)="receiveCvv($event)"
-                    (nitValue)="receiveNit($event)"
-                    [customerId]="customerId"
             ></pet-paradise-client-label-input-aside>
         </div>
 
     </div>
-
-    <div style="display: grid; grid-gap: 20px">
-        <div class="shop-list" *ngFor="let purchaseData of customerPurchases">
-            <pet-paradise-client-product-view-edition  [purchase]="purchaseData" ></pet-paradise-client-product-view-edition>
-        </div>
-        <div>
-            {{totalPrice}}$
+    <div>
+        <div style="display: grid; grid-gap: 20px" class="shop-list">
+            <div *ngFor="let purchaseData of customerPurchases; let i = index">
+                <pet-paradise-client-product-view-edition [purchase]="purchaseData" [productQuantity]="controllers[i]" (purchaseQuantityIrt)="onChildValueChanged($event)"></pet-paradise-client-product-view-edition>
+            </div>
         </div>
     </div>
+
 
 </div>

@@ -7,7 +7,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from "@angular/material/select";
-import {forkJoin} from "rxjs";
+import {forkJoin, of, switchMap} from "rxjs";
 import {PurchaseService} from "../../../services/purchases/purchase.service";
 import {Purchase} from "../../../models/purchase.model";
 import {ProductService} from "../../../services/products/product.service";
@@ -18,6 +18,7 @@ import {SaleService} from "../../../services/sales/sale.service";
 import {SaleDTO} from "../../../modelsDTO/saleDTO.model";
 import {Sale} from "../../../models/sale.model";
 import {Router} from "@angular/router";
+import {SharedService} from "../../../services/globalAttributes/shared.service";
 
 
 @Component({
@@ -29,8 +30,7 @@ import {Router} from "@angular/router";
 
 })
 export class LabelInputAsideComponent implements OnInit{
-
-  @Input() customerId: string = ''
+  customerId: number = 0;
   emailEntry = new FormControl();
   productForUpdate: Product = {} as Product;
   zipCodeEntry = new FormControl();
@@ -41,81 +41,17 @@ export class LabelInputAsideComponent implements OnInit{
   monthsEntry = new FormControl();
   purchases: Purchase[] = []
   customerPurchases: Purchase[] = []
-  years: string[] = ['2023', '2024', '2025', '2026', '2027', '2028', '2029'];
-  months: any[] = [
-    { value: '01', viewValue: 'January' },
-    { value: '02', viewValue: 'February' },
-    { value: '03', viewValue: 'March' },
-    { value: '04', viewValue: 'April' },
-    { value: '05', viewValue: 'May' },
-    { value: '06', viewValue: 'June' },
-    { value: '07', viewValue: 'July' },
-    { value: '08', viewValue: 'August' },
-    { value: '09', viewValue: 'September' },
-    { value: '10', viewValue: 'October' },
-    { value: '11', viewValue: 'November' },
-    { value: '12', viewValue: 'December' }
-  ];
   sales: Sale[] = []
   totalPrice: number = 0;
-
-  @Output() zipCodeValue = new EventEmitter<string>();
-  @Output() emailValue = new EventEmitter<string>();
-  @Output() cvvValue = new EventEmitter<string>();
-  @Output() nitValue = new EventEmitter<string>();
-  @Output() cardNumberValue = new EventEmitter<string>();
-  @Output() monthValue = new EventEmitter<string>();
-  @Output() yearValue = new EventEmitter<string>();
 
 
   constructor(
     private purchaseService: PurchaseService,
     private productService: ProductService,
     private saleService: SaleService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {
-  }
-  sendEmailValue() {
-    if (this.emailEntry.valid) {
-      this.emailValue.emit(this.emailEntry.value)
-    }
-  }
-  sendZipCodeValue() {
-    if (this.zipCodeEntry.valid) {
-      this.zipCodeValue.emit(this.zipCodeEntry.value)
-    }
-  }
-  sendCvvValue() {
-    if (this.cvvEntry.valid) {
-      this.cvvValue.emit(this.cvvEntry.value)
-    }
-  }
-  sendNitValue() {
-    if (this.nitEntry.valid) {
-      this.nitValue.emit(this.nitEntry.value)
-    }
-  }
-  sendCardNumberValue() {
-    if (this.cardNumberEntry.valid) {
-      this.cardNumberValue.emit(this.cardNumberEntry.value)
-    }
-  }
-
-  sendMonthValue() {
-    if (this.monthsEntry.valid) {
-      if( this.monthsEntry.value > 9) {
-        this.monthValue.emit(this.monthsEntry.value.toString())
-      } else {
-        this.monthValue.emit('0' + this.monthsEntry.value.toString())
-      }
-    }
-  }
-  sendYearValue() {
-
-    if (this.yearsEntry.valid) {
-      this.yearValue.emit(this.yearsEntry.value.toString())
-    }
-
   }
 
 
@@ -223,8 +159,7 @@ export class LabelInputAsideComponent implements OnInit{
         ([product]) => {
           this.productForUpdate = product;
           this.productForUpdate.quantity = this.productForUpdate.quantity - purchase.localQuantity;
-          this.updateProduct(purchase.productID, this.prepareProductToUpdate(this.productForUpdate))
-          console.log(this.customerPurchases)
+          this.updateProduct(purchase.productID, this.prepareProductToUpdate())
 
         }
       );
@@ -263,33 +198,46 @@ export class LabelInputAsideComponent implements OnInit{
 
   postSale() {
 
-    let completeDate = this.monthsEntry.value.toString() + "/" + this.yearsEntry.value.toString();
+    let completeDate = this.checkMonthFormat(this.monthsEntry.value) + "/" + this.yearsEntry.value.toString();
     let sale: SaleDTO = {} as SaleDTO
-    sale.saleID = this.sales.length;
-    sale.zipCode = this.zipCodeEntry.value.toString()
-    sale.cvv = this.cvvEntry.value.toString()
-    sale.isAvailable = true
-    sale.userID = Number(this.customerId)
-    sale.cardNumber = this.cardNumberEntry.value.toString()
-    sale.date = completeDate
-    sale.finalPrice = this.totalPrice
-    console.log(sale)
+
+    sale.zipCode = this.zipCodeEntry.value.toString();
+    sale.cvv = Number(this.cvvEntry.value);
+    sale.isAvailable = "true";
+    sale.userID = Number(this.customerId);
+    sale.cardNumber = this.cardNumberEntry.value.toString();
+    sale.date = completeDate;
+    sale.finalPrice = this.totalPrice;
+
     this.saleService.add(sale);
   }
-  buyProcess(){
+
+
+  checkMonthFormat(month: number) {
+    return month < 10 ? ('0' + month.toString()) : month.toString()
+  }
+  buyProcess() {
     if (this.monthsEntry.valid && this.yearsEntry.valid && this.cvvEntry.valid && this.cardNumberEntry.valid && this.nitEntry.valid && this.zipCodeEntry.valid) {
       forkJoin([
         this.getPurchases()
       ]).subscribe(([purchases]) => {
-          this.purchases = purchases;
-          this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), this.purchases)
+        this.purchases = purchases;
+        this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), this.purchases)
         }
       );
-      this.getTotalPrice()
-      this.updateProductStock()
-      this.postSale()
-      this.router.navigate(['invoice'])
+      if (this.customerPurchases.length > 0) {
+        of(null).pipe(
+          switchMap(() => this.getTotalPrice()),
+          switchMap((total) => {
+            this.totalPrice = total;
+            this.updateProductStock();
+            this.postSale();
+            return this.router.navigate(['invoice']);
+          })
+        ).subscribe();
+      }
     }
+
   }
 
   filterPurchasesByCustomerId(customerId: number, purchases: Purchase[]) {
@@ -303,6 +251,7 @@ export class LabelInputAsideComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.customerId = Number(this.getCustomer())
     forkJoin([
       this.getPurchases(),
       this.getSales()
@@ -325,7 +274,7 @@ export class LabelInputAsideComponent implements OnInit{
     return this.productService.getById(productId)
   }
 
-  prepareProductToUpdate(product: Product) {
+  prepareProductToUpdate() {
     let productToPost: ProductDTO = {} as ProductDTO;
     productToPost.productID = this.productForUpdate.productID
     productToPost.productType = this.productForUpdate.productType
@@ -343,14 +292,20 @@ export class LabelInputAsideComponent implements OnInit{
   }
 
   getTotalPrice() {
-    this.totalPrice = 0
-    for (let purchase of this.customerPurchases) {
-      forkJoin([
-        this.getProductById(purchase.productID)
-      ]).subscribe(([product]) => {
-          this.totalPrice += (product.price - (product.price * product.discount / 100) ) * purchase.localQuantity
+    return forkJoin(
+      this.customerPurchases.map(purchase => this.getProductById(purchase.productID))
+    ).pipe(
+      switchMap(products => {
+        let total = 0;
+        for (let i = 0; i < this.customerPurchases.length; i++) {
+          total += (products[i].price - (products[i].price * products[i].discount / 100)) * this.customerPurchases[i].localQuantity;
         }
-      );
-    }
+        return of(total);
+      })
+    );
+  }
+
+  getCustomer() {
+    return this.sharedService.getGlobalVariable()
   }
 }

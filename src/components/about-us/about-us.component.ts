@@ -32,11 +32,9 @@ export class AboutUsComponent implements OnInit {
   getBrandList() {
     this.productsService.getList().subscribe(
       (data) => {
-        console.log('Brand List:', data);
         this.products = data;
       },
       (error) => {
-        console.error('Error fetching brand list:', error);
       }
     );
   }

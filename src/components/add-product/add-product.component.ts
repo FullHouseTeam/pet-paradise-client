@@ -62,7 +62,6 @@ export class AddProductComponent implements OnInit{
         this.currentMaxProductId = Math.max(...this.products.map((product) => product.productID), 0);
       },
       (error) => {
-        console.error('Error fetching product list:', error);
       }
     );
   }
@@ -74,7 +73,6 @@ export class AddProductComponent implements OnInit{
         this.selectedProviders.setValue(this.providerServices.map(provider => provider.providerID));
       },
       (error) => {
-        console.error('Error fetching brand list:', error);
       }
     );
   }
@@ -86,7 +84,6 @@ export class AddProductComponent implements OnInit{
         this.selectedProviders.setValue(this.brandService.map(brand => brand.brandID));
       },
       (error) => {
-        console.error('Error fetching brand list:', error);
       }
     );
   }
@@ -126,13 +123,10 @@ export class AddProductComponent implements OnInit{
   
       this.ProductService.add(newProduct).subscribe(
         (addedProduct) => {
-          console.log('Product added successfully:', addedProduct);
         },
         (error) => {
-          console.error('Error adding product:', error);
         });
     } else {
-      console.log('Form is invalid');
     }
   }
   

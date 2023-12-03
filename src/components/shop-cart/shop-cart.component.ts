@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {LabelInputAsideComponent} from "./input/label-input-aside.component";
 import {ProductViewEditionComponent} from "./product-view-edition/product-view-edition.component";
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
@@ -12,7 +12,7 @@ import {Product} from "../../models/product.model";
 import {Purchase} from "../../models/purchase.model";
 import {ProductService} from "../../services/products/product.service";
 import {PurchaseService} from "../../services/purchases/purchase.service";
-import {forkJoin} from "rxjs";
+import {forkJoin, of, switchMap} from "rxjs";
 import {SaleService} from "../../services/sales/sale.service";
 import {Sale} from "../../models/sale.model";
 import {ProductDTO} from "../../modelsDTO/productDTO.model";
@@ -28,7 +28,7 @@ import {SharedService} from "../../services/globalAttributes/shared.service";
 })
 export class ShopCartComponent {
   customerId: string = '';
-  totalPrice: string = '';
+  totalPrice: number = 0;
   isClicked = false;
   products: Product[] = [];
   productForTotalPrice: Product = {} as Product;
@@ -43,28 +43,23 @@ export class ShopCartComponent {
   cvv: string = '';
   month: string = '';
   year: string = '';
+  controllers: FormControl[] = []
 
   constructor(
-    private route: ActivatedRoute,
     private productService: ProductService,
     private purchaseService: PurchaseService,
     private saleService: SaleService,
-    private router: Router,
     private sharedService: SharedService
   ) {
+
   }
 
 
 
-  showData() {
-    console.log(this.zipCode,
-      this.cvv,
-      this.nit,
-      this.cardNumber,
-      this.month,
-      this.year,
-      this.email)
+  onChildValueChanged(newValue: number): void {
+    //this.getTotalPrice()
   }
+
   ngOnInit() {
       this.customerId = this.getCustomerId();
       forkJoin([
@@ -83,7 +78,15 @@ export class ShopCartComponent {
             this.customerProducts.push(foundProduct);
           }
         }
-    });
+        for (let i = 0; i < this.purchases.length; i++) {
+          const control = new FormControl(0);
+          this.controllers.push(control);
+        }
+
+        this.getTotalPrice();
+
+
+      });
   }
 
 
@@ -96,15 +99,28 @@ export class ShopCartComponent {
   }
 
   getTotalPrice() {
-    this.totalPrice = '0';
-    for (let purchase of this.customerPurchases) {
-      forkJoin([this.getProductById(Number(purchase.productID))]).subscribe(
-        ([product]) => {
-          this.productForTotalPrice = product;
-        }
-      );
-      this.totalPrice = (purchase.localQuantity * (this.productForTotalPrice.price - (this.productForTotalPrice.price * (this.productForTotalPrice.discount / 100)))).toString()
-    }
+    of(null).pipe(
+      switchMap(() => this.getPurchasesList()),
+      switchMap((purchases) => {
+        this.purchases = purchases;
+        this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), purchases);
+        return forkJoin(this.customerPurchases.map(purchase => this.getProductById(Number(purchase.productID))));
+      }),
+    ).subscribe(
+      (products) => {
+        this.totalPrice = 0;
+
+        products.forEach((product, index) => {
+          const purchase = this.customerPurchases[index];
+
+          this.totalPrice += purchase.localQuantity * (product.price - (product.price * (product.discount / 100)));
+        });
+
+
+      },
+      (error) => {
+      }
+    );
   }
 
   getPurchasesList() {
@@ -118,16 +134,6 @@ export class ShopCartComponent {
   updateProduct(productId: number, product: ProductDTO) {
     this.productService.update(productId, product)
   }
-
-
-
-
-
-
-
-
-
-
   filterPurchasesByCustomerId(customerId: number, purchases: Purchase[]) {
     let filteredPurchases: Purchase[] = [];
     for (let purchase of purchases) {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
@@ -24,19 +24,17 @@ import {PurchaseDTO} from "../../../modelsDTO/purchaseDTO.model";
 export class ProductViewEditionComponent implements OnInit{
   @Input() purchase: Purchase = {} as Purchase;
   product: Product = {} as Product;
-  productQuantity = new FormControl();
+  @Input() productQuantity = new FormControl();
   productImage: string = '';
   productName: string = '';
   productPrice: number = 0;
-
-  purchaseToPost: PurchaseDTO = {} as PurchaseDTO;
+  @Output() purchaseQuantityIrt = new EventEmitter<number>()
 
 
 
   constructor(
     private purchaseService: PurchaseService,
-    private productService: ProductService,
-    private router: Router
+    private productService: ProductService
   ) {
   }
 
@@ -49,6 +47,7 @@ export class ProductViewEditionComponent implements OnInit{
         this.productPrice = product.price;
       }
     );
+
   }
 
   quantityValidation() {
@@ -70,6 +69,11 @@ export class ProductViewEditionComponent implements OnInit{
       (purchase) => this.editLocalQuantity(purchase, idPurchase, Number(this.productQuantity.value)),
       (error) => this.handleEditError(error)
     );
+    this.productQuantity.valueChanges.subscribe((value) => {
+      if (this.productQuantity.valid) {
+        this.purchaseQuantityIrt.emit(value);
+      }
+    });
 
   }
 
@@ -83,14 +87,13 @@ export class ProductViewEditionComponent implements OnInit{
         localQuantity: Number(newLocalQuantity),
         productID: purchase.productID,
         userID: purchase.userID,
-        isAvailable: Boolean(purchase.isAvailable),
+        isAvailable: Boolean(purchase.isAvailable)
       };
-
       this.purchaseService.update(idPurchase, updatedPurchaseDTO).subscribe(
         (response) => {
-          console.log('Purchase after edition:', response);
         },
         (error) => this.handleEditError(error)
+
       );
     }
   }
@@ -109,7 +112,6 @@ export class ProductViewEditionComponent implements OnInit{
 
       this.purchaseService.update(idPurchase, updatedPurchaseDTO).subscribe(
         (response) => {
-          console.log('Purchase after edition:', response);
         },
         (error) => this.handleEditError(error)
       );
@@ -117,7 +119,6 @@ export class ProductViewEditionComponent implements OnInit{
   }
 
   private handleEditError(error: any) {
-    console.error('Error editing purchase:', error);
   }
 
 
@@ -128,7 +129,6 @@ export class ProductViewEditionComponent implements OnInit{
       (purchase) => this.editAvailability(purchase, idPurchase, false),
       (error) => this.handleEditError(error)
     );
-    this.router.navigate([`/shop-cart/1`]);
   }
 
 

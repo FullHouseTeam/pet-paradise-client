@@ -63,7 +63,6 @@ export class CustomCarouselComponent {
       [products[i], products[j]] = [products[j], products[i]];
 
     }
-    console.log(products)
     return products;
   }
 

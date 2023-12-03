@@ -44,7 +44,6 @@ export class InvoiceComponent implements OnInit{
     forkJoin([this.getCustomerById(this.customerId)]).subscribe(
       ([customer]) => {
         this.customer = customer;
-        console.log(this.customer)
         forkJoin([this.getPurchases()]).subscribe(
           ([purchases]) => {
             this.purchases = purchases;
@@ -83,11 +82,11 @@ export class InvoiceComponent implements OnInit{
   }
 
   filterSaleByCustomerId(customerId: number, sales: Sale[]) {
-    return sales.filter((sale => sale.userID === customerId))
+    return sales.filter((sale => sale.userID === customerId && sale.isAvailable === "true"))
   }
 
   filterPurchasesByCustomerId(customerId: number, purchases: Purchase[]) {
-    return purchases.filter((purchase => purchase.userID === customerId))
+    return purchases.filter((purchase => (purchase.userID === customerId && purchase.isAvailable === "true")))
   }
 
   getProductById(productId: number) {

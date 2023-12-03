@@ -37,26 +37,31 @@ export class ProductCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    forkJoin([this.getProduct(Number(this.productId)), this.getPurchaseList()]).subscribe(
-        ([product, purchases]) => {
-          this.product = product;
-          this.purchases = purchases;
-          this.loadProductDetails();
-        }
-    );
+    this.callData();
   }
 
   private loadProductDetails() {
-    this.isClicked = this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
+    const purch = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()));
+
+    if (purch) {
+      this.isClicked = purch.isAvailable === "true";
+    } else {
+      this.isClicked = false;
+    }
+
     this.title = this.truncateText(this.product.name, 10);
     this.discount = this.product.discount;
+
     if (this.discount > 0) {
       const discountedPrice = this.product.price - (this.product.price * (this.discount / 100));
       this.price = discountedPrice.toString();
     } else {
       this.price = this.product.price.toString();
-    }    this.image = this.product.image;
+    }
+
+    this.image = this.product.image;
   }
+
 
   onClick() {
     if(!this.isClicked) {
@@ -70,6 +75,7 @@ export class ProductCardComponent implements OnInit {
           userID: Number(this.sharedService.getGlobalVariable()),
           isAvailable: true
         }
+
         this.purchaseService.add(this.purchaseDto).subscribe(
             (error) => this.handleEditError(error)
         );
@@ -83,8 +89,9 @@ export class ProductCardComponent implements OnInit {
             localQuantity: 1,
             productID: this.product.productID,
             userID: Number(this.sharedService.getGlobalVariable()),
-            isAvailable: true,
+            isAvailable: true
           };
+
           this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
               (error) => this.handleEditError(error)
           );
@@ -92,19 +99,18 @@ export class ProductCardComponent implements OnInit {
       }
       this.isClicked = !this.isClicked;
 
-
     } else {
       this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
-      const newPurchase: PurchaseDTO = {
+      this.purchaseDto = {
         totalPrice: 1,
         obtainedTaxes: 1,
         deliveryTime: 1,
         localQuantity: 1,
         productID: this.product.productID,
         userID: Number(this.sharedService.getGlobalVariable()),
-        isAvailable: false,
+        isAvailable: false
       };
-      this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
+      this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
           (error) => this.handleEditError(error)
       );
       this.isClicked = !this.isClicked;
@@ -140,6 +146,21 @@ export class ProductCardComponent implements OnInit {
         purchase.productID === productID &&
         purchase.userID === userID &&
         purchase.isAvailable === "false"
+    );
+  }
+
+  filterPurchasesByID(purchases: Purchase[], id: number) {
+    return purchases.filter((purchase) => purchase.userID == id);
+  }
+  callData(){
+    forkJoin([this.getProduct(Number(this.productId)), this.getPurchaseList()]).subscribe(
+        ([product, purchases]) => {
+          this.product = product;
+          this.purchases = this.filterPurchasesByID(purchases, Number(this.sharedService.getGlobalVariable()));
+
+
+          this.loadProductDetails();
+        }
     );
   }
 }

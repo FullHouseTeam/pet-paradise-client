@@ -56,32 +56,7 @@ export class ProductInfoComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.productId = params['id'];
-      forkJoin([this.getProductsList(), this.getPurchaseList()]).subscribe(
-          ([products, purchases]) => {
-            this.products = products;
-            this.purchases = purchases;
-            this.filterPurchasesByID(purchases, Number(this.sharedService.getGlobalVariable()));
-
-            if (Number(this.productId) > this.products.length) {
-              this.router.navigate(['/error']);
-            } else {
-              this.generateRandomProductIds();
-
-              forkJoin([this.getProduct(Number(this.productId))]).subscribe(
-                  ([product]) => {
-                    this.product = product;
-                    forkJoin([this.getBrand(Number(this.product.brandID)), this.getProvider(Number(this.product.providerID))]).subscribe(
-                        ([brand, provider]) => {
-                          this.brand = brand;
-                          this.provider = provider;
-                          this.loadProductDetails();
-                        }
-                    );
-                  }
-              );
-            }
-          }
-      );
+      this.callData()
     });
   }
 
@@ -123,7 +98,7 @@ export class ProductInfoComponent implements OnInit {
             localQuantity: 1,
             productID: this.product.productID,
             userID: Number(this.sharedService.getGlobalVariable()),
-            isAvailable: true,
+            isAvailable: true
           };
           this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
               (error) => this.handleEditError(error)
@@ -134,20 +109,21 @@ export class ProductInfoComponent implements OnInit {
 
     } else {
       this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
-      const newPurchase: PurchaseDTO = {
+      this.purchaseDto = {
         totalPrice: 1,
         obtainedTaxes: 1,
         deliveryTime: 1,
         localQuantity: 1,
         productID: this.product.productID,
         userID: Number(this.sharedService.getGlobalVariable()),
-        isAvailable: false,
+        isAvailable: false
       };
-      this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
+      this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
           (error) => this.handleEditError(error)
       );
       this.isClicked = !this.isClicked;
     }
+    this.callData()
   }
 
   redirectToCategoriesAndProducts() {
@@ -217,6 +193,34 @@ export class ProductInfoComponent implements OnInit {
 
       this.productIds.push(randomProductId.toString());
     }
+  }
+
+  callData() {
+    forkJoin([this.getProductsList(), this.getPurchaseList()]).subscribe(
+        ([products, purchases]) => {
+          this.products = products;
+          this.purchases = purchases;
+          this.filterPurchasesByID(purchases, Number(this.sharedService.getGlobalVariable()));
+          if (Number(this.productId) > this.products.length) {
+            this.router.navigate(['/error']);
+          } else {
+            this.generateRandomProductIds();
+
+            forkJoin([this.getProduct(Number(this.productId))]).subscribe(
+                ([product]) => {
+                  this.product = product;
+                  forkJoin([this.getBrand(Number(this.product.brandID)), this.getProvider(Number(this.product.providerID))]).subscribe(
+                      ([brand, provider]) => {
+                        this.brand = brand;
+                        this.provider = provider;
+                        this.loadProductDetails();
+                      }
+                  );
+                }
+            );
+          }
+        }
+    );
   }
 
 }

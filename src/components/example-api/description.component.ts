@@ -32,11 +32,9 @@ export class DescriptionComponent implements OnInit {
   getPurchaseList() {
     this.purchaseService.getList().subscribe(
       (data) => {
-        console.log('Purchase List:', data);
         this.purchases = data;
       },
       (error) => {
-        console.error('Error fetching brand list:', error);
       }
     );
   }
@@ -44,10 +42,8 @@ export class DescriptionComponent implements OnInit {
   getPurchaseById(idPurchase: number) {
     this.purchaseService.getById(idPurchase).subscribe(
       (purchase) => {
-        console.log('Purchase by ID:', purchase);
       },
       (error) => {
-        console.error('Error fetching purchase by ID:', error);
       }
     );
   }
@@ -78,18 +74,16 @@ export class DescriptionComponent implements OnInit {
   
       this.purchaseService.update(idPurchase, updatedPurchaseDTO).subscribe(
         (response) => {
-          console.log('Purchase after edition:', response);
           this.getPurchaseList();
         },
         (error) => this.handleEditError(error)
       );
     } else {
-      console.error(`Purchase with ID ${idPurchase} not found.`);
+
     }
   }
   
   private handleEditError(error: any) {
-    console.error('Error editing purchase:', error);
   }
 
   addPurchase() {
@@ -105,11 +99,9 @@ export class DescriptionComponent implements OnInit {
 
     this.purchaseService.add(newPurchaseDTO).subscribe(
       (response) => {
-        console.log('Purchase successfully added:', response);
         this.getPurchaseList();
       },
       (error) => {
-        console.error('Error when adding the purchase:', error);
       }
     );
   }

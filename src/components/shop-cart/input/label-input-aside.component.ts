@@ -159,7 +159,6 @@ export class LabelInputAsideComponent implements OnInit{
         ([product]) => {
           this.productForUpdate = product;
           this.productForUpdate.quantity = this.productForUpdate.quantity - purchase.localQuantity;
-          console.log(this.productForUpdate)
           this.updateProduct(purchase.productID, this.prepareProductToUpdate())
 
         }
@@ -210,7 +209,6 @@ export class LabelInputAsideComponent implements OnInit{
     sale.date = completeDate;
     sale.finalPrice = this.totalPrice;
 
-    console.log(sale);
     this.saleService.add(sale);
   }
 
@@ -227,12 +225,10 @@ export class LabelInputAsideComponent implements OnInit{
         this.customerPurchases = this.filterPurchasesByCustomerId(Number(this.customerId), this.purchases)
         }
       );
-      console.log(this.customerPurchases.length)
       if (this.customerPurchases.length > 0) {
         of(null).pipe(
           switchMap(() => this.getTotalPrice()),
           switchMap((total) => {
-            console.log('asdfghjklñ: ' + total);
             this.totalPrice = total;
             this.updateProductStock();
             this.postSale();

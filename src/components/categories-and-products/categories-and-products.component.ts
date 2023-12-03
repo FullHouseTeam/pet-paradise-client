@@ -33,7 +33,6 @@ export class CategoriesAndProductsComponent implements OnInit{
   openDialog() {
     const dialogRef: MatDialogRef<AddProductComponent, any> = this.dialog.open(AddProductComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
     });
   }
   productCategory: string = '';
@@ -59,7 +58,6 @@ export class CategoriesAndProductsComponent implements OnInit{
     } else {
       this.filteredProducts = this.products.filter(product => product.animalCategory === this.productCategory);
     }
-    console.log(this.filteredProducts)
   }
   getProductsList() {
     return this.productService.getList();

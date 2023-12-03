@@ -42,7 +42,6 @@ export class ProductInfoComponent implements OnInit {
   purchase: Purchase | undefined = {} as Purchase;
   purchaseDto: PurchaseDTO = {} as PurchaseDTO;
 
-
   constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -133,7 +132,6 @@ export class ProductInfoComponent implements OnInit {
       }
       this.isClicked = !this.isClicked;
 
-
     } else {
       this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
       const newPurchase: PurchaseDTO = {
@@ -145,14 +143,12 @@ export class ProductInfoComponent implements OnInit {
         userID: Number(this.sharedService.getGlobalVariable()),
         isAvailable: false,
       };
-      console.log(newPurchase);
       this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
           (error) => this.handleEditError(error)
       );
       this.isClicked = !this.isClicked;
     }
   }
-
 
   redirectToCategoriesAndProducts() {
     this.router.navigate(['/store/' + this.product.animalCategory]);
@@ -173,7 +169,6 @@ export class ProductInfoComponent implements OnInit {
   getBrand(id: number) {
     return this.brandService.getById(id);
   }
-
 
   getProduct(id: number) {
     return this.productService.getById(id);
@@ -219,5 +214,4 @@ export class ProductInfoComponent implements OnInit {
       this.productIds.push(randomProductId.toString());
     }
   }
-
 }

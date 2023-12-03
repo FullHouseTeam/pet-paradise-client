@@ -7,8 +7,9 @@
 
     <div>
         <p>{{title}}</p>
-        <p>{{price}} $</p>
+        <p [ngClass]="{'discounted-price': discount > 0}">{{price}} $</p>
     </div>
+
 
     <button class="add-button" [ngClass]="{'clicked': isClicked}" (click)="onClick()">
         {{ isClicked ? 'Remove from Cart' : 'Add to Cart' }}

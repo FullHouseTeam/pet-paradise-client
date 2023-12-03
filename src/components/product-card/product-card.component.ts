@@ -24,6 +24,7 @@ export class ProductCardComponent implements OnInit {
   image = '';
   isClicked = false;
   product: Product = {} as Product;
+  discount: number = 0;
   purchases: Purchase[] = [];
   purchaseDto: PurchaseDTO = {} as PurchaseDTO;
   purchase: Purchase | undefined = {} as Purchase;
@@ -48,8 +49,13 @@ export class ProductCardComponent implements OnInit {
   private loadProductDetails() {
     this.isClicked = this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
     this.title = this.truncateText(this.product.name, 10);
-    this.price = this.product.price.toString();
-    this.image = this.product.image;
+    this.discount = this.product.discount;
+    if (this.discount > 0) {
+      const discountedPrice = this.product.price - (this.product.price * (this.discount / 100));
+      this.price = discountedPrice.toString();
+    } else {
+      this.price = this.product.price.toString();
+    }    this.image = this.product.image;
   }
 
   onClick() {

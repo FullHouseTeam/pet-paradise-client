@@ -209,9 +209,14 @@ export class ProductInfoComponent implements OnInit {
       let randomProductId: number;
       do {
         randomProductId = Math.floor(Math.random() * this.products.length) + 1;
-      } while (randomProductId.toString() === this.productId || this.productIds.includes(randomProductId.toString()));
+      } while (
+          randomProductId.toString() === this.productId ||
+          this.productIds.includes(randomProductId.toString()) ||
+          this.productIds.includes(randomProductId.toString())
+          );
 
       this.productIds.push(randomProductId.toString());
     }
   }
+
 }

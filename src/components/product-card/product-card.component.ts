@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { forkJoin } from "rxjs";
 import { ProductService } from "../../services/products/product.service";
 import { Product } from "../../models/product.model";
@@ -29,10 +29,7 @@ export class ProductCardComponent implements OnInit {
   purchase: Purchase | undefined = {} as Purchase;
 
   constructor(
-      private renderer: Renderer2,
-      private el: ElementRef,
       private router: Router,
-      private route: ActivatedRoute,
       private sharedService: SharedService,
       private productService: ProductService,
       private purchaseService: PurchaseService,
@@ -40,8 +37,9 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit() {
     forkJoin([this.getProduct(Number(this.productId)), this.getPurchaseList()]).subscribe(
-        ([product]) => {
+        ([product, purchases]) => {
           this.product = product;
+          this.purchases = purchases;
           this.loadProductDetails();
         }
     );
@@ -58,36 +56,56 @@ export class ProductCardComponent implements OnInit {
     if(!this.isClicked) {
       if(!this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))){
         this.purchaseDto = {
-          totalPrice: 0,
-          obtainedTaxes: 0,
-          deliveryTime: 0,
+          totalPrice: 1,
+          obtainedTaxes: 1,
+          deliveryTime: 1,
           localQuantity: 1,
           productID: this.product.productID,
           userID: Number(this.sharedService.getGlobalVariable()),
           isAvailable: true
         }
-        this.purchaseService.add(this.purchaseDto);
-        this.isClicked = !this.isClicked;
+        this.purchaseService.add(this.purchaseDto).subscribe(
+            (error) => this.handleEditError(error)
+        );
+
+      } else {
+        if(this.existFalse(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))){
+          this.purchaseDto = {
+            totalPrice: 1,
+            obtainedTaxes: 1,
+            deliveryTime: 1,
+            localQuantity: 1,
+            productID: this.product.productID,
+            userID: Number(this.sharedService.getGlobalVariable()),
+            isAvailable: true,
+          };
+          this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
+              (error) => this.handleEditError(error)
+          );
+        }
       }
+      this.isClicked = !this.isClicked;
+
+
     } else {
       this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
-      this.purchaseDto = {
-        totalPrice: 0,
-        obtainedTaxes: 0,
-        deliveryTime: 0,
+      const newPurchase: PurchaseDTO = {
+        totalPrice: 1,
+        obtainedTaxes: 1,
+        deliveryTime: 1,
         localQuantity: 1,
         productID: this.product.productID,
         userID: Number(this.sharedService.getGlobalVariable()),
-        isAvailable: false
-      }
-      this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto)
+        isAvailable: false,
+      };
+      console.log(newPurchase);
+      this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
+          (error) => this.handleEditError(error)
+      );
       this.isClicked = !this.isClicked;
     }
-
-
-
-
   }
+
   goToProduct() {
     this.router.navigate(['/product/' + this.productId])
   }
@@ -108,5 +126,15 @@ export class ProductCardComponent implements OnInit {
   duplicatedObject(purchases: Purchase[], productID: number, userID: number): Purchase | undefined {
     return purchases.find((purchase) => purchase.productID === productID && purchase.userID === userID);
   }
+  private handleEditError(error: any) {
+    console.error('Error editing purchase:', error);
+  }
 
+  existFalse (purchases: Purchase[], productID: number, userID: number): boolean {
+    return purchases.some((purchase) =>
+        purchase.productID === productID &&
+        purchase.userID === userID &&
+        purchase.isAvailable === "false"
+    );
+  }
 }

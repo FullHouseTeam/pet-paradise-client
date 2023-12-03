@@ -98,7 +98,6 @@ export class ProductCardComponent implements OnInit {
         userID: Number(this.sharedService.getGlobalVariable()),
         isAvailable: false,
       };
-      console.log(newPurchase);
       this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
           (error) => this.handleEditError(error)
       );

@@ -59,6 +59,11 @@ p {
   background-color: #FF0000;
 }
 
+.discounted-price {
+  color: red;
+}
+
+
 @media only screen and (max-width: 360px) {
   .container {
     display: grid;

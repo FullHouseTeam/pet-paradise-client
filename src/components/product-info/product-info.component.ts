@@ -1,4 +1,4 @@
-import {Component, OnInit, Renderer2, ElementRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ProductCardComponent } from "../product-card/product-card.component";
@@ -60,15 +60,13 @@ export class ProductInfoComponent implements OnInit {
           ([products, purchases]) => {
             this.products = products;
             this.purchases = purchases;
-            this.filterPurchasesByID(purchases, Number(this.sharedService.getGlobalVariable()))
+            this.filterPurchasesByID(purchases, Number(this.sharedService.getGlobalVariable()));
+
             if (Number(this.productId) > this.products.length) {
               this.router.navigate(['/error']);
             } else {
-              const maxIds = Math.min(this.products.length, 5);
-              for (let i = 0; i < maxIds; i++) {
-                const randomProductId = Math.floor(Math.random() * this.products.length) + 1;
-                this.productIds.push(randomProductId.toString());
-              }
+              this.generateRandomProductIds();
+
               forkJoin([this.getProduct(Number(this.productId))]).subscribe(
                   ([product]) => {
                     this.product = product;
@@ -80,21 +78,21 @@ export class ProductInfoComponent implements OnInit {
                         }
                     );
                   }
-              )
+              );
             }
           }
-      )
+      );
     });
   }
 
   private loadProductDetails() {
     this.isClicked = this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
-    this.title = this.truncateText(this.product.name, 20);
-    this.brandName = this.truncateText(this.brand.name,18);
+    this.title = this.truncateText(this.product.name, 18);
+    this.brandName = this.truncateText(this.brand.name,14);
     this.price = (this.product.price.toString())
     this.description = this.product.description;
     this.animalCategory = this.product.animalCategory;
-    this.providerField = this.truncateText(this.provider.name,18);
+    this.providerField = this.truncateText(this.provider.name,14);
     this.productType = this.product.productType;
     this.discount = this.product.discount.toString();
     this.image = this.product.image || 'https://res.cloudinary.com/dkappxhfr/image/upload/v1701218817/Pet/noImage.webp';
@@ -104,36 +102,52 @@ export class ProductInfoComponent implements OnInit {
     if(!this.isClicked) {
       if(!this.isDuplicated(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))){
         this.purchaseDto = {
-          totalPrice: 0,
-          obtainedTaxes: 0,
-          deliveryTime: 0,
+          totalPrice: 1,
+          obtainedTaxes: 1,
+          deliveryTime: 1,
           localQuantity: 1,
           productID: this.product.productID,
           userID: Number(this.sharedService.getGlobalVariable()),
           isAvailable: true
         }
-        this.purchaseService.add(this.purchaseDto);
-        this.isClicked = !this.isClicked;
+        this.purchaseService.add(this.purchaseDto).subscribe(
+            (error) => this.handleEditError(error)
+        );
+
+      } else {
+        if(this.existFalse(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))){
+          this.purchaseDto = {
+            totalPrice: 1,
+            obtainedTaxes: 1,
+            deliveryTime: 1,
+            localQuantity: 1,
+            productID: this.product.productID,
+            userID: Number(this.sharedService.getGlobalVariable()),
+            isAvailable: true,
+          };
+          this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto).subscribe(
+              (error) => this.handleEditError(error)
+          );
+        }
       }
+      this.isClicked = !this.isClicked;
+
     } else {
       this.purchase = this.duplicatedObject(this.purchases, this.product.productID, Number(this.sharedService.getGlobalVariable()))
-      this.purchaseDto = {
-        totalPrice: 0,
-        obtainedTaxes: 0,
-        deliveryTime: 0,
+      const newPurchase: PurchaseDTO = {
+        totalPrice: 1,
+        obtainedTaxes: 1,
+        deliveryTime: 1,
         localQuantity: 1,
         productID: this.product.productID,
         userID: Number(this.sharedService.getGlobalVariable()),
-        isAvailable: false
-      }
-      this.purchaseService.update(<number>this.purchase?.purchaseID, this.purchaseDto)
+        isAvailable: false,
+      };
+      this.purchaseService.update(<number>this.purchase?.purchaseID, newPurchase).subscribe(
+          (error) => this.handleEditError(error)
+      );
       this.isClicked = !this.isClicked;
     }
-
-
-
-
-
   }
 
   redirectToCategoriesAndProducts() {
@@ -144,6 +158,10 @@ export class ProductInfoComponent implements OnInit {
     return this.productService.getList();
   }
 
+  private handleEditError(error: any) {
+    console.error('Error editing purchase:', error);
+  }
+
   getPurchaseList() {
     return this.purchaseService.getList();
   }
@@ -151,7 +169,6 @@ export class ProductInfoComponent implements OnInit {
   getBrand(id: number) {
     return this.brandService.getById(id);
   }
-
 
   getProduct(id: number) {
     return this.productService.getById(id);
@@ -173,9 +190,33 @@ export class ProductInfoComponent implements OnInit {
     return purchases.some((purchase) => purchase.productID === productID && purchase.userID === userID);
   }
 
+  existFalse (purchases: Purchase[], productID: number, userID: number): boolean {
+    return purchases.some((purchase) =>
+        purchase.productID === productID &&
+        purchase.userID === userID &&
+        purchase.isAvailable === "false"
+    );
+  }
+
   duplicatedObject(purchases: Purchase[], productID: number, userID: number): Purchase | undefined {
     return purchases.find((purchase) => purchase.productID === productID && purchase.userID === userID);
   }
+  private generateRandomProductIds() {
+    this.productIds = [];
+    const maxIds = Math.min(this.products.length, 5);
 
+    for (let i = 0; i < maxIds; i++) {
+      let randomProductId: number;
+      do {
+        randomProductId = Math.floor(Math.random() * this.products.length) + 1;
+      } while (
+          randomProductId.toString() === this.productId ||
+          this.productIds.includes(randomProductId.toString()) ||
+          this.productIds.includes(randomProductId.toString())
+          );
+
+      this.productIds.push(randomProductId.toString());
+    }
+  }
 
 }

@@ -7,7 +7,8 @@ describe('CustomerPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomerPageComponent]
+      declarations: [],
+      imports: [CustomerPageComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomerPageComponent);

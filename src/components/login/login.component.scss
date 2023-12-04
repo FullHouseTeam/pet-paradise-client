@@ -45,7 +45,7 @@ input {
   border: none;
   border-radius: 0.5vw;
   cursor: pointer;
-  font-family: 'quicksand';
+  font-family: 'Quicksand-SemiBold', sans-serif;
   font-size: 1.2vw;
   width: 50%;
 }
@@ -55,14 +55,14 @@ input {
   padding: 1vw;
   margin-bottom: 1vw;
   color: #7B8B91;
-  font-family: 'quicksand';
+  font-family: 'Quicksand-SemiBold', sans-serif;
   font-size: 2vw;
 }
 
 .errorLabels {
   display: block;
   margin-bottom: 0.3vw;
-  font-family: 'quicksand';
+  font-family: 'Quicksand-Medium', sans-serif;
   color: red;
   font-size: 0.8vw;
 }

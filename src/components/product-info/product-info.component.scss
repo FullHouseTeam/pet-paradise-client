@@ -34,6 +34,11 @@
   overflow: hidden;
 }
 
+.text-up,
+.text-down {
+  font-family: 'Quicksand-Medium', sans-serif;
+}
+
 .image-container img {
   width: 100%;
   height: auto;
@@ -60,7 +65,7 @@
 }
 
 .description {
-  font-family: 'Quicksand', system-ui;
+  font-family: 'Quicksand-Medium', sans-serif;
   font-size: 0.8vw;
   font-weight: 600;
   line-height: 1.5;
@@ -68,7 +73,7 @@
 }
 
 .big-letters {
-  font-family: 'Quicksand', serif;
+  font-family: 'Quicksand-Medium', sans-serif;
   font-size: 1.3vw;
   font-weight: bold;
   margin-bottom: 0.8vw;
@@ -80,7 +85,7 @@
   height: 2.5vw;
   font-size: 1vw;
   text-align: center;
-  font-family: 'Quicksand', serif;
+  font-family: 'Quicksand-Medium', sans-serif;
 }
 
 .text-up {
@@ -113,7 +118,7 @@
   color: white;
   width: 9vw;
   cursor: pointer;
-  font-family: 'Quicksand', serif;
+  font-family: 'Quicksand-Medium', sans-serif;
   font-weight: bold;
   font-size: 1vw;
 }
@@ -127,7 +132,7 @@
   border: none;
   border-radius: 0.3vw;
   cursor: pointer;
-  font-family: 'Quicksand', serif;
+  font-family: 'Quicksand-Medium', sans-serif;
   font-size: 1vw;
   width: 12vw;
   height: 2vw;

@@ -14,6 +14,12 @@
   width: 99vw;
   height: 20vw;
 }
+
+.text-subtitles{
+  font-family: 'Quicksand-SemiBold', sans-serif;
+  font-size: 3vw;
+}
+
 .carousel-item {
   padding: 0 10px; /* Agrega un pequeño espacio entre los elementos */
   box-sizing: border-box;
@@ -26,9 +32,6 @@
     width: 100vw;
     height: 20vw;
   }
-}
-.text-subtitles{
-  font-size: 3vw;
 }
 
 @media only screen and (max-width: 360px) {
